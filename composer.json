@@ -1,0 +1,33 @@
+{
+  "name": "dhl/module-carrier-paket-returns",
+  "version": "0.1.0",
+  "type": "magento2-module",
+  "description": "Carrier implementation for DHL Business Customer Shipping Online Retoure",
+  "license": "OSL-3.0",
+  "authors": [
+    {
+      "email": "christoph.assmann@netresearch.de",
+      "name": "Christoph Aßmann"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Dhl\\OnlineRetoure\\": ""
+    },
+    "files": [
+      "registration.php"
+    ]
+  },
+  "require": {
+    "php": "~7.0.6||~7.1.3||~7.2.0",
+    "magento/framework": "^101.0.0||^102.0.0",
+    "magento/module-sales": "^101.0.0||^102.0.0",
+    "magento/module-shipping": "^100.2.0",
+    "magento/module-store": "^100.2.0||^101.0.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-develop": "0.1.x-dev"
+    }
+  }
+}

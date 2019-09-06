@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="dhlshippingsolutions">
+            <group id="dhlpaket_rma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="210" translate="label">
+                <label>DHL Paket Online Retoure</label>
+
+                <field id="active_rma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
+                       translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
+                    <label>Enabled</label>
+                    <config_path>carriers/dhlpaketrma/active_rma</config_path>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

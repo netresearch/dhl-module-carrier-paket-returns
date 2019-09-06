@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <dhlpaketrma>
+                <active>1</active>
+                <model>Dhl\OnlineRetoure\Model\Carrier\Paket</model>
+                <is_online>1</is_online>
+                <max_package_weight>1000</max_package_weight>
+                <title>DHL Paket</title>
+                <active_rma>0</active_rma>
+                <sallowspecific>0</sallowspecific>
+            </dhlpaketrma>
+        </carriers>
+    </default>
+</config>
