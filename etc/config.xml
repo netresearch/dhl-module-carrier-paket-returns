@@ -9,7 +9,7 @@
         <carriers>
             <dhlpaketrma>
                 <active>1</active>
-                <model>Dhl\OnlineRetoure\Model\Carrier\Paket</model>
+                <model>Dhl\PaketReturns\Model\Carrier\Paket</model>
                 <is_online>1</is_online>
                 <max_package_weight>1000</max_package_weight>
                 <title>DHL Paket</title>

@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\OnlineRetoure\Model\Carrier;
+namespace Dhl\PaketReturns\Model\Carrier;
 
 use Magento\Framework\DataObject;
 use Magento\Quote\Model\Quote\Address\RateRequest;
@@ -17,7 +17,7 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
 /**
  * Class Paket
  *
- * @package Dhl\OnlineRetoure\Model
+ * @package Dhl\PaketReturns\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

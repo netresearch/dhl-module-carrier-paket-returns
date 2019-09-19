@@ -2,7 +2,7 @@
   "name": "dhl/module-carrier-paket-returns",
   "version": "0.1.0",
   "type": "magento2-module",
-  "description": "Carrier implementation for DHL Business Customer Shipping Online Retoure",
+  "description": "Carrier implementation for DHL Business Customer Shipping Online Returns",
   "license": "OSL-3.0",
   "authors": [
     {
@@ -12,7 +12,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Dhl\\OnlineRetoure\\": ""
+      "Dhl\\PaketReturns\\": ""
     },
     "files": [
       "registration.php"

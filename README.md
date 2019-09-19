@@ -1,3 +1,3 @@
 # module-carrier-paket-returns
 
-DHL Online Retoure
+DHL Online Returns
