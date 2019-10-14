@@ -1,0 +1,45 @@
+<?php
+/**
+ * See LICENSE.md for license details.
+ */
+/** @var Magento\Framework\View\Element\Template $block */
+?>
+<div class="col content">
+    <p>
+        <?php echo $block->escapeHtml(__('The DHL Paket Returns module allows to order return labels for planned return shipments from your customers.')) ?>
+    </p>
+    <p>
+        <?php echo $block->escapeHtml(__('It thereby enables business customers of DHL to seamlessly implement the label creation process for return labels into their own workflows, for example integrated into their own website.')) ?>
+    </p>
+    <p><?php echo $block->escapeHtml(__('To get started:')) ?></p>
+    <ol>
+        <li>
+            <?php echo $block->escapeHtml(__('You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International')) ?>
+            <br/>
+            <em>
+                <small>
+                    <?php echo /* @noEscape */ __('If you don’t have an account or your account is with another DHL division, <a href="https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html" target="_blank">please contact DHL Paket</a> to establish or expand your relationship') ?>
+                </small>
+            </em>
+        </li>
+        <li>
+            <?php echo $block->escapeHtml(__('You must have access to the DHL Business Customer Portlet with the authorization for the function "Returns"')) ?>
+            <br/>
+            <em>
+                <small>
+                    <?php echo $block->escapeHtml(__('If you didn’t discuss this with your account representative when you set up your account, please consult them to enable your API access')) ?>
+                </small>
+            </em>
+        </li>
+    </ol>
+</div>
+<div class="col side">
+    <aside>
+        <div class="section">
+            <h3><?php echo $block->escapeHtml(__('DHL & Magento')) ?></h3>
+            <p>
+                <?php echo $block->escapeHtml(__('Having issues configuring the extension? Contact your DHL Paket Returns account representative who will facilitate technical assistance.')) ?>
+            </p>
+        </div>
+    </aside>
+</div>

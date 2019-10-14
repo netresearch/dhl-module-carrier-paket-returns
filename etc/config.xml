@@ -8,14 +8,93 @@
     <default>
         <carriers>
             <dhlpaketrma>
-                <active>1</active>
+                <version>0.1.0</version>
                 <model>Dhl\PaketReturns\Model\Carrier\Paket</model>
                 <is_online>1</is_online>
                 <max_package_weight>1000</max_package_weight>
-                <title>DHL Paket</title>
+
+                <!-- Default elements -->
+                <active>0</active>
                 <active_rma>0</active_rma>
+                <title>DHL Paket Returns</title>
+                <sort_order>0</sort_order>
+                <showmethod>0</showmethod>
                 <sallowspecific>0</sallowspecific>
             </dhlpaketrma>
         </carriers>
+
+        <dhlshippingsolutions>
+            <dhlpaketrma>
+                <general>
+                    <logging_group>
+                        <loglevel>400</loglevel>
+                    </logging_group>
+                </general>
+
+                <account>
+                    <!-- Sandbox -->
+                    <sandboxmode>1</sandboxmode>
+                    <sandbox>
+                        <auth_username>magento_1</auth_username>
+                        <auth_password>2de26b775e59279464d1c2f8546432e62413372421c672db36eaacfc2f</auth_password>
+                        <api_username>2222222222_Customer</api_username>
+                        <api_password>uBQbZ62!ZiBiVVbhc</api_password>
+                        <account_number>2222222222</account_number>
+                        <account_participations backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
+                            <![CDATA[
+                            {
+                                "_1485789382230_100":{"procedure":"07","participation":"01"},
+                                "_1485789382230_101":{"procedure":"53","participation":"01"}
+                            }
+                            ]]>
+                        </account_participations>
+
+                        <!-- Mapping of 2-letter-iso country code to DHL Paket return receiver id -->
+                        <receiver_ids backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
+                            <![CDATA[
+                        {
+                            "_1485789382230_100":{"iso":"DE","receiver_id":"DE"},
+                            "_1485789382230_101":{"iso":"BE","receiver_id":"BE"},
+                            "_1485789382230_102":{"iso":"BG","receiver_id":"BG"},
+                            "_1485789382230_103":{"iso":"EE","receiver_id":"EE"},
+                            "_1485789382230_104":{"iso":"FI","receiver_id":"FI"},
+                            "_1485789382230_105":{"iso":"FR","receiver_id":"FR"},
+                            "_1485789382230_106":{"iso":"IE","receiver_id":"IE"},
+                            "_1485789382230_107":{"iso":"IT","receiver_id":"IT"},
+                            "_1485789382230_108":{"iso":"HR","receiver_id":"HR"},
+                            "_1485789382230_109":{"iso":"LT","receiver_id":"LV"},
+                            "_1485789382230_110":{"iso":"AT","receiver_id":"AT"},
+                            "_1485789382230_111":{"iso":"PL","receiver_id":"PL"},
+                            "_1485789382230_112":{"iso":"SE","receiver_id":"SE"},
+                            "_1485789382230_113":{"iso":"CH","receiver_id":"CH"},
+                            "_1485789382230_114":{"iso":"HU","receiver_id":"HU"},
+                            "_1485789382230_115":{"iso":"GB","receiver_id":"UK"}
+                        }
+                    ]]>
+                        </receiver_ids>
+                    </sandbox>
+
+                    <production>
+                        <auth_username>NRMAG_2</auth_username>
+                        <auth_password>ivVTCAke61I6cTTilV1eBltp2rvSQb</auth_password>
+                        <api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+
+                        <account_participations backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
+                        <![CDATA[
+                            {
+                                "_1485789382230_100":{"procedure":"07","participation":"01"},
+                                "_1485789382230_101":{"procedure":"53","participation":"01"}
+                            }
+                        ]]>
+                        </account_participations>
+
+                        <receiver_ids backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized"/>
+                    </production>
+
+
+
+                </account>
+            </dhlpaketrma>
+        </dhlshippingsolutions>
     </default>
 </config>

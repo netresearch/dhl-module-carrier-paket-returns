@@ -7,14 +7,19 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="dhlshippingsolutions">
-            <group id="dhlpaket_rma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="210" translate="label">
-                <label>DHL Paket Online Retoure</label>
+            <group id="dhlpaketrma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="210" translate="label">
+                <label>DHL Paket Returns</label>
 
-                <field id="active_rma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
-                       translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
-                    <label>Enabled</label>
-                    <config_path>carriers/dhlpaketrma/active_rma</config_path>
+                <!-- Custom information section -->
+                <field id="paketReturnsInfoBox" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"
+                       extends="dhlshippingsolutions/dhlglobalwebservices/shippingCoreInfoBox">
+                    <frontend_model>Netresearch\ConfigFields\Block\InfoBox</frontend_model>
+                    <attribute type="body_template">Dhl_PaketReturns::system/config/infoBoxBody.phtml</attribute>
+                    <attribute type="view_model">Dhl\PaketReturns\ViewModel\Adminhtml\System\InfoBox</attribute>
                 </field>
+
+                <include path="Dhl_PaketReturns::system/100_general.xml"/>
+                <include path="Dhl_PaketReturns::system/200_account.xml"/>
             </group>
         </section>
     </system>

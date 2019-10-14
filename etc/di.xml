@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- # sdk preferences -->
+    <preference for="Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface" type="Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestBuilder"/>
+    <preference for="Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface" type="Dhl\Sdk\Paket\Retoure\Service\ServiceFactory"/>
+    <preference for="Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface" type="Dhl\Sdk\Paket\Retoure\Auth\AuthenticationStorage"/>
+
+    <!-- # virtual types -->
+    <virtualType name="Dhl\PaketReturns\Model\Logger\Handler\Virtual" type="Dhl\ShippingCore\Model\Log\ApiLogHandler">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/dhl_paket_returns.log</argument>
+            <argument name="logEnabledConfigPath" xsi:type="const">Dhl\PaketReturns\Model\Config\ModuleConfig::CONFIG_PATH_ENABLE_LOGGING</argument>
+            <argument name="logLevelConfigPath" xsi:type="const">Dhl\PaketReturns\Model\Config\ModuleConfig::CONFIG_PATH_LOGLEVEL</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Dhl\PaketReturns\Model\Logger\Virtual" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="const">Dhl\PaketReturns\Model\Carrier\Paket::CARRIER_CODE</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="apilog" xsi:type="object">Dhl\PaketReturns\Model\Logger\Handler\Virtual</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainerFactory\Virtual" type="\Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterfaceFactory">
+        <arguments>
+            <argument name="instanceName" xsi:type="string">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainer</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Dhl\PaketReturns\Webservice\Pipeline\Shipment\CreateShipmentsPipeline\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\CreateShipmentsPipeline">
+        <arguments>
+            <argument name="stages" xsi:type="array">
+                <item name="validate" sortOrder="100" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\ValidateStage</item>
+                <item name="mapRequest" sortOrder="200" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\MapRequestStage</item>
+                <item name="send" sortOrder="300" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\SendRequestStage</item>
+                <item name="mapResponse" sortOrder="400" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\MapResponseStage</item>
+            </argument>
+            <argument name="artifactsContainerFactory" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainerFactory\Virtual</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Dhl\PaketReturns\Webservice\ApiGateway">
+        <arguments>
+            <argument name="pipeline" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\Shipment\CreateShipmentsPipeline\Virtual</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\PaketReturns\Webservice\ReturnLabelService">
+        <arguments>
+            <argument name="logger" xsi:type="object">Dhl\PaketReturns\Model\Logger\Virtual</argument>
+        </arguments>
+    </type>
+
+    <!-- # argument di overrides -->
+    <type name="Dhl\PaketReturns\Model\Carrier\Paket">
+        <arguments>
+            <argument name="returnShipmentManagement" xsi:type="object">Dhl\PaketReturns\Model\ReturnShipmentManagement\Proxy</argument>
+        </arguments>
+    </type>
+</config>
