@@ -14,13 +14,10 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\UnitConverterInterface;
-use Dhl\ShippingCore\Model\Attribute\Backend\ExportDescription;
-use Dhl\ShippingCore\Model\Attribute\Backend\TariffNumber;
 use Dhl\ShippingCore\Util\StreetSplitter;
 use Magento\Directory\Model\ResourceModel\Country\Collection;
 use Magento\Directory\Model\ResourceModel\Country\CollectionFactory;
 use Magento\Framework\DataObject;
-use Magento\Rma\Model\Shipping;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Item;
@@ -201,7 +198,7 @@ class RequestExtractor
      */
     public function getReferenceNumber(): string
     {
-        /** @var Shipping $shipping */
+        /** @var DataObject $shipping */
         $shipping = $this->returnShipmentRequest->getOrderShipment();
         $rma = $shipping->getData('rma');
 
@@ -300,7 +297,7 @@ class RequestExtractor
             $orderItemsData = [];
 
             /** @var Item $item */
-            foreach ($this->getOrder()->getAllVisibleItems() as $item) {
+            foreach ($this->getOrder()->getAllItems() as $item) {
                 $orderItemsData[$item->getItemId()] = [
                     'sku' => $item->getSku(),
                     'customs' => [
@@ -382,7 +379,7 @@ class RequestExtractor
         $totalAmount = array_reduce(
             $this->getPackageItems(),
             static function (float $totalAmount, PackageItemInterface $item) {
-                $totalAmount += $item->getPrice();
+                $totalAmount += $item->getQty() * $item->getPrice();
                 return $totalAmount;
             },
             0

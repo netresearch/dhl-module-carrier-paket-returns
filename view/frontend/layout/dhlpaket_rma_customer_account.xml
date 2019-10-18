@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+
+    <body>
+        <referenceBlock name="sidebar.additional" remove="true"/>
+        <referenceBlock name="customer_account_navigation">
+            <action method="setActive"><argument name="path" xsi:type="string">sales/order/history</argument></action>
+        </referenceBlock>
+    </body>
+</page>

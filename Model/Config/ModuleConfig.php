@@ -8,6 +8,7 @@ namespace Dhl\PaketReturns\Model\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Sales\Model\Order\Shipment;
 use Magento\Store\Model\ScopeInterface;
 
 /**
@@ -21,32 +22,36 @@ class ModuleConfig
 {
     // Defaults
     const CONFIG_PATH_VERSION = 'carriers/dhlpaketrma/version';
-    const CONFIG_PATH_ACTIVE  = 'carriers/dhlpaketrma/active';
+    const CONFIG_PATH_ACTIVE = 'carriers/dhlpaketrma/active';
+    const CONFIG_PATH_ACTIVE_RMA = 'carriers/dhlpaketrma/active_rma';
 
     // 100_general.xml
+    const CONFIG_PATH_DEFAULT_ITEM_WEIGHT = 'dhlshippingsolutions/dhlpaketrma/general/default_item_weight';
     const CONFIG_PATH_ENABLE_LOGGING = 'dhlshippingsolutions/dhlpaketrma/general/logging';
-    const CONFIG_PATH_LOGLEVEL       = 'dhlshippingsolutions/dhlpaketrma/general/logging_group/loglevel';
+    const CONFIG_PATH_LOGLEVEL = 'dhlshippingsolutions/dhlpaketrma/general/logging_group/loglevel';
 
     // 200_account.xml
-    const CONFIG_PATH_SANDBOX_MODE   = 'dhlshippingsolutions/dhlpaketrma/account/sandboxmode';
+    const CONFIG_PATH_SANDBOX_MODE = 'dhlshippingsolutions/dhlpaketrma/account/sandboxmode';
 
     // Production settings
-    const CONFIG_PATH_AUTH_USERNAME  = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_username';
-    const CONFIG_PATH_AUTH_PASSWORD  = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_password';
-    const CONFIG_PATH_USER           = 'dhlshippingsolutions/dhlpaketrma/account/production/api_username';
-    const CONFIG_PATH_SIGNATURE      = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
-    const CONFIG_PATH_EKP            = 'dhlshippingsolutions/dhlpaketrma/account/production/account_number';
+    const CONFIG_PATH_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_username';
+    const CONFIG_PATH_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_password';
+    const CONFIG_PATH_USER = 'dhlshippingsolutions/dhlpaketrma/account/production/api_username';
+    const CONFIG_PATH_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
+    const CONFIG_PATH_EKP = 'dhlshippingsolutions/dhlpaketrma/account/production/account_number';
     const CONFIG_PATH_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/production/account_participations';
-    const CONFIG_PATH_RECEIVER_IDS   = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
+    const CONFIG_PATH_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
 
     // Sandbox settings
-    const CONFIG_PATH_SBX_AUTH_USERNAME  = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_username';
-    const CONFIG_PATH_SBX_AUTH_PASSWORD  = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_password';
-    const CONFIG_PATH_SBX_USER           = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_username';
-    const CONFIG_PATH_SBX_SIGNATURE      = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password';
-    const CONFIG_PATH_SBX_EKP            = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_number';
+    const CONFIG_PATH_SBX_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_username';
+    const CONFIG_PATH_SBX_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_password';
+    const CONFIG_PATH_SBX_USER = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_username';
+    const CONFIG_PATH_SBX_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password';
+    const CONFIG_PATH_SBX_EKP = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_number';
     const CONFIG_PATH_SBX_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_participations';
-    const CONFIG_PATH_SBX_RECEIVER_IDS   = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/receiver_ids';
+    const CONFIG_PATH_SBX_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/receiver_ids';
+
+    const CONFIG_PATH_MAGENTO_RMA_ENABLED = 'sales/magento_rma/enabled';
 
     /**
      * @var ScopeConfigInterface
@@ -83,6 +88,21 @@ class ModuleConfig
     }
 
     /**
+     * Returns TRUE if module is enabled, FALSE otherwise.
+     *
+     * @param mixed $store
+     * @return bool
+     */
+    public function isEnabled($store = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::CONFIG_PATH_ACTIVE_RMA,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
      * Returns TRUE if sandbox mode is enabled, FALSE otherwise.
      *
      * @param mixed $store
@@ -109,7 +129,7 @@ class ModuleConfig
             return $this->getSandboxAuthUsername($store);
         }
 
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_AUTH_USERNAME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -128,7 +148,7 @@ class ModuleConfig
             return $this->getSandboxAuthPassword($store);
         }
 
-        return (string) $this->encryptor->decrypt(
+        return (string)$this->encryptor->decrypt(
             $this->scopeConfig->getValue(
                 self::CONFIG_PATH_AUTH_PASSWORD,
                 ScopeInterface::SCOPE_STORE,
@@ -149,7 +169,7 @@ class ModuleConfig
             return $this->getSandboxUser($store);
         }
 
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_USER,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -168,7 +188,7 @@ class ModuleConfig
             return $this->getSandboxSignature($store);
         }
 
-        return (string) $this->encryptor->decrypt(
+        return (string)$this->encryptor->decrypt(
             $this->scopeConfig->getValue(
                 self::CONFIG_PATH_SIGNATURE,
                 ScopeInterface::SCOPE_STORE,
@@ -189,7 +209,7 @@ class ModuleConfig
             return $this->getSandboxEkp($store);
         }
 
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_EKP,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -246,7 +266,7 @@ class ModuleConfig
      */
     private function getSandboxAuthUsername($store = null): string
     {
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_AUTH_USERNAME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -261,7 +281,7 @@ class ModuleConfig
      */
     private function getSandboxAuthPassword($store = null): string
     {
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_AUTH_PASSWORD,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -276,7 +296,7 @@ class ModuleConfig
      */
     private function getSandboxUser($store = null): string
     {
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_USER,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -291,7 +311,7 @@ class ModuleConfig
      */
     private function getSandboxSignature($store = null): string
     {
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_SIGNATURE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -306,7 +326,7 @@ class ModuleConfig
      */
     private function getSandboxEkp($store = null): string
     {
-        return (string) $this->scopeConfig->getValue(
+        return (string)$this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_EKP,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -354,7 +374,7 @@ class ModuleConfig
      * @param mixed $store
      * @return string
      */
-    public function getCarrierTitle(string $carrierCode, $store = null)
+    public function getCarrierTitle(string $carrierCode, $store = null): string
     {
         $carrierTitle = $this->scopeConfig->getValue(
             'carriers/' . $carrierCode . '/title',
@@ -362,6 +382,68 @@ class ModuleConfig
             $store
         );
 
-        return (string) $carrierTitle;
+        return (string)$carrierTitle;
+    }
+
+    /**
+     * Check if the native Magento RMA solution is enabled for customers.
+     *
+     * @param mixed $store
+     * @return bool
+     */
+    public function isRmaEnabledOnStoreFront($store = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::CONFIG_PATH_MAGENTO_RMA_ENABLED,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
+    }
+
+    /**
+     * @see \Magento\Rma\Helper\Data::getReturnAddressData
+     *
+     * @param mixed $store
+     * @return string[]
+     */
+    public function getReturnAddress($store = null): array
+    {
+        $scope = ScopeInterface::SCOPE_STORE;
+
+        $useStoreAddress = $this->scopeConfig->getValue('sales/magento_rma/use_store_address', $scope, $store);
+
+        if ($useStoreAddress === null || $useStoreAddress === '1') {
+            // flag not configured (CE) or explicitly set (EE).
+            $address['city'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_CITY, $scope, $store);
+            $address['country_id'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_COUNTRY_ID, $scope, $store);
+            $address['postcode'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ZIP, $scope, $store);
+            $address['region_id'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_REGION_ID, $scope, $store);
+            $address['street2'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ADDRESS2, $scope, $store);
+            $address['street1'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ADDRESS1, $scope, $store);
+        } else {
+            $address['city'] = $this->scopeConfig->getValue('sales/magento_rma/city', $scope, $store);
+            $address['country_id'] = $this->scopeConfig->getValue('sales/magento_rma/country_id', $scope, $store);
+            $address['postcode'] = $this->scopeConfig->getValue('sales/magento_rma/zip', $scope, $store);
+            $address['region_id'] = $this->scopeConfig->getValue('sales/magento_rma/region_id', $scope, $store);
+            $address['street2'] = $this->scopeConfig->getValue('sales/magento_rma/address1', $scope, $store);
+            $address['street1'] = $this->scopeConfig->getValue('sales/magento_rma/address', $scope, $store);
+        }
+
+        return $address;
+    }
+
+    /**
+     * Obtain default item weight for a return item.
+     *
+     * @param mixed $store
+     * @return float
+     */
+    public function getDefaultItemWeight($store = null): float
+    {
+        return (float)$this->scopeConfig->getValue(
+            self::CONFIG_PATH_DEFAULT_ITEM_WEIGHT,
+            ScopeInterface::SCOPE_STORE,
+            $store
+        );
     }
 }

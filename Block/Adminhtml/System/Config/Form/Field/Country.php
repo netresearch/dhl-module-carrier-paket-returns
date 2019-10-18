@@ -15,7 +15,7 @@ use Magento\Framework\View\Element\Html\Select;
  *
  * @package Dhl\PaketReturns\Block
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    http://www.netresearch.de/
+ * @link    https://www.netresearch.de/
  */
 class Country extends Select
 {

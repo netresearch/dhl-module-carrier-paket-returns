@@ -8,6 +8,7 @@ namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage;
 
 use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainer;
 use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\RequestDataMapper;
+use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ReturnShipmentException;
 use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
@@ -46,11 +47,20 @@ class MapRequestStage implements CreateShipmentsStageInterface
      */
     public function execute(array $requests, ArtifactsContainerInterface $artifactsContainer): array
     {
-        array_walk($requests, function (ReturnShipment $request, int $requestIndex) use ($artifactsContainer) {
-            $apiRequest = $this->requestDataMapper->mapRequest($request);
-            $artifactsContainer->addApiRequest((string) $requestIndex, $apiRequest);
-        });
+        $callback = function (ReturnShipment $request, int $requestIndex) use ($artifactsContainer) {
+            try {
+                $apiRequest = $this->requestDataMapper->mapRequest($request);
+                $artifactsContainer->addApiRequest((string) $requestIndex, $apiRequest);
 
-        return $requests;
+                return true;
+            } catch (ReturnShipmentException $exception) {
+                $artifactsContainer->addError((string) $requestIndex, $exception->getMessage());
+
+                return false;
+            }
+        };
+
+        // Pass on only the shipment requests that could be mapped
+        return array_filter($requests, $callback, ARRAY_FILTER_USE_BOTH);
     }
 }

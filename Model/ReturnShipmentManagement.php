@@ -6,9 +6,10 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model;
 
+use Dhl\PaketReturns\Model\ReturnShipmentResponse\ErrorResponse;
+use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelResponse;
 use Dhl\PaketReturns\Webservice\ApiGateway;
 use Dhl\PaketReturns\Webservice\ApiGatewayFactory;
-use Dhl\ShippingCore\Api\Data\ShipmentResponse\ShipmentResponseInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
 /**
@@ -64,7 +65,7 @@ class ReturnShipmentManagement
      *
      * @param ReturnShipment[] $returnShipmentRequests
      *
-     * @return ShipmentResponseInterface[]
+     * @return ErrorResponse[]|LabelResponse[]
      */
     public function createLabels(array $returnShipmentRequests): array
     {

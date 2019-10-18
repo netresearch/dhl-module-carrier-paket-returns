@@ -1,0 +1,313 @@
+<?php
+/**
+ * See LICENSE.md for license details.
+ */
+declare(strict_types=1);
+
+namespace Dhl\PaketReturns\Model\ReturnShipmentRequest;
+
+use Dhl\PaketReturns\Model\Carrier\Paket;
+use Dhl\PaketReturns\Model\Config\ModuleConfig;
+use Dhl\PaketReturns\Model\Sales\OrderProvider;
+use Dhl\ShippingCore\Api\ConfigInterface;
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
+use Magento\Framework\DataObjectFactory;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Sales\Api\Data\ShipmentInterface;
+use Magento\Sales\Api\Data\ShipmentItemInterface;
+use Magento\Sales\Api\ShipmentRepositoryInterface;
+use Magento\Shipping\Model\Shipment\ReturnShipment;
+
+/**
+ * Class RequestModifier
+ *
+ * @package Dhl\PaketReturns\Model
+ * @author  Rico Sonntag <rico.sonntag@netresearch.de>
+ * @link    https://www.netresearch.de/
+ */
+class RequestModifier
+{
+    /**
+     * @var OrderProvider
+     */
+    private $orderProvider;
+
+    /**
+     * @var ConfigInterface
+     */
+    private $config;
+
+    /**
+     * @var ModuleConfig
+     */
+    private $moduleConfig;
+
+    /**
+     * @var SearchCriteriaBuilderFactory
+     */
+    private $searchCriteriaBuilderFactory;
+
+    /**
+     * @var FilterBuilder
+     */
+    private $filterBuilder;
+
+    /**
+     * @var ShipmentRepositoryInterface
+     */
+    private $shipmentRepository;
+
+    /**
+     * @var DataObjectFactory
+     */
+    private $dataObjectFactory;
+
+    /**
+     * @var ShipmentInterface[]
+     */
+    private $shipments = [];
+
+    /**
+     * RequestModifier constructor.
+     *
+     * @param OrderProvider $orderProvider
+     * @param ConfigInterface $config
+     * @param ModuleConfig $moduleConfig
+     * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
+     * @param FilterBuilder $filterBuilder
+     * @param ShipmentRepositoryInterface $shipmentRepository
+     * @param DataObjectFactory $dataObjectFactory
+     */
+    public function __construct(
+        OrderProvider $orderProvider,
+        ConfigInterface $config,
+        ModuleConfig $moduleConfig,
+        SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
+        FilterBuilder $filterBuilder,
+        ShipmentRepositoryInterface $shipmentRepository,
+        DataObjectFactory $dataObjectFactory
+    ) {
+        $this->orderProvider = $orderProvider;
+        $this->config = $config;
+        $this->moduleConfig = $moduleConfig;
+        $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
+        $this->filterBuilder = $filterBuilder;
+        $this->shipmentRepository = $shipmentRepository;
+        $this->dataObjectFactory = $dataObjectFactory;
+    }
+
+    /**
+     * @param int[] $shipmentIds
+     * @param int $shipmentItemId
+     * @return ShipmentItemInterface
+     * @throws NoSuchEntityException
+     */
+    private function getShipmentItem(array $shipmentIds, int $shipmentItemId): ShipmentItemInterface
+    {
+        if (!$this->shipments) {
+            $orderIdFilter = $this->filterBuilder
+                ->setField(ShipmentInterface::ORDER_ID)
+                ->setValue($this->orderProvider->getOrder()->getEntityId())
+                ->setConditionType('eq')
+                ->create();
+            $shipmentIdFilter = $this->filterBuilder
+                ->setField(ShipmentInterface::ENTITY_ID)
+                ->setValue($shipmentIds)
+                ->setConditionType('in')
+                ->create();
+
+            $searchCriteriaBuilder = $this->searchCriteriaBuilderFactory->create();
+            $searchCriteria = $searchCriteriaBuilder->addFilter($orderIdFilter)->addFilter($shipmentIdFilter)->create();
+            $searchResult = $this->shipmentRepository->getList($searchCriteria);
+            $this->shipments = $searchResult->getItems();
+        }
+
+        foreach ($this->shipments as $shipment) {
+            foreach ($shipment->getItems() as $item) {
+                if ((int) $item->getEntityId() === $shipmentItemId) {
+                    $weight = $item->getWeight() ?: $this->moduleConfig->getDefaultItemWeight($shipment->getStoreId());
+                    $item->setWeight($weight);
+                    return $item;
+                }
+            }
+        }
+
+        throw new NoSuchEntityException(__('Shipment item %1 is not available.', $shipmentItemId));
+    }
+
+    /**
+     * Set general request params.
+     *
+     * The return shipment may contain items from multiple partial shipments,
+     * there is not the one `order_shipment`. We add a fake `order_shipment` to the request
+     * object as it is only used as transport object for the original `order` anyway.
+     *
+     * @param ReturnShipment $request
+     * @return void
+     */
+    private function modifyGeneralParams(ReturnShipment $request)
+    {
+        $order = $this->orderProvider->getOrder();
+
+        $request->setShippingMethod(Paket::METHOD_CODE);
+        $request->setData('base_currency_code', $order->getBaseCurrencyCode());
+        $request->setData('store_id', $order->getStoreId());
+        $request->setData('is_return', true);
+
+        // add fake shipment to request
+        $orderShipment = $this->dataObjectFactory->create(['data' => ['order' => $order]]);
+        $orderShipment->setData('order', $order);
+        $request->setData('order_shipment', $orderShipment);
+    }
+
+    /**
+     * Set package sender.
+     *
+     * @param ReturnShipment $request
+     * @return void
+     * @throws LocalizedException
+     */
+    private function modifyShipper(ReturnShipment $request)
+    {
+        $addressData = $request->getData('shipper');
+        if (empty($addressData)) {
+            throw new LocalizedException(__('Please specify a return shipment sender address.'));
+        }
+
+        $street = array_filter($addressData['street']);
+        $name = array_filter([$addressData['firstname'] ?? '', $addressData['lastname'] ?? '']);
+
+        $request->setShipperContactPersonName(implode(' ', $name));
+        $request->setShipperContactPersonFirstName($addressData['firstname'] ?? '');
+        $request->setShipperContactPersonLastName($addressData['lastname'] ?? '');
+        $request->setShipperContactCompanyName($addressData['company'] ?? '');
+        $request->setData('shipper_contact_phone_number', $addressData['telephone'] ?? '');
+        $request->setShipperAddressStreet(implode(' ', $street));
+        $request->setShipperAddressStreet1($street[0]);
+        $request->setShipperAddressStreet2($street[1] ?? '');
+        $request->setShipperAddressCity($addressData['city'] ?? '');
+        $request->setShipperAddressStateOrProvinceCode($addressData['region'] ?? '');
+        $request->setData('shipper_address_postal_code', $addressData['postcode'] ?? '');
+        $request->setShipperAddressCountryCode($addressData['country'] ?? '');
+        $request->setData('shipper_email', $addressData['email'] ?? '');
+
+        $request->unsetData('shipper');
+    }
+
+    /**
+     * Set package receiver.
+     *
+     * The actual merchant return address is configured at the business customer portal
+     * and identified via the receiver ID submitted with the web service request.
+     * The receiver address is still needed in the return shipment request to determine
+     * the correct billing number.
+     *
+     * @see \Magento\Rma\Helper\Data::getReturnAddressData
+     *
+     * @param ReturnShipment $request
+     * @return void
+     */
+    private function modifyReceiver(ReturnShipment $request)
+    {
+        $address = $this->moduleConfig->getReturnAddress($this->orderProvider->getOrder()->getStoreId());
+        $street = array_filter([$address['street1'], $address['street2']]);
+
+        $request->setRecipientAddressStreet(implode(' ', $street));
+        $request->setRecipientAddressStreet1($address['street1']);
+        $request->setRecipientAddressStreet2($address['street2']);
+        $request->setRecipientAddressCity($address['city']);
+        $request->setRecipientAddressStateOrProvinceCode($address['region_id']);
+        $request->setData('recipient_address_postal_code', $address['postcode']);
+        $request->setRecipientAddressCountryCode($address['country_id']);
+    }
+
+    /**
+     * Set package params and items.
+     *
+     * @see \Magento\Shipping\Model\Carrier\AbstractCarrierOnline::returnOfShipment
+     *
+     * @param ReturnShipment $request
+     * @return void
+     * @throws LocalizedException
+     */
+    private function modifyPackage(ReturnShipment $request)
+    {
+        $shipmentsData = $request->getData('shipments');
+
+        $items = [];
+        $totalWeight = 0;
+        $totalPrice = 0;
+
+        foreach ($shipmentsData as $shipmentId => $shipmentData) {
+            foreach ($shipmentData['items'] as $itemId => $qty) {
+                if (!$qty) {
+                    continue;
+                }
+
+                try {
+                    $shipmentItem = $this->getShipmentItem(array_keys($shipmentsData), $itemId);
+                } catch (NoSuchEntityException $exception) {
+                    continue;
+                }
+
+                $totalWeight += $qty * $shipmentItem->getWeight();
+                $totalPrice += $qty * $shipmentItem->getPrice();
+                $items[$shipmentItem->getOrderItemId()] = [
+                    'qty' => $qty,
+                    'customs_value' => $shipmentItem->getPrice(),
+                    'price' => $shipmentItem->getPrice(),
+                    'name' => $shipmentItem->getName(),
+                    'weight' => $shipmentItem->getWeight(),
+                    'product_id' => $shipmentItem->getProductId(),
+                    'order_item_id' => $shipmentItem->getOrderItemId(),
+                ];
+            }
+        }
+
+        if (empty($items)) {
+            throw new LocalizedException(__('Please select items to return.'));
+        }
+
+        $unit = $this->config->getWeightUnit($this->orderProvider->getOrder()->getStoreId());
+        $package = [
+            'params' => [
+                'container' => '',
+                'weight' => $totalWeight,
+                'customs_value' => $totalPrice,
+                'length' => '',
+                'width' => '',
+                'height' => '',
+                'weight_units' => $unit === 'kg' ? \Zend_Measure_Weight::KILOGRAM : \Zend_Measure_Weight::POUND,
+                'dimension_units' => $unit === 'kg' ? \Zend_Measure_Length::CENTIMETER : \Zend_Measure_Length::INCH,
+                'content_type' => '',
+                'content_type_other' => '',
+            ],
+            'items' => $items,
+        ];
+
+        $request->setData('package_id', 0);
+        $request->setData('packages', [$package]);
+        $request->setPackageWeight($totalWeight);
+        $request->setData('package_params', $this->dataObjectFactory->create(['data' => $package['params']]));
+        $request->setData('package_items', $package['items']);
+
+        $request->unsetData('shipments');
+    }
+
+    /**
+     * Add return data to return shipment request.
+     *
+     * @param ReturnShipment $request
+     * @return void
+     * @throws LocalizedException
+     */
+    public function modify(ReturnShipment $request)
+    {
+        $this->modifyGeneralParams($request);
+        $this->modifyShipper($request);
+        $this->modifyReceiver($request);
+        $this->modifyPackage($request);
+    }
+}

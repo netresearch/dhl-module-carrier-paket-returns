@@ -9,6 +9,7 @@ namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment;
 use Dhl\PaketReturns\Model\ReturnShipmentRequest\RequestExtractor;
 use Dhl\PaketReturns\Model\ReturnShipmentRequest\RequestExtractorFactory;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface;
+use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
 /**
@@ -53,6 +54,7 @@ class RequestDataMapper
      * @param ReturnShipment $request The return shipment request
      *
      * @return \JsonSerializable
+     * @throws ReturnShipmentException
      */
     public function mapRequest(ReturnShipment $request): \JsonSerializable
     {
@@ -107,6 +109,11 @@ class RequestDataMapper
             }
         }
 
-        return $this->requestBuilder->create();
+        try {
+            return $this->requestBuilder->create();
+        } catch (RequestValidatorException $exception) {
+            $message = __('Return shipment request could not be created: %1', $exception->getMessage());
+            throw new ReturnShipmentException($message);
+        }
     }
 }

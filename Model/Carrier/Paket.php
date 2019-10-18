@@ -42,6 +42,7 @@ use Psr\Log\LoggerInterface;
 class Paket extends AbstractCarrierOnline implements CarrierInterface
 {
     const CARRIER_CODE = 'dhlpaketrma';
+    const METHOD_CODE = 'rma';
 
     /**
      * Tracking URL
@@ -192,7 +193,7 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      */
     public function getAllowedMethods(): array
     {
-        return ['rma' => 'Return Shipment'];
+        return [self::METHOD_CODE => 'Return Shipment'];
     }
 
     /**

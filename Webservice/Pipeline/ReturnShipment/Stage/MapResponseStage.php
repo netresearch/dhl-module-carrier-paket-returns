@@ -53,7 +53,7 @@ class MapResponseStage implements CreateShipmentsStageInterface
 
         foreach ($errors as $requestIndex => $message) {
             // validation error or negative response received from webservice
-            $message = __('Label could not be created: %1.', $message);
+            $message = __('Label could not be created: %1', $message);
             $response = $this->responseDataMapper->createErrorResponse((string) $requestIndex, $message);
             $artifactsContainer->addErrorResponse((string) $requestIndex, $response);
         }

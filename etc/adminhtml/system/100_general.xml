@@ -16,6 +16,13 @@
             <backend_model>Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ActiveRma</backend_model>
         </field>
 
+        <!-- Default Settings -->
+        <field id="default_item_weight" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>Default Item Weight</label>
+            <validate>validate-number validate-zero-or-greater</validate>
+            <comment>This value will be used as return position weight if the original shipment item has no weight configured.</comment>
+        </field>
+
         <!-- Logging -->
         <field id="logging" showInDefault="1" showInWebsite="0" showInStore="0" sortOrder="20"
                translate="label comment button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">

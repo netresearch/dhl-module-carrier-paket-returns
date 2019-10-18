@@ -15,7 +15,7 @@ use Magento\Framework\View\Element\Html\Select;
  *
  * @package Dhl\PaketReturns\Block
  * @author  Benjamin Heuer <benjamin.heuer@netresearch.de>
- * @link    http://www.netresearch.de/
+ * @link    https://www.netresearch.de/
  */
 class Procedures extends Select
 {

@@ -44,6 +44,17 @@
         </arguments>
     </virtualType>
 
+    <!-- # argument di overrides -->
+    <type name="Dhl\PaketReturns\Controller\Returns\Create\Guest">
+        <arguments>
+            <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\PaketReturns\Controller\Returns\Label\Guest">
+        <arguments>
+            <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
+        </arguments>
+    </type>
     <type name="Dhl\PaketReturns\Webservice\ApiGateway">
         <arguments>
             <argument name="pipeline" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\Shipment\CreateShipmentsPipeline\Virtual</argument>
@@ -54,11 +65,19 @@
             <argument name="logger" xsi:type="object">Dhl\PaketReturns\Model\Logger\Virtual</argument>
         </arguments>
     </type>
-
-    <!-- # argument di overrides -->
     <type name="Dhl\PaketReturns\Model\Carrier\Paket">
         <arguments>
             <argument name="returnShipmentManagement" xsi:type="object">Dhl\PaketReturns\Model\ReturnShipmentManagement\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\PaketReturns\ViewModel\Sales\Order\Info\Button\Returns">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Dhl\PaketReturns\ViewModel\Sales\Rma\Form">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
         </arguments>
     </type>
 </config>

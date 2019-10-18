@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * See LICENSE.md for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="sales.order.info.buttons">
+            <block name="sales.order.info.buttons.dhlpaket.returns" template="Dhl_PaketReturns::order/info/button/returns.phtml">
+                <arguments>
+                    <argument name="viewModel" xsi:type="object">Dhl\PaketReturns\ViewModel\Sales\Order\Info\Button\Returns</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,51 @@
+<?php
+/**
+ * See LICENSE.md for license details.
+ */
+?>
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+/** @var \Dhl\PaketReturns\ViewModel\Sales\Rma\Label $viewModel */
+$viewModel = $block->getData('viewModel');
+?>
+
+<div class="block block-return-label-info">
+    <div class="block-title">
+        <strong><?= $block->escapeHtml(__('Labels for your return shipment (shipment number %1)', $viewModel->getTrackingNumber())) ?></strong>
+    </div>
+    <div class="block-content">
+        <?php if ($viewModel->getShippingLabel()): ?>
+        <div class="box box-pdf">
+            <strong class="box-title">
+                <span><?= $block->escapeHtml(__('Return Label')) ?></span>
+            </strong>
+            <div class="box-actions">
+                <a class="action" href="data:application/pdf;base64,<?= /* @noEscape */ $viewModel->getShippingLabel() ?>" download="<?= $block->escapeHtmlAttr($viewModel->getFileName('pdf')) ?>">
+                    <?= $block->escapeHtml(__('Download Return Label')) ?>
+                </a>
+            </div>
+            <div class="box-content">
+                <canvas id="return-label-pdf" data-mage-init='{"pdfPreview": {"data": "<?= /* noEscape */ $viewModel->getShippingLabel() ?>"}}'></canvas>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($viewModel->getQrLabel()): ?>
+        <div class="box box-qr">
+            <strong class="box-title">
+                <span><?= $block->escapeHtml(__('Return Label QR Code')) ?></span>
+            </strong>
+            <div class="box-actions">
+                <a class="action" href="data:image/png;base64,<?= /* @noEscape */ $viewModel->getQrLabel() ?>" download="<?= $block->escapeHtmlAttr($viewModel->getFileName('png')) ?>">
+                    <?= $block->escapeHtml(__('Download QR Code')) ?>
+                </a>
+            </div>
+            <div class="box-content">
+                <a href="data:image/png;base64,<?= /* @noEscape */ $viewModel->getQrLabel() ?>" download="<?= $block->escapeHtmlAttr($viewModel->getFileName('png')) ?>">
+                    <img src="data:image/png;base64,<?= /* @noEscape */ $viewModel->getQrLabel() ?>" alt="<?= $block->escapeHtml(__('Return Label QR Code')) ?>"/>
+                </a>
+            </div>
+        </div>
+        <?php endif; ?>
+    </div>
+</div>

@@ -19,7 +19,7 @@ use Magento\Framework\View\Element\BlockInterface;
  * @package Dhl\PaketReturns\Block
  * @author  Benjamin Heuer <benjamin.heuer@netresearch.de>
  * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    http://www.netresearch.de/
+ * @link    https://www.netresearch.de/
  */
 class Participation extends AbstractFieldArray
 {

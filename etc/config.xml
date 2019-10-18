@@ -26,6 +26,7 @@
         <dhlshippingsolutions>
             <dhlpaketrma>
                 <general>
+                    <default_item_weight>0.250</default_item_weight>
                     <logging_group>
                         <loglevel>400</loglevel>
                     </logging_group>
@@ -63,12 +64,13 @@
                             "_1485789382230_107":{"iso":"IT","receiver_id":"IT"},
                             "_1485789382230_108":{"iso":"HR","receiver_id":"HR"},
                             "_1485789382230_109":{"iso":"LT","receiver_id":"LV"},
-                            "_1485789382230_110":{"iso":"AT","receiver_id":"AT"},
-                            "_1485789382230_111":{"iso":"PL","receiver_id":"PL"},
-                            "_1485789382230_112":{"iso":"SE","receiver_id":"SE"},
-                            "_1485789382230_113":{"iso":"CH","receiver_id":"CH"},
-                            "_1485789382230_114":{"iso":"HU","receiver_id":"HU"},
-                            "_1485789382230_115":{"iso":"GB","receiver_id":"UK"}
+                            "_1485789382230_110":{"iso":"NL","receiver_id":"NL"},
+                            "_1485789382230_111":{"iso":"AT","receiver_id":"AT"},
+                            "_1485789382230_112":{"iso":"PL","receiver_id":"PL"},
+                            "_1485789382230_113":{"iso":"SE","receiver_id":"SE"},
+                            "_1485789382230_114":{"iso":"CH","receiver_id":"CH"},
+                            "_1485789382230_115":{"iso":"HU","receiver_id":"HU"},
+                            "_1485789382230_116":{"iso":"GB","receiver_id":"UK"}
                         }
                     ]]>
                         </receiver_ids>

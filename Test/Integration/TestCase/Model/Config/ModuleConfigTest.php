@@ -7,11 +7,8 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\Test\Integration\TestCase\Model\Config;
 
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
-use Magento\Framework\App\Config;
 use Magento\Framework\Encryption\EncryptorInterface;
-use Magento\Store\Model\ScopeInterface;
 use Magento\TestFramework\ObjectManager;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**

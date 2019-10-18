@@ -1,0 +1,70 @@
+<?php
+/**
+ * See LICENSE.md for license details.
+ */
+?>
+<?php
+/** @var \Magento\Sales\Block\Order\Item\Renderer\DefaultRenderer $block */
+/** @var \Dhl\PaketReturns\ViewModel\Sales\Rma\Form $viewModel */
+/** @var \Magento\Sales\Api\Data\ShipmentItemInterface $item */
+$viewModel = $block->getData('rendered_block')->getData('viewModel');
+$item = $block->getItem();
+?>
+
+<tbody>
+    <tr class="item-info">
+        <td class="col item">
+            <span class="product-item-photo">
+                <span class="product-image-container">
+                    <img class="product-image-photo"
+                         src="<?= $block->escapeUrl($viewModel->getProductThumbnailUrl($item)) ?>"
+                         alt="<?= $block->escapeHtml($item->getName()) ?>"
+                    />
+                </span>
+            </span>
+            <div class="product-item-details">
+                <strong class="product name product-item-name"><?= $block->escapeHtml($item->getName()) ?></strong>
+                <?php if ($options = $block->getItemOptions()): ?>
+                <dl class="item options">
+                    <?php foreach ($options as $option) : ?>
+                        <dt><?= $block->escapeHtml($option['label']) ?></dt>
+                        <?php if (!$block->getPrintStatus()): ?>
+                            <?php $formattedOptionValue = $block->getFormatedOptionValue($option) ?>
+                            <dd<?php if (isset($formattedOptionValue['full_view'])): ?> class="tooltip wrapper"<?php endif; ?>>
+                                <?= $block->escapeHtml($formattedOptionValue['value']) ?>
+                                <?php if (isset($formattedOptionValue['full_view'])): ?>
+                                    <div class="tooltip content">
+                                        <dl class="item options">
+                                            <dt><?= $block->escapeHtml($option['label']) ?></dt>
+                                            <dd><?= $block->escapeHtml($formattedOptionValue['full_view']) ?></dd>
+                                        </dl>
+                                    </div>
+                                <?php endif; ?>
+                            </dd>
+                        <?php else: ?>
+                            <dd><?= $block->escapeHtml((isset($option['print_value']) ? $option['print_value'] : $option['value'])) ?></dd>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </dl>
+                <?php endif; ?>
+                <?php $addInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+                <?php if ($addInfoBlock): ?>
+                    <?php $addInfoBlock->setItem($item->getOrderItem()) ?>
+                    <?= /* @noEscape */ $addInfoBlock->toHtml() ?>
+                <?php endif; ?>
+            </div>
+        </td>
+        <td class="col sku"><?= $block->escapeHtml($item->getSku()) ?></td>
+        <td class="col qty">
+            <div id="qty_block_<?= /* @noEscape */ (int) $item->getEntityId() ?>">
+                <div class="control">
+                    <input type="number" id="item-<?= /* @noEscape */ (int) $item->getEntityId() ?>-qty" max="<?= /* @noEscape */ (int) $item->getQty() ?>"
+                           class="input-text required validate-number-range number-range-0-<?= /* @noEscape */ (int) $item->getQty() ?>"
+                           name="shipments[<?= /* @noEscape */ (int) $item->getParentId() ?>][items][<?= /* @noEscape */ (int) $item->getEntityId() ?>]"
+                           value="0">
+                </div>
+                <label for="item-<?= /* @noEscape */ (int) $item->getEntityId() ?>-qty" class="label"><span><?= $block->escapeHtml(__('%1 Items Shipped', (int) $item->getQty())) ?></span></label>
+            </div>
+        </td>
+    </tr>
+</tbody>

@@ -18,7 +18,7 @@ use Magento\Framework\View\Element\BlockInterface;
  *
  * @package Dhl\PaketReturns\Block
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    http://www.netresearch.de/
+ * @link    https://www.netresearch.de/
  */
 class ReceiverId extends AbstractFieldArray
 {
