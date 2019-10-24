@@ -9,6 +9,7 @@ namespace Dhl\PaketReturns\ViewModel\Sales\Rma;
 use Dhl\PaketReturns\Model\Carrier\Paket;
 use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelDataProvider;
 use Dhl\PaketReturns\Model\Sales\OrderProvider;
+use Magento\Framework\View\Asset\Repository as AssetRepository;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 /**
@@ -20,6 +21,11 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
  */
 class Label implements ArgumentInterface
 {
+    /**
+     * @var AssetRepository
+     */
+    private $assetRepository;
+
     /**
      * @var OrderProvider
      */
@@ -33,11 +39,16 @@ class Label implements ArgumentInterface
     /**
      * Label constructor.
      *
+     * @param AssetRepository $assetRepository
      * @param OrderProvider $orderProvider
      * @param LabelDataProvider $labelDataProvider
      */
-    public function __construct(OrderProvider $orderProvider, LabelDataProvider $labelDataProvider)
-    {
+    public function __construct(
+        AssetRepository $assetRepository,
+        OrderProvider $orderProvider,
+        LabelDataProvider $labelDataProvider
+    ) {
+        $this->assetRepository = $assetRepository;
         $this->orderProvider = $orderProvider;
         $this->labelDataProvider = $labelDataProvider;
     }
@@ -93,9 +104,19 @@ class Label implements ArgumentInterface
     /**
      * @return string
      */
-    public function getQrLabel()
+    public function getQrLabel(): string
     {
         $labelResponse = $this->labelDataProvider->getLabelResponse();
         return $labelResponse ? $labelResponse->getQRLabelData() : '';
+    }
+
+    /**
+     * Get the PDF sample image.
+     *
+     * @return string
+     */
+    public function getPdfSampleImage(): string
+    {
+        return $this->assetRepository->getUrl('Dhl_PaketReturns::images/return-label.png');
     }
 }
