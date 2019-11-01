@@ -13,6 +13,7 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterfaceFactory;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
+use Dhl\ShippingCore\Api\ItemAttributeReaderInterface;
 use Dhl\ShippingCore\Api\UnitConverterInterface;
 use Dhl\ShippingCore\Util\StreetSplitter;
 use Magento\Directory\Model\ResourceModel\Country\Collection;
@@ -60,7 +61,7 @@ class RequestExtractor
     private $unitConverter;
 
     /**
-     * @var ItemAttributeReader
+     * @var ItemAttributeReaderInterface
      */
     private $attributeReader;
 
@@ -102,7 +103,7 @@ class RequestExtractor
      * @param ModuleConfig $moduleConfig
      * @param StreetSplitter $streetSplitter
      * @param UnitConverterInterface $unitConverter
-     * @param ItemAttributeReader $attributeReader
+     * @param ItemAttributeReaderInterface $attributeReader
      * @param ShipperInterfaceFactory $shipperFactory
      * @param PackageItemInterfaceFactory $packageItemFactory
      * @param CollectionFactory $countryCollectionFactory
@@ -113,7 +114,7 @@ class RequestExtractor
         ModuleConfig $moduleConfig,
         StreetSplitter $streetSplitter,
         UnitConverterInterface $unitConverter,
-        ItemAttributeReader $attributeReader,
+        ItemAttributeReaderInterface $attributeReader,
         ShipperInterfaceFactory $shipperFactory,
         PackageItemInterfaceFactory $packageItemFactory,
         CollectionFactory $countryCollectionFactory
@@ -304,7 +305,7 @@ class RequestExtractor
                         'exportDescription' => $this->attributeReader->getExportDescription($item),
                         'hsCode' => $this->attributeReader->getHsCode($item),
                         'countryOfOrigin' => $this->getIso3Code($this->attributeReader->getCountryOfManufacture($item))
-                    ]
+                    ],
                 ];
             }
 

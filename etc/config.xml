@@ -43,36 +43,36 @@
                         <account_number>2222222222</account_number>
                         <account_participations backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
                             <![CDATA[
-                            {
-                                "_1485789382230_100":{"procedure":"07","participation":"01"},
-                                "_1485789382230_101":{"procedure":"53","participation":"01"}
-                            }
+                                {
+                                    "_1485789382230_100":{"procedure":"07","participation":"01"},
+                                    "_1485789382230_101":{"procedure":"53","participation":"01"}
+                                }
                             ]]>
                         </account_participations>
 
                         <!-- Mapping of 2-letter-iso country code to DHL Paket return receiver id -->
                         <receiver_ids backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
                             <![CDATA[
-                        {
-                            "_1485789382230_100":{"iso":"DE","receiver_id":"DE"},
-                            "_1485789382230_101":{"iso":"BE","receiver_id":"BE"},
-                            "_1485789382230_102":{"iso":"BG","receiver_id":"BG"},
-                            "_1485789382230_103":{"iso":"EE","receiver_id":"EE"},
-                            "_1485789382230_104":{"iso":"FI","receiver_id":"FI"},
-                            "_1485789382230_105":{"iso":"FR","receiver_id":"FR"},
-                            "_1485789382230_106":{"iso":"IE","receiver_id":"IE"},
-                            "_1485789382230_107":{"iso":"IT","receiver_id":"IT"},
-                            "_1485789382230_108":{"iso":"HR","receiver_id":"HR"},
-                            "_1485789382230_109":{"iso":"LT","receiver_id":"LV"},
-                            "_1485789382230_110":{"iso":"NL","receiver_id":"NL"},
-                            "_1485789382230_111":{"iso":"AT","receiver_id":"AT"},
-                            "_1485789382230_112":{"iso":"PL","receiver_id":"PL"},
-                            "_1485789382230_113":{"iso":"SE","receiver_id":"SE"},
-                            "_1485789382230_114":{"iso":"CH","receiver_id":"CH"},
-                            "_1485789382230_115":{"iso":"HU","receiver_id":"HU"},
-                            "_1485789382230_116":{"iso":"GB","receiver_id":"UK"}
-                        }
-                    ]]>
+                                {
+                                    "_1485789382230_100":{"iso":"DE","receiver_id":"DE"},
+                                    "_1485789382230_101":{"iso":"BE","receiver_id":"BE"},
+                                    "_1485789382230_102":{"iso":"BG","receiver_id":"BG"},
+                                    "_1485789382230_103":{"iso":"EE","receiver_id":"EE"},
+                                    "_1485789382230_104":{"iso":"FI","receiver_id":"FI"},
+                                    "_1485789382230_105":{"iso":"FR","receiver_id":"FR"},
+                                    "_1485789382230_106":{"iso":"IE","receiver_id":"IE"},
+                                    "_1485789382230_107":{"iso":"IT","receiver_id":"IT"},
+                                    "_1485789382230_108":{"iso":"HR","receiver_id":"HR"},
+                                    "_1485789382230_109":{"iso":"LT","receiver_id":"LV"},
+                                    "_1485789382230_110":{"iso":"NL","receiver_id":"NL"},
+                                    "_1485789382230_111":{"iso":"AT","receiver_id":"AT"},
+                                    "_1485789382230_112":{"iso":"PL","receiver_id":"PL"},
+                                    "_1485789382230_113":{"iso":"SE","receiver_id":"SE"},
+                                    "_1485789382230_114":{"iso":"CH","receiver_id":"CH"},
+                                    "_1485789382230_115":{"iso":"HU","receiver_id":"HU"},
+                                    "_1485789382230_116":{"iso":"GB","receiver_id":"UK"}
+                                }
+                            ]]>
                         </receiver_ids>
                     </sandbox>
 
@@ -82,19 +82,16 @@
                         <api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
 
                         <account_participations backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
-                        <![CDATA[
-                            {
-                                "_1485789382230_100":{"procedure":"07","participation":"01"},
-                                "_1485789382230_101":{"procedure":"53","participation":"01"}
-                            }
-                        ]]>
+                            <![CDATA[
+                                {
+                                    "_1485789382230_100":{"procedure":"07","participation":"01"},
+                                    "_1485789382230_101":{"procedure":"53","participation":"01"}
+                                }
+                            ]]>
                         </account_participations>
 
                         <receiver_ids backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized"/>
                     </production>
-
-
-
                 </account>
             </dhlpaketrma>
         </dhlshippingsolutions>
