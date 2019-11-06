@@ -27,7 +27,7 @@
             <field id="api_username" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
                    translate="label comment" type="text">
                 <label>User</label>
-                <comment>Please talk to your account representative to add API access to your business account. Pass the user name only lowercase.</comment>
+                <comment>Enter your API user name. Lower case letters only. Please talk to your account representative to add API access to your business account.</comment>
             </field>
             <field id="api_password" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="20"
                    translate="label" type="obscure">
@@ -40,7 +40,7 @@
             <field id="account_number" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="30"
                    translate="label comment" type="text">
                 <label>DHL Customer Number (EKP)</label>
-                <comment>The EKP number (standardised customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales.</comment>
+                <comment>The EKP number (standardized customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales.</comment>
                 <validate>validate-length maximum-length-10 minimum-length-10 validate-digits</validate>
             </field>
 

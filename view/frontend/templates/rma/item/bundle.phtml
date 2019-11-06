@@ -35,7 +35,7 @@ if ($block->isShipmentSeparately()) {
                 <?php if (!$item->getParentItem()): ?>
                     <ul>
                     <?php foreach ($item->getOrderItem()->getChildrenItems() as $childItem): ?>
-                        <li><?= $block->getValueHtml($childItem) ?></li>
+                        <li><?= /* @noEscape */ $block->getValueHtml($childItem) ?></li>
                     <?php endforeach; ?>
                     </ul>
                 <?php endif; ?>
