@@ -80,4 +80,26 @@
             <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
         </arguments>
     </type>
+    <type name="Magento\Config\Model\Config\TypePool">
+        <arguments>
+            <argument name="sensitive" xsi:type="array">
+                <item name="dhlshippingsolutions/dhlpaketrma/account/production/auth_username" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/account/production/auth_password" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/account/production/api_username" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/account/production/api_password" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/account/production/account_number" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/account/production/account_participations" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids" xsi:type="string">1</item>
+            </argument>
+            <argument name="environment" xsi:type="array">
+                <item name="dhlshippingsolutions/dhlpaketrma/general/default_item_weight" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/general/logging" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/general/logging_group/loglevel" xsi:type="string">1</item>
+                <item name="dhlshippingsolutions/dhlpaketrma/account/sandboxmode" xsi:type="string" >1</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Config\App\Config\Source\DumpConfigSourceAggregated">
+        <plugin name="unsetPaketReturnsSandboxPaths" type="Dhl\PaketReturns\Plugin\UnsetSandboxPaths"/>
+    </type>
 </config>
