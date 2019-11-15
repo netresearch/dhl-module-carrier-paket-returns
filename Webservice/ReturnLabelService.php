@@ -11,7 +11,6 @@ use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterfaceFactory;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface;
-use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -71,14 +70,6 @@ class ReturnLabelService implements ReturnLabelServiceInterface
         $this->storeId = $storeId;
     }
 
-    /**
-     * BookLabel is the operation call used to generate return labels.
-     *
-     * @param \JsonSerializable $returnOrder
-     *
-     * @return ConfirmationInterface
-     * @throws ServiceException
-     */
     public function bookLabel(\JsonSerializable $returnOrder): ConfirmationInterface
     {
         $authStorage = $this->authStorageFactory->create([

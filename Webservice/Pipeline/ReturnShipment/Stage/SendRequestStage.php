@@ -8,6 +8,7 @@ namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage;
 
 use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainer;
 use Dhl\PaketReturns\Webservice\ReturnLabelServiceFactory;
+use Dhl\Sdk\Paket\Retoure\Exception\DetailedServiceException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
 use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
@@ -57,6 +58,8 @@ class SendRequestStage implements CreateShipmentsStageInterface
                 try {
                     $labelConfirmation = $returnLabelService->bookLabel($apiRequest);
                     $artifactsContainer->addApiResponse((string) $requestIndex, $labelConfirmation);
+                } catch (DetailedServiceException $exception) {
+                    $artifactsContainer->addError((string) $requestIndex, $exception->getMessage());
                 } catch (ServiceException $exception) {
                     $artifactsContainer->addError((string) $requestIndex, $exception->getMessage());
                 }
