@@ -78,7 +78,7 @@ if ($block->isShipmentSeparately()) {
         <td class="col qty">
             <div id="qty_block_<?= /* @noEscape */ (int) $item->getEntityId() ?>">
                 <div class="control">
-                    <input type="number" id="item-<?= /* @noEscape */ (int) $item->getEntityId() ?>-qty" max="<?= /* @noEscape */ (int) $item->getQty() ?>"
+                    <input type="number" id="item-<?= /* @noEscape */ (int) $item->getEntityId() ?>-qty" min="0" max="<?= /* @noEscape */ (int) $item->getQty() ?>"
                            class="input-text required validate-number-range number-range-0-<?= /* @noEscape */ (int) $item->getQty() ?>"
                            name="shipments[<?= /* @noEscape */ (int) $item->getParentId() ?>][items][<?= /* @noEscape */ (int) $item->getEntityId() ?>]"
                            value="0">
