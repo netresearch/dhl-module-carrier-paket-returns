@@ -11,7 +11,6 @@ namespace Dhl\PaketReturns\Model\ReturnShipmentResponse;
  *
  * Registry for passing a web service response through the application.
  *
- * @package Dhl\PaketReturns\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

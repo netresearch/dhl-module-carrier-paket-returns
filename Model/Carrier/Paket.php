@@ -34,7 +34,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class Paket
  *
- * @package Dhl\PaketReturns\Model
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/

@@ -17,7 +17,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
  *
  * Central entry point for creating return order labels.
  *
- * @package Dhl\PaketReturns\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

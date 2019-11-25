@@ -16,7 +16,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * The receiver country name dropdown is rendered per row using a separate form field.
  * @see Country
  *
- * @package Dhl\PaketReturns\Block
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

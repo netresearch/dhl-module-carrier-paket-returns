@@ -17,7 +17,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
  *
  * Magento carrier-aware wrapper around the DHL Paket Returns API SDK.
  *
- * @package Dhl\PaketReturns\Webservice
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

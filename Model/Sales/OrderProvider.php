@@ -13,7 +13,6 @@ use Magento\Sales\Api\Data\OrderInterface;
  *
  * Registry for passing a loaded order through the application.
  *
- * @package Dhl\PaketReturns\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

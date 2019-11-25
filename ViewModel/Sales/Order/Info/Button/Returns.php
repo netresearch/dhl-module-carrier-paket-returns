@@ -19,7 +19,6 @@ use Magento\Sales\Model\OrderRepository;
 /**
  * View model class for adding a returns button to the order info view.
  *
- * @package Dhl\PaketReturns\ViewModel
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

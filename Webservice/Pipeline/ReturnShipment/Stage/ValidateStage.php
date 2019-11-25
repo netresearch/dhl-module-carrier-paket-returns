@@ -16,7 +16,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
 /**
  * Class ValidateStage
  *
- * @package Dhl\PaketReturns\Webservice
  * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
  * @link    https://www.netresearch.de/
  */

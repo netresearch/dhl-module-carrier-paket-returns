@@ -16,7 +16,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
 /**
  * Class MapRequestStage
  *
- * @package Dhl\PaketReturns\Webservice
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

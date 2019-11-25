@@ -11,7 +11,6 @@ use Magento\Framework\Data\OptionSourceInterface;
 /**
  * Class Procedure
  *
- * @package Dhl\PaketReturns\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

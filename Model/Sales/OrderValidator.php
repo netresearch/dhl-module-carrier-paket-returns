@@ -13,7 +13,6 @@ use Magento\Sales\Model\Order;
 /**
  * Class OrderValidator
  *
- * @package Dhl\PaketReturns\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

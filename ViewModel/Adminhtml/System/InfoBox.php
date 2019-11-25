@@ -12,7 +12,6 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 /**
  * Class InfoBox
  *
- * @package Dhl\PaketReturns\ViewModel
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

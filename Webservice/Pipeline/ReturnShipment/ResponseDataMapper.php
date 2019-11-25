@@ -23,7 +23,6 @@ use Psr\Log\LoggerInterface;
  *
  * @see \Magento\Shipping\Model\Carrier\AbstractCarrierOnline::requestToShipment
  *
- * @package Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */
 class ResponseDataMapper

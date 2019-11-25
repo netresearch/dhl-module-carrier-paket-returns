@@ -16,7 +16,6 @@ use Psr\Log\LoggerInterface;
 /**
  * Class ReturnLabelService
  *
- * @package Dhl\PaketReturns\Webservice
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

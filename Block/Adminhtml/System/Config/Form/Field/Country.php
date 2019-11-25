@@ -13,7 +13,6 @@ use Magento\Framework\View\Element\Html\Select;
 /**
  * The country names dropdown.
  *
- * @package Dhl\PaketReturns\Block
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

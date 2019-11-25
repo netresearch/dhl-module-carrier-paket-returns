@@ -19,7 +19,6 @@ use Magento\Sales\Controller\AbstractController\OrderViewAuthorizationInterface;
 /**
  * Return Form Controller.
  *
- * @package Dhl\PaketReturns\Controller
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

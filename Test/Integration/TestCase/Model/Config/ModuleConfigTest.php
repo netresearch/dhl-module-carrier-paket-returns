@@ -14,7 +14,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class ModuleConfigTest
  *
- * @package Dhl\PaketReturns\Test\Integration
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

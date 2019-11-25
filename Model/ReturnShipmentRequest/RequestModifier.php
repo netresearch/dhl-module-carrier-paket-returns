@@ -23,7 +23,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipment;
 /**
  * Class RequestModifier
  *
- * @package Dhl\PaketReturns\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

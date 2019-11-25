@@ -11,7 +11,6 @@ use Magento\Framework\DataObject;
 /**
  * The return shipment label response.
  *
- * @package Dhl\PaketReturns\Model
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

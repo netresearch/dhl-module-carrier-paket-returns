@@ -27,7 +27,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipmentFactory;
 /**
  * Request and display return shipment labels.
  *
- * @package Dhl\PaketReturns\Controller
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

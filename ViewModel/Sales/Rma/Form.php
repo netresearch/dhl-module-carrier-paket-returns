@@ -33,7 +33,6 @@ use Magento\Shipping\Block\Items;
 /**
  * View model class for creating a return shipment.
  *
- * @package Dhl\PaketReturns\Controller
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

@@ -14,7 +14,6 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 /**
  * Class ArtifactsContainer
  *
- * @package Dhl\PaketReturns\Webservice
  * @author  Rico Sonntag <rico.sonntag@netresearch.de>
  * @link    https://www.netresearch.de/
  */

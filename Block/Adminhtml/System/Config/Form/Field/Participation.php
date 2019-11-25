@@ -16,7 +16,6 @@ use Magento\Framework\View\Element\BlockInterface;
  * The procedures dropdown is rendered per row using a separate form field.
  * @see Procedures
  *
- * @package Dhl\PaketReturns\Block
  * @author  Benjamin Heuer <benjamin.heuer@netresearch.de>
  * @author  Max Melzer <max.melzer@netresearch.de>
  * @link    https://www.netresearch.de/
