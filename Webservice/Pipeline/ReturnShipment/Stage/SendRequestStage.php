@@ -60,7 +60,7 @@ class SendRequestStage implements CreateShipmentsStageInterface
                 } catch (DetailedServiceException $exception) {
                     $artifactsContainer->addError((string) $requestIndex, $exception->getMessage());
                 } catch (ServiceException $exception) {
-                    $artifactsContainer->addError((string) $requestIndex, $exception->getMessage());
+                    $artifactsContainer->addError((string) $requestIndex, 'Web service request failed.');
                 }
             }
         }
