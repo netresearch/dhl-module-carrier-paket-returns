@@ -91,7 +91,7 @@ class RequestDataMapper
 
         if (!$requestExtractor->isEuShipping()) {
             $this->requestBuilder->setCustomsDetails(
-                $requestExtractor->getOrder()->getOrderCurrency()->getCurrencyCode(),
+                $requestExtractor->getOrder()->getBaseCurrencyCode(),
                 implode(', ', $requestExtractor->getOriginalShipmentNumbers()),
                 $requestExtractor->getOriginalCarrier()
             );

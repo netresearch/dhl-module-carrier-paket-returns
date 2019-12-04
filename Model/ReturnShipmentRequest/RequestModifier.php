@@ -246,22 +246,34 @@ class RequestModifier
                 }
 
                 try {
+                    /** @var \Magento\Sales\Model\Order\Shipment\Item $shipmentItem */
                     $shipmentItem = $this->getShipmentItem(array_keys($shipmentsData), $itemId);
                 } catch (NoSuchEntityException $exception) {
                     continue;
                 }
 
+                $rowAmount = $shipmentItem->getOrderItem()->getBaseRowTotal()
+                    - $shipmentItem->getOrderItem()->getBaseDiscountAmount()
+                    + $shipmentItem->getOrderItem()->getBaseTaxAmount()
+                    + $shipmentItem->getOrderItem()->getbaseDiscountTaxCompensationAmount();
+                $itemPrice = $rowAmount / $shipmentItem->getOrderItem()->getQtyOrdered();
+
                 $totalWeight += $qty * $shipmentItem->getWeight();
-                $totalPrice += $qty * $shipmentItem->getPrice();
-                $items[$shipmentItem->getOrderItemId()] = [
-                    'qty' => $qty,
-                    'customs_value' => $shipmentItem->getPrice(),
-                    'price' => $shipmentItem->getPrice(),
-                    'name' => $shipmentItem->getName(),
-                    'weight' => $shipmentItem->getWeight(),
-                    'product_id' => $shipmentItem->getProductId(),
-                    'order_item_id' => $shipmentItem->getOrderItemId(),
-                ];
+                $totalPrice += $qty * $itemPrice;
+
+                if (!isset($items[$shipmentItem->getOrderItemId()])) {
+                    $items[$shipmentItem->getOrderItemId()] = [
+                        'qty' => $qty,
+                        'customs_value' => $itemPrice,
+                        'price' => $itemPrice,
+                        'name' => $shipmentItem->getName(),
+                        'weight' => $shipmentItem->getWeight(),
+                        'product_id' => $shipmentItem->getProductId(),
+                        'order_item_id' => $shipmentItem->getOrderItemId(),
+                    ];
+                } else {
+                    $items[$shipmentItem->getOrderItemId()]['qty'] += $qty;
+                }
             }
         }
 

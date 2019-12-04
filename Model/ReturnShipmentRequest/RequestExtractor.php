@@ -294,40 +294,36 @@ class RequestExtractor
         if (empty($this->items)) {
             $allItems = [];
             $packages = $this->returnShipmentRequest->getData('packages');
-            $orderItemsData = [];
 
-            /** @var Item $item */
-            foreach ($this->getOrder()->getAllItems() as $item) {
-                $orderItemsData[$item->getItemId()] = [
-                    'sku' => $item->getSku(),
-                    'customs' => [
-                        'exportDescription' => $this->attributeReader->getExportDescription($item),
-                        'hsCode' => $this->attributeReader->getHsCode($item),
-                        'countryOfOrigin' => $this->getIso3Code($this->attributeReader->getCountryOfManufacture($item))
-                    ],
-                ];
-            }
+            $orderItems = $this->getOrder()->getAllItems();
+            $orderItemIds = array_map(function (Item $item) {
+                return $item->getId();
+            }, $orderItems);
+            $orderItems = array_combine($orderItemIds, $orderItems);
 
             foreach ($packages as $packageId => $packageData) {
                 $packageItems = array_map(
-                    function (array $itemData) use ($packageId, $orderItemsData) {
-                        $orderItemData = $orderItemsData[$itemData['order_item_id']];
+                    function (array $itemData) use ($packageId, $orderItems) {
+                        /** @var Item $orderItem */
+                        $orderItem = $orderItems[$itemData['order_item_id']];
+                        $countryOfManufacture = $this->attributeReader->getCountryOfManufacture($orderItem);
+
                         $packageItem = $this->packageItemFactory->create(
                             [
-                                'orderItemId' => (int)$itemData['order_item_id'],
-                                'productId' => (int)$itemData['product_id'],
-                                'packageId' => (int)$packageId,
+                                'orderItemId' => (int) $itemData['order_item_id'],
+                                'productId' => (int) $itemData['product_id'],
+                                'packageId' => (int) $packageId,
                                 'name' => $itemData['name'],
-                                'qty' => (float)$itemData['qty'],
-                                'weight' => (float)$itemData['weight'],
-                                'price' => (float)$itemData['price'],
+                                'qty' => (float) $itemData['qty'],
+                                'weight' => (float) $itemData['weight'],
+                                'price' => (float) $itemData['price'],
                                 'customsValue' => isset($itemData['customs_value'])
-                                    ? (float)$itemData['customs_value']
+                                    ? (float) $itemData['customs_value']
                                     : null,
-                                'sku' => $orderItemData['sku'],
-                                'exportDescription' => $orderItemData['customs']['exportDescription'] ?? '',
-                                'hsCode' => $orderItemData['customs']['hsCode'] ?? '',
-                                'countryOfOrigin' => $orderItemData['customs']['countryOfOrigin'] ?? '',
+                                'sku' => $orderItem->getSku(),
+                                'exportDescription' => $this->attributeReader->getExportDescription($orderItem),
+                                'hsCode' => $this->attributeReader->getHsCode($orderItem),
+                                'countryOfOrigin' => $this->getIso3Code($countryOfManufacture),
                             ]
                         );
 
@@ -364,18 +360,13 @@ class RequestExtractor
     }
 
     /**
-     * Returns the total value of all package items or the package customs value for non-EU shipping.
+     * Returns the total value of all package items. We use the amount of
+     * all items including tax and not the the package customs value.
      *
      * @return float
      */
     public function getPackageAmount(): float
     {
-        if (!$this->isEuShipping()) {
-            $packageId = $this->returnShipmentRequest->getData('package_id');
-            $packages = $this->returnShipmentRequest->getData('packages');
-            return (float)$packages[$packageId]['params']['customs_value'];
-        }
-
         $totalAmount = array_reduce(
             $this->getPackageItems(),
             static function (float $totalAmount, PackageItemInterface $item) {
