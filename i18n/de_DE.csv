@@ -36,6 +36,7 @@ Item,Artikel
 "Log Level",Protokollierungsstufe
 Logging,Protokollierung
 "New Return Shipment","Neue Retourenlieferung"
+"Observe upper and lower case when handing over the password.","Beachten Sie Groß- und Kleinschreibung beim Eintragen des Passworts."
 "Only return shipments are supported.","Es werden nur Versandaufträge für Retouren unterstützt."
 "Order # %1","Bestellung # %1"
 Participation,Teilnahme
@@ -64,7 +65,7 @@ State/Province,Bundesland
 "Street Address %1",Straße
 Submit,Absenden
 "The DHL Paket Returns module allows to order return labels for planned return shipments from your customers.","Mit dem Modul DHL Paket Returns können Sie Retourenetiketten für geplante Rücksendungen bei Ihren Kunden bestellen."
-"The EKP number (standardized customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales.","Die DHL-Kundennumemr (standardisierte Kunden- und Produktnummer) ist der Schlüssel zur Nutzung der Produkte von Deutsche Post DHL. Es ist 10-stellig und wird vom DHL-Vertrieb vergeben."
+"The EKP number (standardized customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales.","Die EKP (Kundennummer) ist Ihr Schlüssel zu den Produkten von DHL. Sie umfasst 10 Zeichen und wird Ihnen von DHL zugewiesen."
 "The customer integration gateway of DHL provides generic test endpoints for the calling APIs. Select this option to use the test environment.","Die DHL-Schnittstelle bietet generische Testendpunkte für die aufrufenden APIs. Wählen Sie diese Option aus, um die Testumgebung zu verwenden."
 "The log level <em>Info</em> should only be set while resolving problems. It may result in very large log files.","Die Protokollierungsstufe <em>Info</em> sollte nur beim Lösen von Problemen eingestellt werden, da dies zu sehr großen Protokolldateien führen kann."
 "The participation number enables invoices to be subdivided according to location, seasonal business or different conditions. The participation is 2 numerical digits from 00 to 99 or alphanumerical digits from AA to ZZ. It is allocated by DHL Sales.","Die Teilnehmernummer ermöglicht die Aufteilung der Rechnungen nach Standort, Saisongeschäft oder unterschiedlichen Konditionen. Die Teilnahme besteht aus 2 Ziffern von 00 bis 99 oder alphanumerischen Ziffern von AA bis ZZ. Sie wird vom DHL-Vertrieb vergeben."

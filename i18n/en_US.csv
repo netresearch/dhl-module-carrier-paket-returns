@@ -36,6 +36,7 @@ Item,Item
 "Log Level","Log Level"
 Logging,Logging
 "New Return Shipment","New Return Shipment"
+"Observe upper and lower case when handing over the password.","Observe upper and lower case when handing over the password."
 "Only return shipments are supported.","Only return shipments are supported."
 "Order # %1","Order # %1"
 Participation,Participation
