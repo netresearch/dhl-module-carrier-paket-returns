@@ -11,7 +11,7 @@ use Dhl\PaketReturns\Model\ReturnShipmentResponse\ErrorResponseFactory;
 use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelResponse;
 use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelResponseFactory;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
-use Dhl\ShippingCore\Api\PdfCombinatorInterface;
+use Dhl\ShippingCore\Api\Util\PdfCombinatorInterface;
 use Magento\Framework\Exception\RuntimeException;
 use Magento\Framework\Phrase;
 use Psr\Log\LoggerInterface;

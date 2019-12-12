@@ -11,7 +11,7 @@
     <preference for="Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface" type="Dhl\Sdk\Paket\Retoure\Auth\AuthenticationStorage"/>
 
     <!-- # virtual types -->
-    <virtualType name="Dhl\PaketReturns\Model\Logger\Handler\Virtual" type="Dhl\ShippingCore\Model\Log\ApiLogHandler">
+    <virtualType name="Dhl\PaketReturns\Model\Logger\Handler\Virtual" type="Dhl\ShippingCore\Model\Util\ApiLogHandler">
         <arguments>
             <argument name="fileName" xsi:type="string">var/log/dhl_paket_returns.log</argument>
             <argument name="logEnabledConfigPath" xsi:type="const">Dhl\PaketReturns\Model\Config\ModuleConfig::CONFIG_PATH_ENABLE_LOGGING</argument>
