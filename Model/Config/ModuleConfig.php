@@ -7,7 +7,6 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\Model\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Store\Model\ScopeInterface;
 
@@ -58,22 +57,13 @@ class ModuleConfig
     private $scopeConfig;
 
     /**
-     * @var EncryptorInterface
-     */
-    private $encryptor;
-
-    /**
      * ModuleConfig constructor.
      *
      * @param ScopeConfigInterface $scopeConfig
-     * @param EncryptorInterface $encryptor
      */
-    public function __construct(
-        ScopeConfigInterface $scopeConfig,
-        EncryptorInterface $encryptor
-    ) {
+    public function __construct(ScopeConfigInterface $scopeConfig)
+    {
         $this->scopeConfig = $scopeConfig;
-        $this->encryptor = $encryptor;
     }
 
     /**
@@ -128,7 +118,7 @@ class ModuleConfig
             return $this->getSandboxAuthUsername($store);
         }
 
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_AUTH_USERNAME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -147,12 +137,10 @@ class ModuleConfig
             return $this->getSandboxAuthPassword($store);
         }
 
-        return (string)$this->encryptor->decrypt(
-            $this->scopeConfig->getValue(
-                self::CONFIG_PATH_AUTH_PASSWORD,
-                ScopeInterface::SCOPE_STORE,
-                $store
-            )
+        return (string) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_AUTH_PASSWORD,
+            ScopeInterface::SCOPE_STORE,
+            $store
         );
     }
 
@@ -168,7 +156,7 @@ class ModuleConfig
             return $this->getSandboxUser($store);
         }
 
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_USER,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -187,12 +175,10 @@ class ModuleConfig
             return $this->getSandboxSignature($store);
         }
 
-        return (string)$this->encryptor->decrypt(
-            $this->scopeConfig->getValue(
-                self::CONFIG_PATH_SIGNATURE,
-                ScopeInterface::SCOPE_STORE,
-                $store
-            )
+        return (string) $this->scopeConfig->getValue(
+            self::CONFIG_PATH_SIGNATURE,
+            ScopeInterface::SCOPE_STORE,
+            $store
         );
     }
 
@@ -208,7 +194,7 @@ class ModuleConfig
             return $this->getSandboxEkp($store);
         }
 
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_EKP,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -265,7 +251,7 @@ class ModuleConfig
      */
     private function getSandboxAuthUsername($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_AUTH_USERNAME,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -280,7 +266,7 @@ class ModuleConfig
      */
     private function getSandboxAuthPassword($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_AUTH_PASSWORD,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -295,7 +281,7 @@ class ModuleConfig
      */
     private function getSandboxUser($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_USER,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -310,7 +296,7 @@ class ModuleConfig
      */
     private function getSandboxSignature($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_SIGNATURE,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -325,7 +311,7 @@ class ModuleConfig
      */
     private function getSandboxEkp($store = null): string
     {
-        return (string)$this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_EKP,
             ScopeInterface::SCOPE_STORE,
             $store
@@ -375,13 +361,11 @@ class ModuleConfig
      */
     public function getCarrierTitle(string $carrierCode, $store = null): string
     {
-        $carrierTitle = $this->scopeConfig->getValue(
+        return (string) $this->scopeConfig->getValue(
             'carriers/' . $carrierCode . '/title',
             ScopeInterface::SCOPE_STORE,
             $store
         );
-
-        return (string)$carrierTitle;
     }
 
     /**
