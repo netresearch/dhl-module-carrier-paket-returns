@@ -69,8 +69,8 @@ Submit,Submit
 "The customer integration gateway of DHL provides generic test endpoints for the calling APIs. Select this option to use the test environment.","The customer integration gateway of DHL provides generic test endpoints for the calling APIs. Select this option to use the test environment."
 "The log level <em>Info</em> should only be set while resolving problems. It may result in very large log files.","The log level <em>Info</em> should only be set while resolving problems. It may result in very large log files."
 "The participation number enables invoices to be subdivided according to location, seasonal business or different conditions. The participation is 2 numerical digits from 00 to 99 or alphanumerical digits from AA to ZZ. It is allocated by DHL Sales.","The participation number enables invoices to be subdivided according to location, seasonal business or different conditions. The participation is 2 numerical digits from 00 to 99 or alphanumerical digits from AA to ZZ. It is allocated by DHL Sales."
-"The receiver ID is a two letter alphanumeric code.","The receiver ID is a two letter alphanumeric code."
 "This value will be used as return position weight if the original shipment item has no weight configured.","This value will be used as return position weight if the original shipment item has no weight configured."
+"To determine valid receiver IDs for your account, log into the DHL Business Customer Portal and download the <em>Receiver Links</em> CSV file from the <em>Returns</em> section.","To determine valid receiver IDs for your account, log into the DHL Business Customer Portal and download the <em>Receiver Links</em> CSV file from the <em>Returns</em> section."
 "To get started:","To get started:"
 User,User
 "You cannot create a return shipment for order %1.","You cannot create a return shipment for order %1."

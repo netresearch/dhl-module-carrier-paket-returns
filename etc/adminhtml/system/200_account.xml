@@ -56,7 +56,7 @@
             <field id="receiver_ids" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="50"
                    translate="label comment" type="select">
                 <label>Return Receiver IDs</label>
-                <comment>The receiver ID is a two letter alphanumeric code.</comment>
+                <comment><![CDATA[To determine valid receiver IDs for your account, log into the DHL Business Customer Portal and download the <em>Receiver Links</em> CSV file from the <em>Returns</em> section.]]></comment>
                 <frontend_model>Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field\ReceiverId</frontend_model>
                 <backend_model>Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized</backend_model>
             </field>
