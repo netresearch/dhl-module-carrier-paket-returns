@@ -61,8 +61,8 @@ SKU,SKU
 "Shipment # %1","Lieferschein # %1"
 "Shipment item %1 is not available.","Versandartikel %1 ist nicht verfügbar."
 State/Province,Bundesland
-"Street Address",Straße
-"Street Address %1",Straße
+"Street Name",Straße
+"Street Number",Hausnummer
 Submit,Absenden
 "The DHL Paket Returns module allows to order return labels for planned return shipments from your customers.","Mit dem Modul DHL Paket Returns können Sie Retourenetiketten für geplante Rücksendungen bei Ihren Kunden bestellen."
 "The EKP number (standardized customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales.","Die EKP (Kundennummer) ist Ihr Schlüssel zu den Produkten von DHL. Sie umfasst 10 Zeichen und wird Ihnen von DHL zugewiesen."

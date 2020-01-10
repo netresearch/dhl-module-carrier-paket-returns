@@ -61,8 +61,8 @@ SKU,SKU
 "Shipment # %1","Shipment # %1"
 "Shipment item %1 is not available.","Shipment item %1 is not available."
 State/Province,State/Province
-"Street Address","Street Address"
-"Street Address %1","Street Address %1"
+"Street Name","Street Name"
+"Street Number","Street Number"
 Submit,Submit
 "The DHL Paket Returns module allows to order return labels for planned return shipments from your customers.","The DHL Paket Returns module allows to order return labels for planned return shipments from your customers."
 "The EKP number (standardized customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales.","The EKP number (standardized customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales."

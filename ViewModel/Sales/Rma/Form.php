@@ -8,15 +8,15 @@ namespace Dhl\PaketReturns\ViewModel\Sales\Rma;
 
 use Dhl\PaketReturns\Model\Sales\OrderProvider;
 use Dhl\PaketReturns\Model\Sales\OrderValidator;
+use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
+use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Magento\Catalog\Helper\Image;
 use Magento\Catalog\Model\ProductRepository;
-use Magento\Customer\Helper\Address as AddressHelper;
 use Magento\Customer\Model\Session;
 use Magento\Directory\Block\Data as DirectoryBlock;
 use Magento\Directory\Helper\Data as DirectoryHelper;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
@@ -49,6 +49,11 @@ class Form implements ArgumentInterface
     private $orderValidator;
 
     /**
+     * @var RecipientStreetLoaderInterface
+     */
+    private $recipientStreetLoader;
+
+    /**
      * @var SearchCriteriaBuilderFactory
      */
     private $searchCriteriaBuilderFactory;
@@ -72,11 +77,6 @@ class Form implements ArgumentInterface
      * @var LayoutInterface
      */
     private $layout;
-
-    /**
-     * @var AddressHelper
-     */
-    private $addressHelper;
 
     /**
      * @var DirectoryHelper
@@ -103,16 +103,16 @@ class Form implements ArgumentInterface
     private $urlBuilder;
 
     /**
-     * Create constructor.
+     * Form constructor.
      *
      * @param OrderProvider $orderProvider
      * @param OrderValidator $orderValidator
+     * @param RecipientStreetLoaderInterface $recipientStreetLoader
      * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
      * @param FilterBuilder $filterBuilder
      * @param ShipmentRepositoryInterface $shipmentRepository
      * @param ProductRepository $productRepository
      * @param LayoutInterface $layout
-     * @param AddressHelper $addressHelper
      * @param DirectoryHelper $directoryHelper
      * @param Image $imageHelper
      * @param Session $customerSession
@@ -121,12 +121,12 @@ class Form implements ArgumentInterface
     public function __construct(
         OrderProvider $orderProvider,
         OrderValidator $orderValidator,
+        RecipientStreetLoaderInterface $recipientStreetLoader,
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         FilterBuilder $filterBuilder,
         ShipmentRepositoryInterface $shipmentRepository,
         ProductRepository $productRepository,
         LayoutInterface $layout,
-        AddressHelper $addressHelper,
         DirectoryHelper $directoryHelper,
         Image $imageHelper,
         Session $customerSession,
@@ -134,31 +134,16 @@ class Form implements ArgumentInterface
     ) {
         $this->orderProvider = $orderProvider;
         $this->orderValidator = $orderValidator;
+        $this->recipientStreetLoader = $recipientStreetLoader;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
         $this->filterBuilder = $filterBuilder;
         $this->shipmentRepository = $shipmentRepository;
         $this->productRepository = $productRepository;
         $this->layout = $layout;
-        $this->addressHelper = $addressHelper;
         $this->directoryHelper = $directoryHelper;
         $this->imageHelper = $imageHelper;
         $this->customerSession = $customerSession;
         $this->urlBuilder = $url;
-    }
-
-    /**
-     * Obtain the order's shipping address.
-     *
-     * @return OrderAddressInterface|null
-     */
-    public function getAddress()
-    {
-        $order = $this->orderProvider->getOrder();
-        if (!$order instanceof Order) {
-            return null;
-        }
-
-        return $order->getShippingAddress();
     }
 
     /**
@@ -186,17 +171,29 @@ class Form implements ArgumentInterface
     }
 
     /**
-     * Obtain number of configured street lines.
+     * Obtain the order's shipping address.
      *
-     * @return int
+     * @return OrderAddressInterface|null
      */
-    public function getStreetLineCount()
+    public function getAddress()
     {
-        try {
-            return $this->addressHelper->getStreetLines($this->orderProvider->getOrder()->getStoreId());
-        } catch (LocalizedException $exception) {
-            return 2;
+        $order = $this->orderProvider->getOrder();
+        if (!$order instanceof Order) {
+            return null;
         }
+
+        return $order->getShippingAddress();
+    }
+
+    /**
+     * Get split Address for RMA Form.
+     *
+     * @return RecipientStreetInterface
+     */
+    public function getRecipientStreet()
+    {
+        $shippingAddress = $this->getAddress();
+        return $this->recipientStreetLoader->load($shippingAddress);
     }
 
     /**

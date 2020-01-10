@@ -7,6 +7,7 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\Model\Carrier;
 
 use Dhl\PaketReturns\Model\ReturnShipmentManagement;
+use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Directory\Helper\Data;
 use Magento\Directory\Model\CountryFactory;
@@ -54,6 +55,11 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
     protected $_code = self::CARRIER_CODE;
 
     /**
+     * @var RecipientStreetLoaderInterface
+     */
+    private $recipientStreetLoader;
+
+    /**
      * @var ReturnShipmentManagement
      */
     private $returnShipmentManagement;
@@ -76,6 +82,7 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      * @param CurrencyFactory $currencyFactory
      * @param Data $directoryData
      * @param StockRegistryInterface $stockRegistry
+     * @param RecipientStreetLoaderInterface $recipientStreetLoader
      * @param ReturnShipmentManagement $returnShipmentManagement
      * @param mixed[] $data
      */
@@ -95,9 +102,11 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
         CurrencyFactory $currencyFactory,
         Data $directoryData,
         StockRegistryInterface $stockRegistry,
+        RecipientStreetLoaderInterface $recipientStreetLoader,
         ReturnShipmentManagement $returnShipmentManagement,
         array $data = []
     ) {
+        $this->recipientStreetLoader = $recipientStreetLoader;
         $this->returnShipmentManagement = $returnShipmentManagement;
 
         parent::__construct(
@@ -159,6 +168,14 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      */
     protected function _doShipmentRequest(DataObject $request): DataObject
     {
+        $address = $request->getOrderShipment()->getOrder()->getShippingAddress();
+        $recipientStreet = $this->recipientStreetLoader->load($address);
+
+        $request->addData([
+            'street_name' => $recipientStreet->getName(),
+            'street_number' => $recipientStreet->getNumber(),
+        ]);
+
         $apiResult = $this->returnShipmentManagement->createLabels([$request->getData('package_id') => $request]);
 
         // One request, one response.

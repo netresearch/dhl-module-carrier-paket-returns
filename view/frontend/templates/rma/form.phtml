@@ -10,6 +10,7 @@
 $viewModel = $block->getData('viewModel');
 $shipments = $viewModel->getShipments();
 $address = $viewModel->getAddress();
+$recipientStreet = $viewModel->getRecipientStreet();
 ?>
 
 <?php if (!empty($shipments) && !empty($address)): ?>
@@ -73,28 +74,22 @@ $address = $viewModel->getAddress();
         <legend class="legend"><span><?= $block->escapeHtml(__('Address')) ?></span></legend><br>
 
         <div class="field street required">
-            <label for="street_1" class="label"><span><?= $block->escapeHtml(__('Street Address')) ?></span></label>
+            <label for="street_name" class="label"><span><?= $block->escapeHtml(__('Street Name')) ?></span></label>
             <div class="control">
-                <input type="text" name="address[street][]"
-                       id="street_1" class="input-text required-entry"
-                       value="<?= $block->escapeHtmlAttr($address->getStreetLine(1)) ?>"
-                       title="<?= $block->escapeHtmlAttr(__('Street Address')) ?>">
+                <input type="text" name="address[street_name]"
+                       id="street_name" class="input-text required-entry"
+                       value="<?= $block->escapeHtmlAttr($recipientStreet->getName()) ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Street Name')) ?>">
+            </div>
+        </div>
 
-                <div class="nested">
-                    <?php for ($_i = 2, $_n = $viewModel->getStreetLineCount(); $_i <= $_n; $_i++): ?>
-                        <div class="field additional">
-                            <label class="label" for="street_<?= /* @noEscape */ $_i ?>">
-                                <span><?= $block->escapeHtml(__('Street Address')) ?></span>
-                            </label>
-                            <div class="control">
-                                <input type="text" name="address[street][]"
-                                       id="street_<?= /* @noEscape */ $_i ?>" class="input-text"
-                                       value="<?= $block->escapeHtml($address->getStreetLine($_i)) ?>"
-                                       title="<?= $block->escapeHtmlAttr(__('Street Address %1', $_i)) ?>">
-                            </div>
-                        </div>
-                    <?php endfor; ?>
-                </div>
+        <div class="field required">
+            <label for="street_number" class="label"><span><?= $block->escapeHtml(__('Street Number')) ?></span></label>
+            <div class="control">
+                <input type="text" name="address[street_number]"
+                       id="street_number" class="input-text required-entry"
+                       value="<?= $block->escapeHtmlAttr($recipientStreet->getNumber()) ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Street Number')) ?>">
             </div>
         </div>
 

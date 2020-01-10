@@ -15,7 +15,6 @@ use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
 use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
-use Dhl\ShippingCore\Model\Util\StreetSplitter;
 use Magento\Directory\Model\ResourceModel\Country\Collection;
 use Magento\Directory\Model\ResourceModel\Country\CollectionFactory;
 use Magento\Framework\DataObject;
@@ -48,11 +47,6 @@ class RequestExtractor
      * @var ModuleConfig
      */
     private $moduleConfig;
-
-    /**
-     * @var StreetSplitter
-     */
-    private $streetSplitter;
 
     /**
      * @var UnitConverterInterface
@@ -100,7 +94,6 @@ class RequestExtractor
      * @param ReturnShipment $returnShipmentRequest
      * @param ConfigInterface $coreConfig
      * @param ModuleConfig $moduleConfig
-     * @param StreetSplitter $streetSplitter
      * @param UnitConverterInterface $unitConverter
      * @param ItemAttributeReaderInterface $attributeReader
      * @param ShipperInterfaceFactory $shipperFactory
@@ -111,7 +104,6 @@ class RequestExtractor
         ReturnShipment $returnShipmentRequest,
         ConfigInterface $coreConfig,
         ModuleConfig $moduleConfig,
-        StreetSplitter $streetSplitter,
         UnitConverterInterface $unitConverter,
         ItemAttributeReaderInterface $attributeReader,
         ShipperInterfaceFactory $shipperFactory,
@@ -121,7 +113,6 @@ class RequestExtractor
         $this->returnShipmentRequest = $returnShipmentRequest;
         $this->coreConfig = $coreConfig;
         $this->moduleConfig = $moduleConfig;
-        $this->streetSplitter = $streetSplitter;
         $this->unitConverter = $unitConverter;
         $this->attributeReader = $attributeReader;
         $this->shipperFactory = $shipperFactory;
@@ -250,14 +241,6 @@ class RequestExtractor
     public function getShipper(): ShipperInterface
     {
         if (empty($this->shipper)) {
-            $street = (string)$this->returnShipmentRequest->getShipperAddressStreet();
-            $streetParts = $this->streetSplitter->splitStreet($street);
-            $streetData = [
-                'streetName' => $streetParts['street_name'],
-                'streetNumber' => $streetParts['street_number'],
-                'addressAddition' => $streetParts['supplement'],
-            ];
-
             $shipperData = [
                 'contactPersonName' => (string)$this->returnShipmentRequest->getShipperContactPersonName(),
                 'contactPersonFirstName' => (string)$this->returnShipmentRequest->getShipperContactPersonFirstName(),
@@ -275,9 +258,11 @@ class RequestExtractor
                 'countryCode' => $this->getIso3Code(
                     (string)$this->returnShipmentRequest->getShipperAddressCountryCode()
                 ),
+                'streetName' => (string)$this->returnShipmentRequest->getData('street_name'),
+                'streetNumber' => (string)$this->returnShipmentRequest->getData('street_number'),
+                'addressAddition' => '',
             ];
 
-            $shipperData = array_merge($shipperData, $streetData);
             $this->shipper = $this->shipperFactory->create($shipperData);
         }
 

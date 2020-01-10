@@ -170,12 +170,13 @@ class RequestModifier
      */
     private function modifyShipper(ReturnShipment $request)
     {
+        $origShippingAddress = $request->getOrderShipment()->getOrder()->getShippingAddress();
+
         $addressData = $request->getData('shipper');
         if (empty($addressData)) {
             throw new LocalizedException(__('Please specify a return shipment sender address.'));
         }
 
-        $street = array_filter($addressData['street']);
         $name = array_filter([$addressData['firstname'] ?? '', $addressData['lastname'] ?? '']);
 
         $request->setShipperContactPersonName(implode(' ', $name));
@@ -183,14 +184,19 @@ class RequestModifier
         $request->setShipperContactPersonLastName($addressData['lastname'] ?? '');
         $request->setShipperContactCompanyName($addressData['company'] ?? '');
         $request->setData('shipper_contact_phone_number', $addressData['telephone'] ?? '');
-        $request->setShipperAddressStreet(implode(' ', $street));
-        $request->setShipperAddressStreet1($street[0]);
-        $request->setShipperAddressStreet2($street[1] ?? '');
+        $request->setShipperAddressStreet(implode(' ', $origShippingAddress->getStreet()));
+        $request->setShipperAddressStreet1($origShippingAddress->getStreetLine(1));
+        $request->setShipperAddressStreet2($origShippingAddress->getStreetLine(2));
         $request->setShipperAddressCity($addressData['city'] ?? '');
         $request->setShipperAddressStateOrProvinceCode($addressData['region'] ?? '');
         $request->setData('shipper_address_postal_code', $addressData['postcode'] ?? '');
         $request->setShipperAddressCountryCode($addressData['country'] ?? '');
         $request->setData('shipper_email', $addressData['email'] ?? '');
+
+        $request->addData([
+            'street_name' => $addressData['street_name'] ?? '',
+            'street_number' => $addressData['street_number'] ?? '',
+        ]);
 
         $request->unsetData('shipper');
     }
