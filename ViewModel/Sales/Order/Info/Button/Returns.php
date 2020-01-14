@@ -8,13 +8,11 @@ namespace Dhl\PaketReturns\ViewModel\Sales\Order\Info\Button;
 
 use Dhl\PaketReturns\Model\Sales\OrderValidator;
 use Magento\Customer\Model\Session;
-use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Registry;
 use Magento\Framework\Session\SessionManagerInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Sales\Api\OrderRepositoryInterface;
-use Magento\Sales\Model\OrderRepository;
+use Magento\Sales\Api\Data\OrderInterface;
 
 /**
  * View model class for adding a returns button to the order info view.
@@ -25,24 +23,19 @@ use Magento\Sales\Model\OrderRepository;
 class Returns implements ArgumentInterface
 {
     /**
-     * @var SessionManagerInterface|Session
+     * @var Registry
      */
-    private $customerSession;
-
-    /**
-     * @var OrderRepositoryInterface|OrderRepository
-     */
-    private $orderRepository;
-
-    /**
-     * @var RequestInterface
-     */
-    private $request;
+    private $registry;
 
     /**
      * @var OrderValidator
      */
     private $orderValidator;
+
+    /**
+     * @var SessionManagerInterface|Session
+     */
+    private $customerSession;
 
     /**
      * @var UrlInterface
@@ -52,23 +45,20 @@ class Returns implements ArgumentInterface
     /**
      * Returns constructor.
      *
-     * @param SessionManagerInterface $customerSession
-     * @param OrderRepositoryInterface $orderRepository
-     * @param RequestInterface $request
-     * @param UrlInterface $urlBuilder
+     * @param Registry $registry
      * @param OrderValidator $orderValidator
+     * @param SessionManagerInterface $customerSession
+     * @param UrlInterface $urlBuilder
      */
     public function __construct(
-        SessionManagerInterface $customerSession,
-        OrderRepositoryInterface $orderRepository,
-        RequestInterface $request,
+        Registry $registry,
         OrderValidator $orderValidator,
+        SessionManagerInterface $customerSession,
         UrlInterface $urlBuilder
     ) {
-        $this->customerSession = $customerSession;
-        $this->orderRepository = $orderRepository;
-        $this->request = $request;
+        $this->registry = $registry;
         $this->orderValidator = $orderValidator;
+        $this->customerSession = $customerSession;
         $this->urlBuilder = $urlBuilder;
     }
 
@@ -79,9 +69,8 @@ class Returns implements ArgumentInterface
      */
     public function getReturnCreateUrl(): string
     {
-        try {
-            $order = $this->orderRepository->get((int) $this->request->getParam('order_id'));
-        } catch (LocalizedException $exception) {
+        $order = $this->registry->registry('current_order');
+        if (!$order instanceof OrderInterface) {
             return '';
         }
 
