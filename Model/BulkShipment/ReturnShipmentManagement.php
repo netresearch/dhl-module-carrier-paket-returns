@@ -4,12 +4,12 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Model;
+namespace Dhl\PaketReturns\Model\BulkShipment;
 
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelResponse;
-use Dhl\PaketReturns\Webservice\ApiGateway;
-use Dhl\PaketReturns\Webservice\ApiGatewayFactory;
+use Dhl\PaketReturns\Model\Pipeline\ApiGateway;
+use Dhl\PaketReturns\Model\Pipeline\ApiGatewayFactory;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
 /**

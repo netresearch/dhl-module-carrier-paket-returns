@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Webservice;
+namespace Dhl\PaketReturns\Model\Webservice;
 
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterfaceFactory;

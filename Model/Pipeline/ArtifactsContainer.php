@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment;
+namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelResponse;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 

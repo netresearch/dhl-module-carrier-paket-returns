@@ -4,15 +4,15 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Model\ReturnShipmentRequest;
+namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 
 use Dhl\PaketReturns\Model\Adminhtml\System\Config\Source\Procedure;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterface;
-use Dhl\ShippingCore\Api\Data\ShipmentRequest\PackageItemInterfaceFactory;
-use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterface;
-use Dhl\ShippingCore\Api\Data\ShipmentRequest\ShipperInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterfaceFactory;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface;
+use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceFactory;
 use Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Magento\Directory\Model\ResourceModel\Country\Collection;

@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment;
+namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\PaketReturns\Model\ReturnShipmentRequest\RequestExtractor;
-use Dhl\PaketReturns\Model\ReturnShipmentRequest\RequestExtractorFactory;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestExtractor;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestExtractorFactory;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface;
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Magento\Shipping\Model\Shipment\ReturnShipment;

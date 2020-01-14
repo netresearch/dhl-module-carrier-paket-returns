@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage;
+namespace Dhl\PaketReturns\Model\Pipeline\Stage;
 
-use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainer;
-use Dhl\PaketReturns\Webservice\ReturnLabelServiceFactory;
+use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
+use Dhl\PaketReturns\Model\Webservice\ReturnLabelServiceFactory;
 use Dhl\Sdk\Paket\Retoure\Exception\DetailedServiceException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
 use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;

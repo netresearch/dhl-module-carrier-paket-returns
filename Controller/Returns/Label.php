@@ -6,11 +6,11 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Controller\Returns;
 
-use Dhl\PaketReturns\Model\ReturnShipmentManagement;
-use Dhl\PaketReturns\Model\ReturnShipmentRequest\RequestModifier;
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelDataProvider;
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelResponse;
+use Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestModifier;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelDataProvider;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Dhl\PaketReturns\Model\Sales\OrderProvider;
 use Dhl\PaketReturns\Model\Sales\OrderValidator;
 use Magento\Backend\Model\View\Result\Page;

@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Model\ReturnShipmentRequest;
+namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 
 use Dhl\PaketReturns\Model\Carrier\Paket;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;

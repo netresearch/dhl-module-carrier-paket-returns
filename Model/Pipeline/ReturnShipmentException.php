@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment;
+namespace Dhl\PaketReturns\Model\Pipeline;
 
 use Magento\Framework\Exception\LocalizedException;
 

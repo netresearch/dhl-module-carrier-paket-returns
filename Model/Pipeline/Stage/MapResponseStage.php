@@ -4,10 +4,10 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage;
+namespace Dhl\PaketReturns\Model\Pipeline\Stage;
 
-use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainer;
-use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ResponseDataMapper;
+use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
+use Dhl\PaketReturns\Model\Pipeline\ResponseDataMapper;
 use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;

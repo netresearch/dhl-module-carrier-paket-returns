@@ -4,7 +4,7 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Model\ReturnShipmentResponse;
+namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse;
 
 use Magento\Framework\DataObject;
 

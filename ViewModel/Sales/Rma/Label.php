@@ -7,7 +7,7 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\ViewModel\Sales\Rma;
 
 use Dhl\PaketReturns\Model\Carrier\Paket;
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelDataProvider;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelDataProvider;
 use Dhl\PaketReturns\Model\Sales\OrderProvider;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 use Magento\Framework\View\Element\Block\ArgumentInterface;

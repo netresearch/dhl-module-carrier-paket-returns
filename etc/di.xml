@@ -27,20 +27,20 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainerFactory\Virtual" type="\Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterfaceFactory">
+    <virtualType name="Dhl\PaketReturns\Model\Pipeline\ArtifactsContainerFactory\Virtual" type="\Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterfaceFactory">
         <arguments>
-            <argument name="instanceName" xsi:type="string">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainer</argument>
+            <argument name="instanceName" xsi:type="string">Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Dhl\PaketReturns\Webservice\Pipeline\Shipment\CreateShipmentsPipeline\Virtual" type="Dhl\ShippingCore\Webservice\Pipeline\Shipment\CreateShipmentsPipeline">
+    <virtualType name="Dhl\PaketReturns\Model\Pipeline\Virtual" type="Dhl\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline">
         <arguments>
             <argument name="stages" xsi:type="array">
-                <item name="validate" sortOrder="100" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\ValidateStage</item>
-                <item name="mapRequest" sortOrder="200" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\MapRequestStage</item>
-                <item name="send" sortOrder="300" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\SendRequestStage</item>
-                <item name="mapResponse" sortOrder="400" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\Stage\MapResponseStage</item>
+                <item name="validate" sortOrder="100" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Stage\ValidateStage</item>
+                <item name="mapRequest" sortOrder="200" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Stage\MapRequestStage</item>
+                <item name="send" sortOrder="300" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Stage\SendRequestStage</item>
+                <item name="mapResponse" sortOrder="400" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Stage\MapResponseStage</item>
             </argument>
-            <argument name="artifactsContainerFactory" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainerFactory\Virtual</argument>
+            <argument name="artifactsContainerFactory" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\ArtifactsContainerFactory\Virtual</argument>
         </arguments>
     </virtualType>
 
@@ -55,19 +55,19 @@
             <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
         </arguments>
     </type>
-    <type name="Dhl\PaketReturns\Webservice\ApiGateway">
+    <type name="Dhl\PaketReturns\Model\Pipeline\ApiGateway">
         <arguments>
-            <argument name="pipeline" xsi:type="object">Dhl\PaketReturns\Webservice\Pipeline\Shipment\CreateShipmentsPipeline\Virtual</argument>
+            <argument name="pipeline" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Virtual</argument>
         </arguments>
     </type>
-    <type name="Dhl\PaketReturns\Webservice\ReturnLabelService">
+    <type name="Dhl\PaketReturns\Model\Webservice\ReturnLabelService">
         <arguments>
             <argument name="logger" xsi:type="object">Dhl\PaketReturns\Model\Logger\Virtual</argument>
         </arguments>
     </type>
     <type name="Dhl\PaketReturns\Model\Carrier\Paket">
         <arguments>
-            <argument name="returnShipmentManagement" xsi:type="object">Dhl\PaketReturns\Model\ReturnShipmentManagement\Proxy</argument>
+            <argument name="returnShipmentManagement" xsi:type="object">Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement\Proxy</argument>
         </arguments>
     </type>
     <type name="Dhl\PaketReturns\ViewModel\Sales\Order\Info\Button\Returns">

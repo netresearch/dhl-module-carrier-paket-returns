@@ -6,7 +6,7 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Carrier;
 
-use Dhl\PaketReturns\Model\ReturnShipmentManagement;
+use Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement;
 use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Directory\Helper\Data;

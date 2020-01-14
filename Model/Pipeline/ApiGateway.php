@@ -4,11 +4,11 @@
  */
 declare(strict_types=1);
 
-namespace Dhl\PaketReturns\Webservice;
+namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\ReturnShipmentResponse\LabelResponse;
-use Dhl\PaketReturns\Webservice\Pipeline\ReturnShipment\ArtifactsContainer;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
+use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
+use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
 use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
