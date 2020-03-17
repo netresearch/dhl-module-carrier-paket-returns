@@ -24,7 +24,7 @@ Enabled,Enabled
 Errors,Errors
 "First Name","First Name"
 "General Settings","General Settings"
-"Having issues configuring the extension? Contact your DHL Paket Returns account representative who will facilitate technical assistance.","Having issues configuring the extension? Contact your DHL Paket Returns account representative who will facilitate technical assistance."
+"Having issues configuring the extension? Contact our support desk: ","Having issues configuring the extension? Contact our support desk: "
 "If you didn’t discuss this with your account representative when you set up your account, please consult them to enable your API access","If you didn’t discuss this with your account representative when you set up your account, please consult them to enable your API access"
 "If you don’t have an account or your account is with another DHL division, <a href=""https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html"" target=""_blank"">please contact DHL Paket</a> to establish or expand your relationship","If you don’t have an account or your account is with another DHL division, <a href=""https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html"" target=""_blank"">please contact DHL Paket</a> to establish or expand your relationship"
 "Info (All API Activities)","Info (All API Activities)"
@@ -78,3 +78,4 @@ User,User
 "You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International","You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International"
 "You must have access to the DHL Business Customer Portlet with the authorization for the function ""Returns""","You must have access to the DHL Business Customer Portlet with the authorization for the function ""Returns"""
 "Zip/Postal Code","Zip/Postal Code"
+dhl.support@netresearch.de,dhl.support@netresearch.de

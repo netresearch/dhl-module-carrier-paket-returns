@@ -24,11 +24,11 @@ Enabled,Aktiviert
 Errors,Fehler
 "First Name",Vorname
 "General Settings","Allgemeine Einstellungen"
-"Having issues configuring the extension? Contact your DHL Paket Returns account representative who will facilitate technical assistance.","Haben Sie Probleme beim Konfigurieren der Erweiterung? Wenden Sie sich an Ihren DHL Paket-Kundenbetreuer, um technische Unterstützung zu erhalten."
+"Having issues configuring the extension? Contact our support desk: ","Haben Sie Probleme beim Konfigurieren der Extension? Wenden Sie sich an unser Support-Team: "
 "If you didn’t discuss this with your account representative when you set up your account, please consult them to enable your API access","Wenn Sie dies bei der Einrichtung Ihres Kontos nicht mit Ihrem Kundenbetreuer besprochen haben, wenden Sie sich an diesen, um Ihren API-Zugriff zu aktivieren"
 "If you don’t have an account or your account is with another DHL division, <a href=""https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html"" target=""_blank"">please contact DHL Paket</a> to establish or expand your relationship","Wenn Sie kein Konto haben oder Ihr Konto bei einer anderen DHL-Abteilung ist, wenden Sie sich bitte an <a href=""https://www.dhl.de/de/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html"" target=""_ blank"">DHL Paket</a>, um Ihren Vertrag zu erweitern"
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
-"It thereby enables business customers of DHL to seamlessly implement the label creation process for return labels into their own workflows, for example integrated into their own website.","Damit können Geschäftskunden von DHL den Etikettenerstellungsprozess für Retourenetiketten nahtlos in ihre eigenen Workflows implementieren, beispielsweise in die eigene Website."
+"It thereby enables business customers of DHL to seamlessly implement the label creation process for return labels into their own workflows, for example integrated into their own website.","Damit können Geschäftskunden von DHL den Etikettenerstellungsprozess für Retourenetiketten nahtlos in Ihre eigenen Workflows implementieren, beispielsweise in die eigene Website."
 Item,Artikel
 "Label could not be created: %1","Versandedikett konnte nicht erstellt werden: %1"
 "Labels for your return shipment (shipment number %1)","Labels für Ihre Retourenlieferung (Sendungsnummer %1)"
@@ -78,3 +78,4 @@ User,Benutzer
 "You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International","Für die Produkte DHL Retoure Online und/oder DHL Retoure International benötigen Sie einen gültigen Geschäftskundenvertrag mit der DHL Paket GmbH"
 "You must have access to the DHL Business Customer Portlet with the authorization for the function ""Returns""","Sie benötigen Zugriff zum DHL Geschäftskundenportal mit der Berechtigung für die Funktion ""Retoure"""
 "Zip/Postal Code",Postleitzahl
+dhl.support@netresearch.de,"dhl.support@netresearch.de"
