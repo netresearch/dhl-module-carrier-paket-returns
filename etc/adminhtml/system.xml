@@ -8,7 +8,7 @@
     <system>
         <section id="dhlshippingsolutions">
             <group id="dhlpaketrma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="210" translate="label">
-                <label>DHL Paket Returns</label>
+                <label>DHL Parcel Germany Returns</label>
 
                 <!-- Custom information section -->
                 <field id="paketReturnsInfoBox" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"

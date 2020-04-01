@@ -8,11 +8,12 @@ Company,Firma
 Country,Land
 "Create Return Label","Rücksendeetikett erstellen"
 "DHL & Magento","DHL & Magento"
+"DHL contract customers receive the access data to the DHL Business Customer Portal via <em>DHL Paket</em> sales.","DHL-Vertragskunden erhalten die Zugangsdaten zum DHL-Geschäftskundenportal durch einen <em>DHL Paket</em>-Vertriebsmitarbeiter."
 "DHL Customer Number (EKP)","DHL Kundennummer (EKP)"
 "DHL Paket Returns","DHL Paket Retoure"
 "DHL Paket Returns International","DHL Paket Retoure International"
 "DHL Paket Returns National","DHL Paket Retoure National"
-"DHL contract customers receive the access data to the DHL Business Customer Portal via <em>DHL Paket</em> sales.","DHL-Vertragskunden erhalten die Zugangsdaten zum DHL-Geschäftskundenportal durch einen <em>DHL Paket</em>-Vertriebsmitarbeiter."
+"DHL Parcel Germany Returns","DHL Paket Retouren"
 "Default Item Weight",Standardgewicht
 "Download QR Code","QR-Code herunterladen"
 "Download Return Label","Retourenetikett herunterladen"
