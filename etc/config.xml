@@ -8,7 +8,7 @@
     <default>
         <carriers>
             <dhlpaketrma>
-                <version>0.1.0</version>
+                <version>1.0.0</version>
                 <model>Dhl\PaketReturns\Model\Carrier\Paket</model>
                 <is_online>1</is_online>
                 <max_package_weight>1000</max_package_weight>
@@ -38,7 +38,7 @@
                     <sandbox>
                         <auth_username>magento_1</auth_username>
                         <auth_password>2de26b775e59279464d1c2f8546432e62413372421c672db36eaacfc2f</auth_password>
-                        <api_username>2222222222_Customer</api_username>
+                        <api_username>2222222222_customer</api_username>
                         <api_password>uBQbZ62!ZiBiVVbhc</api_password>
                         <account_number>2222222222</account_number>
                         <account_participations backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
