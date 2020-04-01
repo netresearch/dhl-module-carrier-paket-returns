@@ -80,6 +80,14 @@
             <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
         </arguments>
     </type>
+    <type name="Dhl\ShippingCore\Model\Util\ApiLogAnonymizer">
+        <arguments>
+            <argument name="patterns" xsi:type="array">
+                <item name="dhlpaketrmaBasicAuth" xsi:type="string">|Authorization: Basic (.+)|</item>
+                <item name="dhlpaketrmaUserAuth" xsi:type="string">|DPDHL-User-Authentication-Token: (.+)|</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Magento\Config\Model\Config\TypePool">
         <arguments>
             <argument name="sensitive" xsi:type="array">

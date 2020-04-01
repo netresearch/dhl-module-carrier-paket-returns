@@ -1,0 +1,25 @@
+POST /services/production/rest/returns/ HTTP/1.1
+Host: cig.dhl.de
+Accept: application/json
+DPDHL-User-Authentication-Token: alNR9foo=
+Authorization: Basic XX1YY2ZZ=
+
+{"receiverId":"XYZ"} {"request":"[object] (Nyholm\\Psr7\\Request: {})"} []
+
+[2020-04-01 17:06:56] dhlpaketrma.ERROR: Error:
+Authentification failed: User not found or password invalid (Error 400)
+with response:
+HTTP/1.1 400 Bad Request
+Date: Wed, 01 Apr 2020 17:06:56 GMT
+Content-Type: application/json
+
+{"code":400,"detail":"Authentification failed: User not found or password invalid"}
+
+when sending request:
+POST /services/production/rest/returns/ HTTP/1.1
+Host: cig.dhl.de
+Accept: application/json
+DPDHL-User-Authentication-Token: alNR9foo=
+Authorization: Basic XX1YY2ZZ=
+
+{"receiverId":"XYZ"} {"request":"[object] (Nyholm\\Psr7\\Request: {})","response":"[object] (Nyholm\\Psr7\\Response: {})","exception":"[object] (Dhl\\Sdk\\Paket\\Retoure\\Exception\\DetailedErrorException(code: 400): Authentification failed: User not found or password invalid (Error 400) at /srv/www/m23x-enterprise-dist.dhl.nr-cas/vendor/dhl/sdk-api-bcs-returns/src/Http/ClientPlugin/ReturnLabelErrorPlugin.php:96)","milliseconds":473} []
