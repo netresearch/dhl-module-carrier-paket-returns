@@ -249,7 +249,7 @@ class ModuleConfigTest extends TestCase
             self::assertInternalType('string', $countryCode);
             self::assertSame(2, strlen($countryCode));
             self::assertInternalType('string', $receiverId);
-            self::assertSame(2, strlen($receiverId));
+            self::assertSame(3, strlen($receiverId));
         }
     }
 }
