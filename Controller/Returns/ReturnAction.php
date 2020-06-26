@@ -20,10 +20,7 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Model\OrderRepository;
 
 /**
- * Controller Return Shipment Action Pre-dispatch.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
+ * Order access authorization for all return shipment actions.
  */
 abstract class ReturnAction extends Action
 {

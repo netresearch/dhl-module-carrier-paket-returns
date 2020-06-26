@@ -16,9 +16,6 @@ use Magento\Sales\Api\Data\OrderInterface;
 
 /**
  * View model class for adding a returns button to the order info view.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class Returns implements ArgumentInterface
 {

@@ -12,9 +12,6 @@ use Magento\Framework\View\Element\Html\Select;
 
 /**
  * The country names dropdown.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class Country extends Select
 {

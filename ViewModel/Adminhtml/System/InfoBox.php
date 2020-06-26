@@ -9,12 +9,6 @@ namespace Dhl\PaketReturns\ViewModel\Adminhtml\System;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
-/**
- * Class InfoBox
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class InfoBox implements ArgumentInterface
 {
     /**

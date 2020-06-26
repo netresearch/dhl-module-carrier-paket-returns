@@ -22,8 +22,6 @@ use Psr\Log\LoggerInterface;
  * Convert API response into the carrier response format that the shipping module understands.
  *
  * @see \Magento\Shipping\Model\Carrier\AbstractCarrierOnline::requestToShipment
- *
- * @link    https://www.netresearch.de/
  */
 class ResponseDataMapper
 {

@@ -9,15 +9,12 @@ namespace Dhl\PaketReturns\Plugin;
 use Magento\Config\App\Config\Source\DumpConfigSourceAggregated;
 
 /**
- * UnsetSandboxPaths
+ * Unset sandbox config paths.
  *
  * Sandbox config defaults are static values distributed between environments
  * via config.xml file. There is no need to dump them to the config.php or
  * env.php files. Doing so causes issues when importing them as the necessary
  * backend model is not declared in system.xml
- *
- * @author  Sebastian Ertner <sebastian.ertner@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class UnsetSandboxPaths
 {

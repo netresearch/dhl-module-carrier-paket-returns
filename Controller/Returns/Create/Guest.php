@@ -19,10 +19,7 @@ use Magento\Sales\Controller\AbstractController\OrderViewAuthorizationInterface;
 use Magento\Sales\Helper\Guest as GuestHelper;
 
 /**
- * Return Form Controller.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
+ * Return shipment form for guests.
  */
 class Guest extends Create
 {

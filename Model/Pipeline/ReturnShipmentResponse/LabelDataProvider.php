@@ -7,12 +7,7 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse;
 
 /**
- * Class LabelDataProvider
- *
  * Registry for passing a web service response through the application.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class LabelDataProvider
 {

@@ -20,12 +20,6 @@ use Magento\Sales\Api\Data\ShipmentItemInterface;
 use Magento\Sales\Api\ShipmentRepositoryInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
-/**
- * Class RequestModifier
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class RequestModifier
 {
     /**

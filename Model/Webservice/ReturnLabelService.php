@@ -13,12 +13,6 @@ use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
 use Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class ReturnLabelService
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ReturnLabelService implements ReturnLabelServiceInterface
 {
     /**

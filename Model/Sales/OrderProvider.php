@@ -9,12 +9,7 @@ namespace Dhl\PaketReturns\Model\Sales;
 use Magento\Sales\Api\Data\OrderInterface;
 
 /**
- * Class OrderProvider
- *
  * Registry for passing a loaded order through the application.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class OrderProvider
 {

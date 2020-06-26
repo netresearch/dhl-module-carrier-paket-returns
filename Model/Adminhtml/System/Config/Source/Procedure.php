@@ -8,12 +8,6 @@ namespace Dhl\PaketReturns\Model\Adminhtml\System\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
-/**
- * Class Procedure
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class Procedure implements OptionSourceInterface
 {
     const PROCEDURE_RETURNSHIPMENT_NATIONAL      = '07';

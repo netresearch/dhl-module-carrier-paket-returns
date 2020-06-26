@@ -14,9 +14,6 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 /**
  * View model class for displaying return shipment label data.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class Label implements ArgumentInterface
 {

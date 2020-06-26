@@ -13,12 +13,7 @@ use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
 /**
- * Class ApiGateway
- *
  * Magento carrier-aware wrapper around the DHL Paket Returns API SDK.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class ApiGateway
 {

@@ -13,11 +13,9 @@ use Magento\Framework\View\Element\BlockInterface;
 
 /**
  * Array configuration field with receiver country and receiver country name.
- * The receiver country name dropdown is rendered per row using a separate form field.
- * @see Country
  *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
+ * The receiver country name dropdown is rendered per row using a separate form field.
+ * @see \Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field\Country
  */
 class ReceiverId extends AbstractFieldArray
 {

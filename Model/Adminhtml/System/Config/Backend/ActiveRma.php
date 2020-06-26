@@ -18,9 +18,6 @@ use Magento\Framework\Registry;
 
 /**
  * Manipulate value of "active" flag after saving "active_rma".
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class ActiveRma extends Value
 {

@@ -12,12 +12,6 @@ use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
-/**
- * Class MapResponseStage
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class MapResponseStage implements CreateShipmentsStageInterface
 {
     /**

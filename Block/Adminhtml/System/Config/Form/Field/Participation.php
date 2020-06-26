@@ -13,12 +13,9 @@ use Magento\Framework\View\Element\BlockInterface;
 
 /**
  * Array configuration field with procedures and the merchant's participation number.
- * The procedures dropdown is rendered per row using a separate form field.
- * @see Procedures
  *
- * @author  Benjamin Heuer <benjamin.heuer@netresearch.de>
- * @author  Max Melzer <max.melzer@netresearch.de>
- * @link    https://www.netresearch.de/
+ * The procedures dropdown is rendered per row using a separate form field.
+ * @see \Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field\Procedures
  */
 class Participation extends AbstractFieldArray
 {

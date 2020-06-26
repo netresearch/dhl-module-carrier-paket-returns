@@ -12,12 +12,6 @@ use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface;
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
-/**
- * Request mapper.
- *
- * @author Rico Sonntag <rico.sonntag@netresearch.de>
- * @link   https://www.netresearch.de/
- */
 class RequestDataMapper
 {
     /**

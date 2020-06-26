@@ -13,12 +13,7 @@ use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
 /**
- * Class ReturnShipmentManagement
- *
  * Central entry point for creating return order labels.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class ReturnShipmentManagement
 {

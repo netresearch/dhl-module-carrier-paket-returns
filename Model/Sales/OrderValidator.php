@@ -10,12 +10,6 @@ use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Model\Order;
 
-/**
- * Class OrderValidator
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class OrderValidator
 {
     /**

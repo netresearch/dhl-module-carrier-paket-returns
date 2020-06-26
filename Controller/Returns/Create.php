@@ -17,10 +17,7 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Controller\AbstractController\OrderViewAuthorizationInterface;
 
 /**
- * Return Form Controller.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
+ * Return shipment form.
  */
 class Create extends ReturnAction
 {

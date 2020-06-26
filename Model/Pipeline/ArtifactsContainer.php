@@ -11,12 +11,6 @@ use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 
-/**
- * Class ArtifactsContainer
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ArtifactsContainer implements ArtifactsContainerInterface
 {
     /**

@@ -32,13 +32,6 @@ use Magento\Shipping\Model\Tracking\Result\StatusFactory;
 use Magento\Shipping\Model\Tracking\ResultFactory as TrackResultFactory;
 use Psr\Log\LoggerInterface;
 
-/**
- * Class Paket
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class Paket extends AbstractCarrierOnline implements CarrierInterface
 {
     const CARRIER_CODE = 'dhlpaketrma';

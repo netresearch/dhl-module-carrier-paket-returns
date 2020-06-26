@@ -26,9 +26,6 @@ use Magento\Shipping\Model\Shipment\ReturnShipmentFactory;
 
 /**
  * Request and display return shipment labels.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class Label extends ReturnAction
 {

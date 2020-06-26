@@ -13,12 +13,6 @@ use Magento\Framework\DataObject;
 use Magento\Shipping\Model\Shipment\Request;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
-/**
- * Class ValidateStage
- *
- * @author  Christoph Aßmann <christoph.assmann@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ValidateStage implements CreateShipmentsStageInterface
 {
     /**

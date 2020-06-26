@@ -32,9 +32,6 @@ use Magento\Shipping\Block\Items;
 
 /**
  * View model class for creating a return shipment.
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
  */
 class Form implements ArgumentInterface
 {

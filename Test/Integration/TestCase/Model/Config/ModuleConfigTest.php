@@ -11,12 +11,6 @@ use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\TestFramework\ObjectManager;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Class ModuleConfigTest
- *
- * @author  Rico Sonntag <rico.sonntag@netresearch.de>
- * @link    https://www.netresearch.de/
- */
 class ModuleConfigTest extends TestCase
 {
     /**
