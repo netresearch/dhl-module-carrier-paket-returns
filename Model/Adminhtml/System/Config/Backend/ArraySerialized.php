@@ -71,7 +71,7 @@ class ArraySerialized extends Value implements ProcessorInterface
     }
 
     /**
-     * Unset array element with '__empty' key
+     * Unset array element with '__empty' key or where values are empty.
      *
      * @return self
      */
@@ -79,7 +79,16 @@ class ArraySerialized extends Value implements ProcessorInterface
     {
         $value = $this->getValue();
         if (\is_array($value)) {
+            // remove empty row
             unset($value['__empty']);
+
+            // remove row with empty value
+            $value = array_filter(
+                $value,
+                function (array $row) {
+                    return $row === array_filter($row);
+                }
+            );
         }
 
         if (!empty($value)) {
