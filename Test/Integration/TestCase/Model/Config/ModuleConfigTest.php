@@ -31,7 +31,7 @@ class ModuleConfigTest extends TestCase
     /**
      * Init object manager and test subject
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -46,7 +46,7 @@ class ModuleConfigTest extends TestCase
      *
      * @link http://magento.stackexchange.com/a/93961
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $realPath = realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files');
 
@@ -61,7 +61,7 @@ class ModuleConfigTest extends TestCase
      *
      * @see setUpBeforeClass()
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         $realPath = realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files');
 
@@ -180,11 +180,11 @@ class ModuleConfigTest extends TestCase
     {
         $participations = $this->config->getParticipations();
 
-        self::assertInternalType('array', $participations);
+        self::assertTrue(\is_array($participations));
         self::assertNotEmpty($participations);
 
         foreach ($participations as $procedure => $participation) {
-            self::assertInternalType('string', $participation);
+            self::assertTrue(\is_string($participation));
             self::assertSame(2, strlen($participation));
         }
     }
@@ -202,11 +202,11 @@ class ModuleConfigTest extends TestCase
     {
         $participations = $this->config->getParticipations();
 
-        self::assertInternalType('array', $participations);
+        self::assertTrue(\is_array($participations));
         self::assertNotEmpty($participations);
 
         foreach ($participations as $procedure => $participation) {
-            self::assertInternalType('string', $participation);
+            self::assertTrue(\is_string($participation));
             self::assertSame(2, strlen($participation));
         }
     }
@@ -221,7 +221,7 @@ class ModuleConfigTest extends TestCase
     public function getReceiverIds()
     {
         $receiverIds = $this->config->getReceiverIds();
-        self::assertInternalType('array', $receiverIds);
+        self::assertTrue(\is_array($receiverIds));
         self::assertEmpty($receiverIds);
     }
 
@@ -237,12 +237,12 @@ class ModuleConfigTest extends TestCase
     public function getSandboxReceiverIds()
     {
         $receiverIds = $this->config->getReceiverIds('fixturestore');
-        self::assertInternalType('array', $receiverIds);
+        self::assertTrue(\is_array($receiverIds));
 
         foreach ($receiverIds as $countryCode => $receiverId) {
-            self::assertInternalType('string', $countryCode);
+            self::assertTrue(\is_string($countryCode));
             self::assertSame(2, strlen($countryCode));
-            self::assertInternalType('string', $receiverId);
+            self::assertTrue(\is_string($receiverId));
             self::assertSame(3, strlen($receiverId));
         }
     }
