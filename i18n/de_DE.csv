@@ -7,10 +7,8 @@ Company,Firma
 "Contact Information",Kontaktinformationen
 Country,Land
 "Create Return Label","Rücksendeetikett erstellen"
-"DHL & Magento","DHL & Magento"
 "DHL contract customers receive the access data to the DHL Business Customer Portal via <em>DHL Paket</em> sales.","DHL-Vertragskunden erhalten die Zugangsdaten zum DHL-Geschäftskundenportal durch einen <em>DHL Paket</em>-Vertriebsmitarbeiter."
 "DHL Customer Number (EKP)","DHL Kundennummer (EKP)"
-"DHL Paket Returns","DHL Paket Retoure"
 "DHL Paket Returns International","DHL Paket Retoure International"
 "DHL Paket Returns National","DHL Paket Retoure National"
 "DHL Parcel Germany Returns","DHL Paket Retouren"
@@ -26,10 +24,10 @@ Errors,Fehler
 "First Name",Vorname
 "General Settings","Allgemeine Einstellungen"
 "Having issues configuring the extension? Contact our support desk: ","Haben Sie Probleme beim Konfigurieren der Extension? Wenden Sie sich an unser Support-Team: "
-"If you didn’t discuss this with your account representative when you set up your account, please consult them to enable your API access","Wenn Sie dies bei der Einrichtung Ihres Kontos nicht mit Ihrem Kundenbetreuer besprochen haben, wenden Sie sich an diesen, um Ihren API-Zugriff zu aktivieren"
-"If you don’t have an account or your account is with another DHL division, <a href=""https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html"" target=""_blank"">please contact DHL Paket</a> to establish or expand your relationship","Wenn Sie kein Konto haben oder Ihr Konto bei einer anderen DHL-Abteilung ist, wenden Sie sich bitte an <a href=""https://www.dhl.de/de/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html"" target=""_ blank"">DHL Paket</a>, um Ihren Vertrag zu erweitern"
+"https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html","https://www.dhl.de/de/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html"
+"If you did not discuss this with your account representative when you set up your account, please consult them to enable your API access.","Wenn Sie dies bei der Einrichtung Ihres Kontos nicht mit Ihrem Kundenbetreuer besprochen haben, wenden Sie sich an diesen, um Ihren API-Zugriff zu aktivieren."
+"If you do not have an account or your account is with another DHL division, %1please contact DHL Parcel Germany%2 to establish or expand your relationship.","Wenn Sie kein Konto haben oder Ihr Konto bei einer anderen DHL-Abteilung ist, wenden Sie sich bitte an %1DHL Paket%2, um Ihren Vertrag zu erweitern."
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
-"It thereby enables business customers of DHL to seamlessly implement the label creation process for return labels into their own workflows, for example integrated into their own website.","Damit können Geschäftskunden von DHL den Etikettenerstellungsprozess für Retourenetiketten nahtlos in Ihre eigenen Workflows implementieren, beispielsweise in die eigene Website."
 Item,Artikel
 "Label could not be created: %1","Versandedikett konnte nicht erstellt werden: %1"
 "Labels for your return shipment (shipment number %1)","Labels für Ihre Retourenlieferung (Sendungsnummer %1)"
@@ -46,6 +44,7 @@ Participation,Teilnahme
 "Please select a region, state or province.","Bitte wählen Sie eine Region, ein Bundesland oder eine Provinz aus."
 "Please select items to return.","Bitte wählen Sie Retouren-Artikel aus."
 "Please specify a return shipment sender address.","Bitte geben Sie eine Absenderadresse für die Retoure an."
+"Post & DHL and Magento","Versenden mit Post & DHL"
 Procedure,Verfahren
 Qty,Anzahl
 "Receiver ID",Retourenempfänger-ID
@@ -64,7 +63,7 @@ State/Province,Bundesland
 "Street Name",Straße
 "Street Number",Hausnummer
 Submit,Absenden
-"The DHL Paket Returns module allows to order return labels for planned return shipments from your customers.","Mit dem Modul DHL Paket Returns können Sie Retourenetiketten für geplante Rücksendungen bei Ihren Kunden bestellen."
+"The DHL Parcel Germany Returns module allows to create return shipment labels for your orders directly within your Magento suite.","DHL Paket Retouren ermöglicht es Ihnen, Rücksendeetiketten für versandte Bestellungen direkt in Ihrer Magento-Instanz zu erzeugen."
 "The EKP number (standardized customer and product number) is the key to using the products of Deutsche Post DHL. It is 10 digits and is allocated by DHL Sales.","Die EKP (Kundennummer) ist Ihr Schlüssel zu den Produkten von DHL. Sie umfasst 10 Zeichen und wird Ihnen von DHL zugewiesen."
 "The customer integration gateway of DHL provides generic test endpoints for the calling APIs. Select this option to use the test environment.","Die DHL-Schnittstelle bietet generische Testendpunkte für die aufrufenden APIs. Wählen Sie diese Option aus, um die Testumgebung zu verwenden."
 "The log level <em>Info</em> should only be set while resolving problems. It may result in very large log files.","Die Protokollierungsstufe <em>Info</em> sollte nur beim Lösen von Problemen eingestellt werden, da dies zu sehr großen Protokolldateien führen kann."
@@ -76,7 +75,7 @@ User,Benutzer
 "You cannot create a return shipment for order %1.","Sie können keine Retoure für Bestellung %1 anfordern."
 "You cannot create a return shipment for order %1: %2.","Sie können keine Retoure für Bestellung %1 anfordern: %2."
 "You must also have Magento general logging enabled.","Die allgemeine Protokollierung muss in Magento aktiviert sein, damit die modulspezifische Protokollierung funktioniert."
-"You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International","Für die Produkte DHL Retoure Online und/oder DHL Retoure International benötigen Sie einen gültigen Geschäftskundenvertrag mit der DHL Paket GmbH"
-"You must have access to the DHL Business Customer Portlet with the authorization for the function ""Returns""","Sie benötigen Zugriff zum DHL Geschäftskundenportal mit der Berechtigung für die Funktion ""Retoure"""
+"You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International.","Für die Produkte DHL Retoure Online und/oder DHL Retoure International benötigen Sie einen gültigen Geschäftskundenvertrag mit der DHL Paket GmbH."
+"You must have access to the DHL Business Customer Portal with the authorization for the function ""Returns"".","Sie benötigen Zugriff zum DHL Geschäftskundenportal mit der Berechtigung für die Funktion ""Retoure""."
 "Zip/Postal Code",Postleitzahl
 dhl.support@netresearch.de,"dhl.support@netresearch.de"

@@ -1,0 +1,53 @@
+<?php
+/**
+ * See LICENSE.md for license details.
+ */
+/** @var Magento\Framework\View\Element\Template $block */
+?>
+<div class="col content">
+    <p>
+        <?= $block->escapeHtml(__('The DHL Parcel Germany Returns module allows to create return shipment labels for your orders directly within your Magento suite.')) ?>
+    </p>
+    <p><?= $block->escapeHtml(__('To get started:')) ?></p>
+    <ol>
+        <li>
+            <?= $block->escapeHtml(__('You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International.')) ?>
+            <br/>
+            <em>
+                <small>
+                    <?php $contactUrl = __('https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html') ?>
+                    <?= $block->escapeHtml(
+                        __(
+                            'If you do not have an account or your account is with another DHL division, %1please contact DHL Parcel Germany%2 to establish or expand your relationship.',
+                            '<a href="' . $block->escapeUrl($contactUrl) . '" target="_blank" rel="noreferrer">',
+                            '</a>'
+                        ),
+                        ['a']
+                    ) ?>
+                </small>
+            </em>
+        </li>
+        <li>
+            <?= $block->escapeHtml(__('You must have access to the DHL Business Customer Portal with the authorization for the function "Returns".')) ?>
+            <br/>
+            <em>
+                <small>
+                    <?= $block->escapeHtml(__('If you did not discuss this with your account representative when you set up your account, please consult them to enable your API access.')) ?>
+                </small>
+            </em>
+        </li>
+    </ol>
+</div>
+<div class="col side">
+    <aside>
+        <div class="section">
+            <h3><?= $block->escapeHtml(__('Post & DHL and Magento')) ?></h3>
+            <p>
+                <?= $block->escapeHtml(__('Having issues configuring the extension? Contact our support desk: ')) ?>
+                <a href="mailto:<?= $block->escapeHtml(__('dhl.support@netresearch.de'))?>">
+                    <?= $block->escapeHtml(__('dhl.support@netresearch.de'))?>
+                </a>
+            </p>
+        </div>
+    </aside>
+</div>
