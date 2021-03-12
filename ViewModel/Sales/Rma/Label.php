@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\ViewModel\Sales\Rma;
@@ -32,13 +34,6 @@ class Label implements ArgumentInterface
      */
     private $labelDataProvider;
 
-    /**
-     * Label constructor.
-     *
-     * @param AssetRepository $assetRepository
-     * @param OrderProvider $orderProvider
-     * @param LabelDataProvider $labelDataProvider
-     */
     public function __construct(
         AssetRepository $assetRepository,
         OrderProvider $orderProvider,

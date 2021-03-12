@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\Stage;
@@ -10,9 +12,9 @@ use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
 use Dhl\PaketReturns\Model\Webservice\ReturnLabelServiceFactory;
 use Dhl\Sdk\Paket\Retoure\Exception\DetailedServiceException;
 use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
-use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
-use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
+use Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 
 class SendRequestStage implements CreateShipmentsStageInterface
 {
@@ -21,11 +23,6 @@ class SendRequestStage implements CreateShipmentsStageInterface
      */
     private $returnLabelServiceFactory;
 
-    /**
-     * SendRequestStage constructor.
-     *
-     * @param ReturnLabelServiceFactory $returnLabelServiceFactory
-     */
     public function __construct(ReturnLabelServiceFactory $returnLabelServiceFactory)
     {
         $this->returnLabelServiceFactory = $returnLabelServiceFactory;

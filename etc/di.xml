@@ -11,7 +11,7 @@
     <preference for="Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface" type="Dhl\Sdk\Paket\Retoure\Auth\AuthenticationStorage"/>
 
     <!-- # virtual types -->
-    <virtualType name="Dhl\PaketReturns\Model\Logger\Handler\Virtual" type="Dhl\ShippingCore\Model\Util\ApiLogHandler">
+    <virtualType name="Dhl\PaketReturns\Model\Logger\Handler\Virtual" type="Netresearch\ShippingCore\Model\Util\ApiLogHandler">
         <arguments>
             <argument name="fileName" xsi:type="string">var/log/dhl_paket_returns.log</argument>
             <argument name="logEnabledConfigPath" xsi:type="const">Dhl\PaketReturns\Model\Config\ModuleConfig::CONFIG_PATH_ENABLE_LOGGING</argument>
@@ -27,12 +27,12 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="Dhl\PaketReturns\Model\Pipeline\ArtifactsContainerFactory\Virtual" type="\Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterfaceFactory">
+    <virtualType name="Dhl\PaketReturns\Model\Pipeline\ArtifactsContainerFactory\Virtual" type="Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterfaceFactory">
         <arguments>
             <argument name="instanceName" xsi:type="string">Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Dhl\PaketReturns\Model\Pipeline\Virtual" type="Dhl\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline">
+    <virtualType name="Dhl\PaketReturns\Model\Pipeline\Virtual" type="Netresearch\ShippingCore\Model\Pipeline\Shipment\CreateShipmentsPipeline">
         <arguments>
             <argument name="stages" xsi:type="array">
                 <item name="validate" sortOrder="100" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Stage\ValidateStage</item>
@@ -41,6 +41,11 @@
                 <item name="mapResponse" sortOrder="400" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Stage\MapResponseStage</item>
             </argument>
             <argument name="artifactsContainerFactory" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\ArtifactsContainerFactory\Virtual</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Dhl\PaketReturns\ViewModel\Adminhtml\System\InfoBox\Virtual" type="Netresearch\ShippingCore\ViewModel\Adminhtml\System\InfoBox">
+        <arguments>
+            <argument name="version" xsi:type="object">Dhl\PaketReturns\Model\Config\ModuleConfig</argument>
         </arguments>
     </virtualType>
 
@@ -80,7 +85,7 @@
             <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
         </arguments>
     </type>
-    <type name="Dhl\ShippingCore\Model\Util\ApiLogAnonymizer">
+    <type name="Netresearch\ShippingCore\Model\Util\ApiLogAnonymizer">
         <arguments>
             <argument name="patterns" xsi:type="array">
                 <item name="dhlpaketrmaBasicAuth" xsi:type="string">|Authorization: Basic (.+)|</item>

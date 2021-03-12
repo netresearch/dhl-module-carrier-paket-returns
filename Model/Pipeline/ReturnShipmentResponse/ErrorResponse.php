@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse;
@@ -18,8 +20,8 @@ use Magento\Framework\Phrase;
  */
 class ErrorResponse extends DataObject
 {
-    const REQUEST_INDEX = 'request_index';
-    const ERRORS = 'errors';
+    public const REQUEST_INDEX = 'request_index';
+    public const ERRORS = 'errors';
 
     /**
      * Obtain request id (package id, sequence number).

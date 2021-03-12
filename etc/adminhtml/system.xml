@@ -9,13 +9,10 @@
         <section id="dhlshippingsolutions">
             <group id="dhlpaketrma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="210" translate="label">
                 <label>DHL Parcel Germany Returns</label>
-
-                <!-- Custom information section -->
-                <field id="paketReturnsInfoBox" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"
+                <field id="infoBox" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"
                        extends="dhlshippingsolutions/dhlglobalwebservices/shippingCoreInfoBox">
-                    <frontend_model>Netresearch\ConfigFields\Block\InfoBox</frontend_model>
                     <attribute type="body_template">Dhl_PaketReturns::system/config/infobox.phtml</attribute>
-                    <attribute type="view_model">Dhl\PaketReturns\ViewModel\Adminhtml\System\InfoBox</attribute>
+                    <attribute type="view_model">Dhl\PaketReturns\ViewModel\Adminhtml\System\InfoBox\Virtual</attribute>
                 </field>
 
                 <include path="Dhl_PaketReturns::system/100_general.xml"/>

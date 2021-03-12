@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field;
@@ -113,7 +115,7 @@ class ReceiverId extends AbstractFieldArray
         if ($this->getData('element') && $this->getData('element')->getData('inherit')) {
             $htmlId = $this->_getCellInputElementId('<%- _id %>', $columnName);
             $inherit = '<input type="hidden" id="' . $htmlId . '_inherit" checked="checked" disabled="disabled" />';
-            $cellTemplate.= $inherit;
+            $cellTemplate .= $inherit;
         }
 
         return $cellTemplate;

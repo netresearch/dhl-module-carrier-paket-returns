@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend;
@@ -29,18 +31,6 @@ class ArraySerialized extends Value implements ProcessorInterface
      */
     private $serializer;
 
-    /**
-     * ArraySerialized constructor.
-     *
-     * @param Context $context
-     * @param Registry $registry
-     * @param ScopeConfigInterface $config
-     * @param TypeListInterface $cacheTypeList
-     * @param Json $serializer
-     * @param AbstractResource|null $resource
-     * @param AbstractDb|null $resourceCollection
-     * @param mixed[] $data
-     */
     public function __construct(
         Context $context,
         Registry $registry,

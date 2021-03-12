@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
@@ -11,9 +13,9 @@ use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponseFactory;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponseFactory;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
-use Dhl\ShippingCore\Api\Util\PdfCombinatorInterface;
 use Magento\Framework\Exception\RuntimeException;
 use Magento\Framework\Phrase;
+use Netresearch\ShippingCore\Api\Util\PdfCombinatorInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -45,13 +47,6 @@ class ResponseDataMapper
      */
     private $errorResponseFactory;
 
-    /**
-     * ResponseDataMapper constructor.
-     *
-     * @param PdfCombinatorInterface $pdfCombinator
-     * @param LabelResponseFactory $labelResponseFactory
-     * @param ErrorResponseFactory $errorResponseFactory
-     */
     public function __construct(
         PdfCombinatorInterface $pdfCombinator,
         LabelResponseFactory $labelResponseFactory,

@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Controller\Returns\Create;
@@ -28,16 +30,6 @@ class Guest extends Create
      */
     private $guestHelper;
 
-    /**
-     * Create constructor.
-     *
-     * @param Context $context
-     * @param OrderRepositoryInterface $orderRepository
-     * @param OrderViewAuthorizationInterface $orderAuthorization
-     * @param OrderProvider $orderProvider
-     * @param OrderValidator $orderValidator
-     * @param GuestHelper $guestHelper
-     */
     public function __construct(
         Context $context,
         OrderRepositoryInterface $orderRepository,

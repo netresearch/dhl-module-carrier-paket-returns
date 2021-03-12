@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Controller\Returns;
@@ -44,15 +46,6 @@ abstract class ReturnAction extends Action
      */
     private $orderValidator;
 
-    /**
-     * Create constructor.
-     *
-     * @param Context $context
-     * @param OrderRepositoryInterface $orderRepository
-     * @param OrderViewAuthorizationInterface $orderAuthorization
-     * @param OrderProvider $orderProvider
-     * @param OrderValidator $orderValidator
-     */
     public function __construct(
         Context $context,
         OrderRepositoryInterface $orderRepository,

@@ -1,20 +1,15 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 
 use Dhl\PaketReturns\Model\Adminhtml\System\Config\Source\Procedure;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
-use Dhl\ShippingCore\Api\ConfigInterface;
-use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface;
-use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterfaceFactory;
-use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface;
-use Dhl\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceFactory;
-use Dhl\ShippingCore\Api\Util\ItemAttributeReaderInterface;
-use Dhl\ShippingCore\Api\Util\UnitConverterInterface;
 use Magento\Directory\Model\ResourceModel\Country\Collection;
 use Magento\Directory\Model\ResourceModel\Country\CollectionFactory;
 use Magento\Framework\DataObject;
@@ -22,6 +17,14 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Item;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
+use Netresearch\ShippingCore\Api\ConfigInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterfaceFactory;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceFactory;
+use Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface;
+use Netresearch\ShippingCore\Api\Util\UnitConverterInterface;
 
 /**
  * Class RequestExtractor
@@ -38,7 +41,7 @@ class RequestExtractor
     private $returnShipmentRequest;
 
     /**
-     * @var ConfigInterface
+     * @var ShippingConfigInterface
      */
     private $coreConfig;
 
@@ -87,21 +90,9 @@ class RequestExtractor
      */
     private $countryMap = [];
 
-    /**
-     * RequestExtractor constructor.
-     *
-     * @param ReturnShipment $returnShipmentRequest
-     * @param ConfigInterface $coreConfig
-     * @param ModuleConfig $moduleConfig
-     * @param UnitConverterInterface $unitConverter
-     * @param ItemAttributeReaderInterface $attributeReader
-     * @param ShipperInterfaceFactory $shipperFactory
-     * @param PackageItemInterfaceFactory $packageItemFactory
-     * @param CollectionFactory $countryCollectionFactory
-     */
     public function __construct(
         ReturnShipment $returnShipmentRequest,
-        ConfigInterface $coreConfig,
+        ShippingConfigInterface $coreConfig,
         ModuleConfig $moduleConfig,
         UnitConverterInterface $unitConverter,
         ItemAttributeReaderInterface $attributeReader,
@@ -188,7 +179,6 @@ class RequestExtractor
      */
     public function getReferenceNumber(): string
     {
-        /** @var DataObject $shipping */
         $shipping = $this->returnShipmentRequest->getOrderShipment();
         $rma = $shipping->getData('rma');
 
@@ -305,9 +295,9 @@ class RequestExtractor
                                     ? (float) $itemData['customs_value']
                                     : null,
                                 'sku' => $orderItem->getSku(),
+                                'countryOfOrigin' => $this->getIso3Code($countryOfManufacture),
                                 'exportDescription' => $this->attributeReader->getExportDescription($orderItem),
                                 'hsCode' => $this->attributeReader->getHsCode($orderItem),
-                                'countryOfOrigin' => $this->getIso3Code($countryOfManufacture),
                             ]
                         );
 

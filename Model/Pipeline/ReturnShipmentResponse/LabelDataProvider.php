@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse;
@@ -16,18 +18,12 @@ class LabelDataProvider
      */
     private $labelResponse;
 
-    /**
-     * @param LabelResponse $labelResponse
-     */
     public function setLabelResponse(LabelResponse $labelResponse)
     {
         $this->labelResponse = $labelResponse;
     }
 
-    /**
-     * @return LabelResponse|null
-     */
-    public function getLabelResponse()
+    public function getLabelResponse(): ?LabelResponse
     {
         return $this->labelResponse;
     }

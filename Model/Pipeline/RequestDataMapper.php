@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
@@ -28,12 +30,6 @@ class RequestDataMapper
      */
     private $requestBuilder;
 
-    /**
-     * RequestDataMapper constructor.
-     *
-     * @param ReturnLabelRequestBuilderInterface $requestBuilder
-     * @param RequestExtractorFactory $requestExtractorFactory
-     */
     public function __construct(
         ReturnLabelRequestBuilderInterface $requestBuilder,
         RequestExtractorFactory $requestExtractorFactory
@@ -52,7 +48,6 @@ class RequestDataMapper
      */
     public function mapRequest(ReturnShipment $request): \JsonSerializable
     {
-        /** @var RequestExtractor $requestExtractor */
         $requestExtractor = $this->requestExtractorFactory->create(['returnShipmentRequest' => $request]);
 
         $this->requestBuilder->setAccountDetails(

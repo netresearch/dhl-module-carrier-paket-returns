@@ -23,7 +23,7 @@
     "require": {
         "php": "^7.1.3",
         "ext-json": "*",
-        "dhl/module-shipping-core": "^1.1.0",
+        "dhl/module-shipping-core": "^2.0.0",
         "dhl/sdk-api-bcs-returns": "^2.0.0",
         "magento/framework": "^102.0.0 || ^103.0.0",
         "magento/module-backend": "^101.0.0 || ^102.0.0 ",
@@ -37,9 +37,18 @@
         "magento/module-sales": "^102.0.0 || ^103.0.0",
         "magento/module-shipping": "^100.3.0",
         "magento/module-store": "^101.0.0",
-        "netresearch/config-fields-m2": "^1.2.0"
+        "netresearch/config-fields-m2": "^1.2.2",
+        "netresearch/module-shipping-core": "^2.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5.0 || ^9.0.0"
     },
     "suggest": {
         "magento/module-rma": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "2.0.0.x-dev"
+        }
     }
 }

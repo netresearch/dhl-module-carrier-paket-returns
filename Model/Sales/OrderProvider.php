@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Sales;
@@ -18,18 +20,12 @@ class OrderProvider
      */
     private $order;
 
-    /**
-     * @param OrderInterface $order
-     */
     public function setOrder(OrderInterface $order)
     {
         $this->order = $order;
     }
 
-    /**
-     * @return OrderInterface|null
-     */
-    public function getOrder()
+    public function getOrder(): ?OrderInterface
     {
         return $this->order;
     }

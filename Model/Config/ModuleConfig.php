@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Config;
@@ -9,52 +11,48 @@ namespace Dhl\PaketReturns\Model\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Api\InfoBox\VersionInterface;
 
-class ModuleConfig
+class ModuleConfig implements VersionInterface
 {
     // Defaults
-    const CONFIG_PATH_VERSION = 'carriers/dhlpaketrma/version';
-    const CONFIG_PATH_ACTIVE = 'carriers/dhlpaketrma/active';
-    const CONFIG_PATH_ACTIVE_RMA = 'carriers/dhlpaketrma/active_rma';
+    private const CONFIG_PATH_VERSION = 'carriers/dhlpaketrma/version';
+    public const CONFIG_PATH_ACTIVE = 'carriers/dhlpaketrma/active';
+    private const CONFIG_PATH_ACTIVE_RMA = 'carriers/dhlpaketrma/active_rma';
 
     // 100_general.xml
-    const CONFIG_PATH_DEFAULT_ITEM_WEIGHT = 'dhlshippingsolutions/dhlpaketrma/general/default_item_weight';
-    const CONFIG_PATH_ENABLE_LOGGING = 'dhlshippingsolutions/dhlpaketrma/general/logging';
-    const CONFIG_PATH_LOGLEVEL = 'dhlshippingsolutions/dhlpaketrma/general/logging_group/loglevel';
+    private const CONFIG_PATH_DEFAULT_ITEM_WEIGHT = 'dhlshippingsolutions/dhlpaketrma/general/default_item_weight';
+    public const CONFIG_PATH_ENABLE_LOGGING = 'dhlshippingsolutions/dhlpaketrma/general/logging';
+    public const CONFIG_PATH_LOGLEVEL = 'dhlshippingsolutions/dhlpaketrma/general/logging_group/loglevel';
 
     // 200_account.xml
-    const CONFIG_PATH_SANDBOX_MODE = 'dhlshippingsolutions/dhlpaketrma/account/sandboxmode';
+    private const CONFIG_PATH_SANDBOX_MODE = 'dhlshippingsolutions/dhlpaketrma/account/sandboxmode';
 
     // Production settings
-    const CONFIG_PATH_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_username';
-    const CONFIG_PATH_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_password';
-    const CONFIG_PATH_USER = 'dhlshippingsolutions/dhlpaketrma/account/production/api_username';
-    const CONFIG_PATH_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
-    const CONFIG_PATH_EKP = 'dhlshippingsolutions/dhlpaketrma/account/production/account_number';
-    const CONFIG_PATH_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/production/account_participations';
-    const CONFIG_PATH_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
+    private const CONFIG_PATH_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_username';
+    private const CONFIG_PATH_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_password';
+    private const CONFIG_PATH_USER = 'dhlshippingsolutions/dhlpaketrma/account/production/api_username';
+    private const CONFIG_PATH_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
+    private const CONFIG_PATH_EKP = 'dhlshippingsolutions/dhlpaketrma/account/production/account_number';
+    private const CONFIG_PATH_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/production/account_participations';
+    private const CONFIG_PATH_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
 
     // Sandbox settings
-    const CONFIG_PATH_SBX_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_username';
-    const CONFIG_PATH_SBX_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_password';
-    const CONFIG_PATH_SBX_USER = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_username';
-    const CONFIG_PATH_SBX_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password';
-    const CONFIG_PATH_SBX_EKP = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_number';
-    const CONFIG_PATH_SBX_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_participations';
-    const CONFIG_PATH_SBX_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/receiver_ids';
+    private const CONFIG_PATH_SBX_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_username';
+    private const CONFIG_PATH_SBX_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_password';
+    private const CONFIG_PATH_SBX_USER = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_username';
+    private const CONFIG_PATH_SBX_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password';
+    private const CONFIG_PATH_SBX_EKP = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_number';
+    private const CONFIG_PATH_SBX_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_participations';
+    private const CONFIG_PATH_SBX_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/receiver_ids';
 
-    const CONFIG_PATH_MAGENTO_RMA_ENABLED = 'sales/magento_rma/enabled';
+    private const CONFIG_PATH_MAGENTO_RMA_ENABLED = 'sales/magento_rma/enabled';
 
     /**
      * @var ScopeConfigInterface
      */
     private $scopeConfig;
 
-    /**
-     * ModuleConfig constructor.
-     *
-     * @param ScopeConfigInterface $scopeConfig
-     */
     public function __construct(ScopeConfigInterface $scopeConfig)
     {
         $this->scopeConfig = $scopeConfig;

@@ -1,12 +1,14 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Test\Integration\TestCase\Model\Util;
 
-use Dhl\ShippingCore\Model\Util\ApiLogAnonymizer;
+use Netresearch\ShippingCore\Model\Util\ApiLogAnonymizer;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 

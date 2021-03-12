@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\ViewModel\Sales\Order\Info\Button;
@@ -39,14 +41,6 @@ class Returns implements ArgumentInterface
      */
     private $urlBuilder;
 
-    /**
-     * Returns constructor.
-     *
-     * @param Registry $registry
-     * @param OrderValidator $orderValidator
-     * @param SessionManagerInterface $customerSession
-     * @param UrlInterface $urlBuilder
-     */
     public function __construct(
         Registry $registry,
         OrderValidator $orderValidator,

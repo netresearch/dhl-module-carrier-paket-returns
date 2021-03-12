@@ -1,16 +1,17 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
 
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
-use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
-use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface;
 
 /**
  * Magento carrier-aware wrapper around the DHL Paket Returns API SDK.
@@ -27,12 +28,6 @@ class ApiGateway
      */
     private $storeId;
 
-    /**
-     * ApiGateway constructor.
-     *
-     * @param CreateShipmentsPipelineInterface $pipeline
-     * @param int $storeId
-     */
     public function __construct(CreateShipmentsPipelineInterface $pipeline, int $storeId)
     {
         $this->pipeline = $pipeline;

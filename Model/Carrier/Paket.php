@@ -1,13 +1,14 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Carrier;
 
 use Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement;
-use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Directory\Helper\Data;
 use Magento\Directory\Model\CountryFactory;
@@ -30,17 +31,15 @@ use Magento\Shipping\Model\Tracking\Result as TrackingResult;
 use Magento\Shipping\Model\Tracking\Result\ErrorFactory as TrackErrorFactory;
 use Magento\Shipping\Model\Tracking\Result\StatusFactory;
 use Magento\Shipping\Model\Tracking\ResultFactory as TrackResultFactory;
+use Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Psr\Log\LoggerInterface;
 
 class Paket extends AbstractCarrierOnline implements CarrierInterface
 {
-    const CARRIER_CODE = 'dhlpaketrma';
-    const METHOD_CODE = 'rma';
+    public const CARRIER_CODE = 'dhlpaketrma';
+    public const METHOD_CODE = 'rma';
 
-    /**
-     * Tracking URL
-     */
-    const TRACKING_URL_TEMPLATE = 'https://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=de&idc=%s';
+    public const TRACKING_URL_TEMPLATE = 'https://www.dhl.de/de/privatkunden/pakete-empfangen/verfolgen.html?lang=de&idc=%s';
 
     /**
      * @var string
@@ -57,28 +56,6 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      */
     private $returnShipmentManagement;
 
-    /**
-     * Paket constructor.
-     *
-     * @param ScopeConfigInterface $scopeConfig
-     * @param ErrorFactory $rateErrorFactory
-     * @param LoggerInterface $logger
-     * @param Security $xmlSecurity
-     * @param ElementFactory $xmlElFactory
-     * @param ResultFactory $rateFactory
-     * @param MethodFactory $rateMethodFactory
-     * @param TrackResultFactory $trackFactory
-     * @param TrackErrorFactory $trackErrorFactory
-     * @param StatusFactory $trackStatusFactory
-     * @param RegionFactory $regionFactory
-     * @param CountryFactory $countryFactory
-     * @param CurrencyFactory $currencyFactory
-     * @param Data $directoryData
-     * @param StockRegistryInterface $stockRegistry
-     * @param RecipientStreetLoaderInterface $recipientStreetLoader
-     * @param ReturnShipmentManagement $returnShipmentManagement
-     * @param mixed[] $data
-     */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         ErrorFactory $rateErrorFactory,

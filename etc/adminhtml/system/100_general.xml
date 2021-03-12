@@ -11,7 +11,7 @@
         <field id="active_rma" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="10"
                translate="label button_label" type="Netresearch\ConfigFields\Model\Type\Checkbox">
             <label>Enabled</label>
-            <button_label>Allow customers to create order return labels</button_label>
+            <button_label>Allow customers to create return shipment labels</button_label>
             <config_path>carriers/dhlpaketrma/active_rma</config_path>
             <backend_model>Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ActiveRma</backend_model>
         </field>

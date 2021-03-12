@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Sales;
@@ -19,14 +21,8 @@ class OrderValidator
      */
     private $moduleConfig;
 
-    /**
-     * Returns constructor.
-     *
-     * @param ModuleConfig $moduleConfig
-     */
-    public function __construct(
-        ModuleConfig $moduleConfig
-    ) {
+    public function __construct(ModuleConfig $moduleConfig)
+    {
         $this->moduleConfig = $moduleConfig;
     }
 

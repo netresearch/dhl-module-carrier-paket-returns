@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
@@ -9,7 +11,6 @@ namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 use Dhl\PaketReturns\Model\Carrier\Paket;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Dhl\PaketReturns\Model\Sales\OrderProvider;
-use Dhl\ShippingCore\Api\ConfigInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Framework\DataObjectFactory;
@@ -19,6 +20,7 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\Data\ShipmentItemInterface;
 use Magento\Sales\Api\ShipmentRepositoryInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
 
 class RequestModifier
 {
@@ -28,7 +30,7 @@ class RequestModifier
     private $orderProvider;
 
     /**
-     * @var ConfigInterface
+     * @var ShippingConfigInterface
      */
     private $config;
 
@@ -62,20 +64,9 @@ class RequestModifier
      */
     private $shipments = [];
 
-    /**
-     * RequestModifier constructor.
-     *
-     * @param OrderProvider $orderProvider
-     * @param ConfigInterface $config
-     * @param ModuleConfig $moduleConfig
-     * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
-     * @param FilterBuilder $filterBuilder
-     * @param ShipmentRepositoryInterface $shipmentRepository
-     * @param DataObjectFactory $dataObjectFactory
-     */
     public function __construct(
         OrderProvider $orderProvider,
-        ConfigInterface $config,
+        ShippingConfigInterface $config,
         ModuleConfig $moduleConfig,
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         FilterBuilder $filterBuilder,

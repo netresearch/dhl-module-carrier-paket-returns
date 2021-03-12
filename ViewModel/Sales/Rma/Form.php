@@ -1,15 +1,15 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\ViewModel\Sales\Rma;
 
 use Dhl\PaketReturns\Model\Sales\OrderProvider;
 use Dhl\PaketReturns\Model\Sales\OrderValidator;
-use Dhl\ShippingCore\Api\Data\RecipientStreetInterface;
-use Dhl\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 use Magento\Catalog\Helper\Image;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Customer\Model\Session;
@@ -29,6 +29,8 @@ use Magento\Sales\Api\ShipmentRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Shipment\Item;
 use Magento\Shipping\Block\Items;
+use Netresearch\ShippingCore\Api\Data\RecipientStreetInterface;
+use Netresearch\ShippingCore\Api\SplitAddress\RecipientStreetLoaderInterface;
 
 /**
  * View model class for creating a return shipment.
@@ -99,22 +101,6 @@ class Form implements ArgumentInterface
      */
     private $urlBuilder;
 
-    /**
-     * Form constructor.
-     *
-     * @param OrderProvider $orderProvider
-     * @param OrderValidator $orderValidator
-     * @param RecipientStreetLoaderInterface $recipientStreetLoader
-     * @param SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory
-     * @param FilterBuilder $filterBuilder
-     * @param ShipmentRepositoryInterface $shipmentRepository
-     * @param ProductRepository $productRepository
-     * @param LayoutInterface $layout
-     * @param DirectoryHelper $directoryHelper
-     * @param Image $imageHelper
-     * @param Session $customerSession
-     * @param UrlInterface $url
-     */
     public function __construct(
         OrderProvider $orderProvider,
         OrderValidator $orderValidator,
@@ -148,7 +134,7 @@ class Form implements ArgumentInterface
      *
      * @return ShipmentInterface[]
      */
-    public function getShipments()
+    public function getShipments(): array
     {
         $order = $this->orderProvider->getOrder();
         if (!$order instanceof OrderInterface || !$this->orderValidator->canCreateRma($order)) {
@@ -172,7 +158,7 @@ class Form implements ArgumentInterface
      *
      * @return OrderAddressInterface|null
      */
-    public function getAddress()
+    public function getAddress(): ?OrderAddressInterface
     {
         $order = $this->orderProvider->getOrder();
         if (!$order instanceof Order) {
@@ -187,7 +173,7 @@ class Form implements ArgumentInterface
      *
      * @return RecipientStreetInterface
      */
-    public function getRecipientStreet()
+    public function getRecipientStreet(): RecipientStreetInterface
     {
         $shippingAddress = $this->getAddress();
         return $this->recipientStreetLoader->load($shippingAddress);

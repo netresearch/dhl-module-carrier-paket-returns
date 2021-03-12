@@ -1,16 +1,18 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\Stage;
 
 use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
 use Dhl\PaketReturns\Model\Pipeline\ResponseDataMapper;
-use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
-use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
+use Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 
 class MapResponseStage implements CreateShipmentsStageInterface
 {
@@ -19,11 +21,6 @@ class MapResponseStage implements CreateShipmentsStageInterface
      */
     private $responseDataMapper;
 
-    /**
-     * MapResponseStage constructor.
-     *
-     * @param ResponseDataMapper $responseDataMapper
-     */
     public function __construct(ResponseDataMapper $responseDataMapper)
     {
         $this->responseDataMapper = $responseDataMapper;

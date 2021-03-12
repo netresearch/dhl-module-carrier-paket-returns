@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Controller\Returns;
@@ -54,19 +56,6 @@ class Label extends ReturnAction
      */
     private $labelDataProvider;
 
-    /**
-     * Submit constructor.
-     *
-     * @param Context $context
-     * @param OrderRepositoryInterface $orderRepository
-     * @param OrderViewAuthorizationInterface $orderAuthorization
-     * @param OrderProvider $orderProvider
-     * @param OrderValidator $orderValidator
-     * @param ReturnShipmentFactory $shipmentRequestFactory
-     * @param RequestModifier $requestModifier
-     * @param ReturnShipmentManagement $returnShipmentManagement
-     * @param LabelDataProvider $labelDataProvider
-     */
     public function __construct(
         Context $context,
         OrderRepositoryInterface $orderRepository,

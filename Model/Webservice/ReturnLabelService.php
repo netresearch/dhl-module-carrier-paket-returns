@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Webservice;
@@ -40,15 +42,6 @@ class ReturnLabelService implements ReturnLabelServiceInterface
      */
     private $storeId;
 
-    /**
-     * ReturnLabelService constructor.
-     *
-     * @param AuthenticationStorageInterfaceFactory $authStorageFactory
-     * @param ModuleConfig $moduleConfig
-     * @param ServiceFactoryInterface $serviceFactory
-     * @param LoggerInterface $logger
-     * @param int $storeId
-     */
     public function __construct(
         AuthenticationStorageInterfaceFactory $authStorageFactory,
         ModuleConfig $moduleConfig,

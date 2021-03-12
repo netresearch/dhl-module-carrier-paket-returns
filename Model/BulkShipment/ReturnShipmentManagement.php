@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\BulkShipment;
@@ -27,11 +29,6 @@ class ReturnShipmentManagement
      */
     private $apiGateways;
 
-    /**
-     * ReturnShipmentManagement constructor.
-     *
-     * @param ApiGatewayFactory $apiGatewayFactory
-     */
     public function __construct(ApiGatewayFactory $apiGatewayFactory)
     {
         $this->apiGatewayFactory = $apiGatewayFactory;

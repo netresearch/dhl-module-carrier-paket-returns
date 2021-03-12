@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse;
@@ -13,11 +15,11 @@ use Magento\Framework\DataObject;
  */
 class LabelResponse extends DataObject
 {
-    const REQUEST_INDEX = 'request_index';
-    const TRACKING_NUMBER = 'tracking_number';
-    const SHIPPING_LABEL_CONTENT = 'shipping_label_content';
-    const SHIPPING_LABEL_DATA = 'shipping_label_data';
-    const QR_LABEL_DATA = 'qr_label_data';
+    public const REQUEST_INDEX = 'request_index';
+    public const TRACKING_NUMBER = 'tracking_number';
+    public const SHIPPING_LABEL_CONTENT = 'shipping_label_content';
+    public const SHIPPING_LABEL_DATA = 'shipping_label_data';
+    public const QR_LABEL_DATA = 'qr_label_data';
 
     /**
      * Obtain request id (package id, sequence number).

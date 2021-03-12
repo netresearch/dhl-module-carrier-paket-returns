@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field;
@@ -20,13 +22,6 @@ class Procedures extends Select
      */
     private $source;
 
-    /**
-     * Procedures constructor.
-     *
-     * @param Context $context
-     * @param Procedure $source
-     * @param mixed[] $data
-     */
     public function __construct(
         Context $context,
         Procedure $source,

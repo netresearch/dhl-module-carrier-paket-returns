@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\Stage;
@@ -9,9 +11,9 @@ namespace Dhl\PaketReturns\Model\Pipeline\Stage;
 use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
 use Dhl\PaketReturns\Model\Pipeline\RequestDataMapper;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentException;
-use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
-use Dhl\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
+use Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
 
 class MapRequestStage implements CreateShipmentsStageInterface
 {
@@ -20,11 +22,6 @@ class MapRequestStage implements CreateShipmentsStageInterface
      */
     private $requestDataMapper;
 
-    /**
-     * MapRequestStage constructor.
-     *
-     * @param RequestDataMapper $requestDataMapper
-     */
     public function __construct(RequestDataMapper $requestDataMapper)
     {
         $this->requestDataMapper = $requestDataMapper;

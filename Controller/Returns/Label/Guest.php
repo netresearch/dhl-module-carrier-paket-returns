@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Controller\Returns\Label;
@@ -32,20 +34,6 @@ class Guest extends Label
      */
     private $guestHelper;
 
-    /**
-     * Submit constructor.
-     *
-     * @param Context $context
-     * @param OrderRepositoryInterface $orderRepository
-     * @param OrderViewAuthorizationInterface $orderAuthorization
-     * @param OrderProvider $orderProvider
-     * @param OrderValidator $orderValidator
-     * @param ReturnShipmentFactory $shipmentRequestFactory
-     * @param RequestModifier $requestModifier
-     * @param ReturnShipmentManagement $returnShipmentManagement
-     * @param LabelDataProvider $labelDataProvider
-     * @param GuestHelper $guestHelper
-     */
     public function __construct(
         Context $context,
         OrderRepositoryInterface $orderRepository,

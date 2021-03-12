@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend;
@@ -26,18 +28,6 @@ class ActiveRma extends Value
      */
     private $configWriter;
 
-    /**
-     * ActiveRma constructor.
-     *
-     * @param Context $context
-     * @param Registry $registry
-     * @param ScopeConfigInterface $config
-     * @param TypeListInterface $cacheTypeList
-     * @param WriterInterface $configWriter
-     * @param AbstractResource|null $resource
-     * @param AbstractDb|null $resourceCollection
-     * @param mixed[] $data
-     */
     public function __construct(
         Context $context,
         Registry $registry,

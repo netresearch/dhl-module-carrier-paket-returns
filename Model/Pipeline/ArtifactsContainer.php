@@ -1,7 +1,9 @@
 <?php
+
 /**
  * See LICENSE.md for license details.
  */
+
 declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
@@ -9,7 +11,7 @@ namespace Dhl\PaketReturns\Model\Pipeline;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
-use Dhl\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 
 class ArtifactsContainer implements ArtifactsContainerInterface
 {
@@ -61,7 +63,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * @param int $storeId
      * @return void
      */
-    public function setStoreId(int $storeId)
+    public function setStoreId(int $storeId): void
     {
         $this->storeId = $storeId;
     }
