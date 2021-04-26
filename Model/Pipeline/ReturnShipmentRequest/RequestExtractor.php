@@ -10,19 +10,18 @@ namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 
 use Dhl\PaketReturns\Model\Adminhtml\System\Config\Source\Procedure;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
-use Magento\Directory\Model\ResourceModel\Country\Collection;
-use Magento\Directory\Model\ResourceModel\Country\CollectionFactory;
 use Magento\Framework\DataObject;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Item;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
-use Netresearch\ShippingCore\Api\ConfigInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterfaceFactory;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceFactory;
+use Netresearch\ShippingCore\Api\Util\CountryCodeInterface;
 use Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 use Netresearch\ShippingCore\Api\Util\UnitConverterInterface;
 
@@ -56,6 +55,11 @@ class RequestExtractor
     private $unitConverter;
 
     /**
+     * @var CountryCodeInterface
+     */
+    private $country;
+
+    /**
      * @var ItemAttributeReaderInterface
      */
     private $attributeReader;
@@ -71,11 +75,6 @@ class RequestExtractor
     private $packageItemFactory;
 
     /**
-     * @var Collection
-     */
-    private $countryCollection;
-
-    /**
      * @var ShipperInterface
      */
     private $shipper;
@@ -85,29 +84,24 @@ class RequestExtractor
      */
     private $items = [];
 
-    /**
-     * @var string[]
-     */
-    private $countryMap = [];
-
     public function __construct(
         ReturnShipment $returnShipmentRequest,
         ShippingConfigInterface $coreConfig,
         ModuleConfig $moduleConfig,
         UnitConverterInterface $unitConverter,
+        CountryCodeInterface $country,
         ItemAttributeReaderInterface $attributeReader,
         ShipperInterfaceFactory $shipperFactory,
-        PackageItemInterfaceFactory $packageItemFactory,
-        CollectionFactory $countryCollectionFactory
+        PackageItemInterfaceFactory $packageItemFactory
     ) {
         $this->returnShipmentRequest = $returnShipmentRequest;
         $this->coreConfig = $coreConfig;
         $this->moduleConfig = $moduleConfig;
         $this->unitConverter = $unitConverter;
+        $this->country = $country;
         $this->attributeReader = $attributeReader;
         $this->shipperFactory = $shipperFactory;
         $this->packageItemFactory = $packageItemFactory;
-        $this->countryCollection = $countryCollectionFactory->create();
     }
 
     /**
@@ -118,13 +112,11 @@ class RequestExtractor
      */
     private function getIso3Code(string $iso2Code): string
     {
-        if (empty($this->countryMap)) {
-            foreach ($this->countryCollection as $country) {
-                $this->countryMap[$country->getData('iso2_code')] = $country->getData('iso3_code');
-            }
+        try {
+            return $this->country->getIso3Code($iso2Code);
+        } catch (NoSuchEntityException $exception) {
+            return '';
         }
-
-        return $this->countryMap[$iso2Code] ?? '';
     }
 
     /**
