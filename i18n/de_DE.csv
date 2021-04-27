@@ -29,7 +29,7 @@ Errors,Fehler
 "If you do not have an account or your account is with another DHL division, %1please contact DHL Parcel Germany%2 to establish or expand your relationship.","Wenn Sie kein Konto haben oder Ihr Konto bei einer anderen DHL-Abteilung ist, wenden Sie sich bitte an %1DHL Paket%2, um Ihren Vertrag zu erweitern."
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
 Item,Artikel
-"Label could not be created: %1","Versandedikett konnte nicht erstellt werden: %1"
+"Label could not be created: %1","Versandetikett konnte nicht erstellt werden: %1"
 "Labels for your return shipment (shipment number %1)","Labels für Ihre Retourenlieferung (Sendungsnummer %1)"
 "Last Name",Nachname
 "Log Level",Protokollierungsstufe

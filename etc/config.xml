@@ -41,7 +41,7 @@
                         <api_username>2222222222_customer</api_username>
                         <api_password>uBQbZ62!ZiBiVVbhc</api_password>
                         <account_number>2222222222</account_number>
-                        <account_participations backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
+                        <account_participations backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized">
                             <![CDATA[
                                 {
                                     "_1485789382230_100":{"procedure":"07","participation":"01"},
@@ -51,37 +51,38 @@
                         </account_participations>
 
                         <!-- Mapping of 2-letter-iso country code to DHL Paket return receiver id -->
-                        <receiver_ids backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
+                        <receiver_ids backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized">
                             <![CDATA[
                                 {
-                                    "_1599052161775_775":{"iso":"AT","receiver_id":"aut"},
-                                    "_1599052172342_342":{"iso":"BE","receiver_id":"bel"},
-                                    "_1599052181389_389":{"iso":"BG","receiver_id":"bgr"},
-                                    "_1599052199200_200":{"iso":"HR","receiver_id":"hrv"},
-                                    "_1599052222502_502":{"iso":"CY","receiver_id":"cyp"},
-                                    "_1599052242351_351":{"iso":"CZ","receiver_id":"cze"},
-                                    "_1599052258496_496":{"iso":"DK","receiver_id":"dnk"},
-                                    "_1599052281433_433":{"iso":"EE","receiver_id":"est"},
-                                    "_1599052297680_680":{"iso":"FI","receiver_id":"fin"},
-                                    "_1599052312001_1":{"iso":"FR","receiver_id":"fra"},
-                                    "_1599052331497_497":{"iso":"DE","receiver_id":"deu"},
-                                    "_1599052363857_857":{"iso":"GR","receiver_id":"grc"},
-                                    "_1599052385640_640":{"iso":"HU","receiver_id":"hun"},
-                                    "_1599052397313_313":{"iso":"IE","receiver_id":"irl"},
-                                    "_1599052413253_253":{"iso":"LV","receiver_id":"lva"},
-                                    "_1599052435033_33":{"iso":"LT","receiver_id":"ltu"},
-                                    "_1599052502355_355":{"iso":"LU","receiver_id":"lux"},
-                                    "_1599052515195_195":{"iso":"MT","receiver_id":"mlt"},
-                                    "_1599052530183_183":{"iso":"NL","receiver_id":"nld"},
-                                    "_1599052556818_818":{"iso":"PL","receiver_id":"pol"},
-                                    "_1599052578097_97":{"iso":"PT","receiver_id":"prt"},
-                                    "_1599052598912_912":{"iso":"RO","receiver_id":"rou"},
-                                    "_1599052622954_954":{"iso":"SK","receiver_id":"svk"},
-                                    "_1599052644745_745":{"iso":"SI","receiver_id":"svn"},
-                                    "_1599052658877_877":{"iso":"ES","receiver_id":"esp"},
-                                    "_1599052677106_106":{"iso":"SE","receiver_id":"swe"},
-                                    "_1599052695659_659":{"iso":"CH","receiver_id":"che"},
-                                    "_1599052710034_34":{"iso":"GB","receiver_id":"gbr"}
+                                    "_1619538487261_261": {"iso": "AT", "receiver_id": "aut"},
+                                    "_1619538513726_726": {"iso": "BE", "receiver_id": "bel"},
+                                    "_1619538514326_326": {"iso": "BG", "receiver_id": "bgr"},
+                                    "_1619538514879_879": {"iso": "CH", "receiver_id": "che"},
+                                    "_1619538539711_711": {"iso": "CY", "receiver_id": "cyp"},
+                                    "_1619538540099_99": {"iso": "CZ", "receiver_id": "cze"},
+                                    "_1619538540647_647": {"iso": "DE", "receiver_id": "deu"},
+                                    "_1619538541663_663": {"iso": "DK", "receiver_id": "dnk"},
+                                    "_1619538542255_255": {"iso": "ES", "receiver_id": "esp"},
+                                    "_1619538556095_95": {"iso": "EE", "receiver_id": "est"},
+                                    "_1619538556591_591": {"iso": "FI", "receiver_id": "fin"},
+                                    "_1619538557351_351": {"iso": "FR", "receiver_id": "fra"},
+                                    "_1619538557903_903": {"iso": "GB", "receiver_id": "gbr"},
+                                    "_1619538589105_105": {"iso": "GR", "receiver_id": "grc"},
+                                    "_1619538589679_679": {"iso": "HR", "receiver_id": "hrv"},
+                                    "_1619538590888_888": {"iso": "HU", "receiver_id": "hun"},
+                                    "_1619538591400_400": {"iso": "IE", "receiver_id": "irl"},
+                                    "_1619538591984_984": {"iso": "IT", "receiver_id": "ita"},
+                                    "_1619538593159_159": {"iso": "LT", "receiver_id": "ltu"},
+                                    "_1619538620080_80": {"iso": "LU", "receiver_id": "lux"},
+                                    "_1619538621496_496": {"iso": "LV", "receiver_id": "lva"},
+                                    "_1619538621976_976": {"iso": "MT", "receiver_id": "mlt"},
+                                    "_1619538622416_416": {"iso": "NL", "receiver_id": "nld"},
+                                    "_1619538623460_460": {"iso": "PL", "receiver_id": "pol"},
+                                    "_1619538646601_601": {"iso": "PT", "receiver_id": "prt"},
+                                    "_1619538647067_67": {"iso": "RO", "receiver_id": "rou"},
+                                    "_1619538647617_617": {"iso": "SK", "receiver_id": "svk"},
+                                    "_1619538648553_553": {"iso": "SI", "receiver_id": "svn"},
+                                    "_1619538649006_6": {"iso": "SE", "receiver_id": "swe"}
                                 }
                             ]]>
                         </receiver_ids>
@@ -92,7 +93,7 @@
                         <auth_password>pMnRHKfNMw9O3qKMLAUhFT4cBbwotp</auth_password>
                         <api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
 
-                        <account_participations backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized">
+                        <account_participations backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized">
                             <![CDATA[
                                 {
                                     "_1485789382230_100":{"procedure":"07","participation":"01"},
@@ -101,7 +102,7 @@
                             ]]>
                         </account_participations>
 
-                        <receiver_ids backend_model="Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized"/>
+                        <receiver_ids backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized"/>
                     </production>
                 </account>
             </dhlpaketrma>

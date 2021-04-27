@@ -50,7 +50,7 @@
                 <label>Participation Numbers</label>
                 <comment>The participation number enables invoices to be subdivided according to location, seasonal business or different conditions. The participation is 2 numerical digits from 00 to 99 or alphanumerical digits from AA to ZZ. It is allocated by DHL Sales.</comment>
                 <frontend_model>Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field\Participation</frontend_model>
-                <backend_model>Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized</backend_model>
+                <backend_model>Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized</backend_model>
             </field>
 
             <field id="receiver_ids" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="50"
@@ -58,7 +58,7 @@
                 <label>Return Receiver IDs</label>
                 <comment><![CDATA[To determine valid receiver IDs for your account, log into the DHL Business Customer Portal and download the <em>Receiver Links</em> CSV file from the <em>Returns</em> section.]]></comment>
                 <frontend_model>Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field\ReceiverId</frontend_model>
-                <backend_model>Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ArraySerialized</backend_model>
+                <backend_model>Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized</backend_model>
             </field>
         </group>
     </group>

@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Use `netresearch/module-shipping-core` package for three-letter country code calculation.
 
+### Fixed
+
+- Add missing sandbox _Receiver ID_ configuration for Italy.
+
 ## 2.0.0
 
 ### Changed
