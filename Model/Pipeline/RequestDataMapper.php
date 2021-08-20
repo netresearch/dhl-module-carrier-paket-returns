@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestExtractor;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestExtractorFactory;
 use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface;
 use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
@@ -52,7 +51,7 @@ class RequestDataMapper
 
         $this->requestBuilder->setAccountDetails(
             $requestExtractor->getReceiverId(),
-            $requestExtractor->getBillingNumber()
+            $requestExtractor->getOrder()->getRealOrderId()
         );
         $this->requestBuilder->setShipmentReference($requestExtractor->getReferenceNumber());
 

@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 
-use Dhl\PaketReturns\Model\Adminhtml\System\Config\Source\Procedure;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -137,31 +136,6 @@ class RequestExtractor
     public function getOrder(): Order
     {
         return $this->returnShipmentRequest->getOrderShipment()->getOrder();
-    }
-
-    /**
-     * Returns the billing number (= customer reference number).
-     *
-     * @return string
-     */
-    public function getBillingNumber(): string
-    {
-        $storeId = $this->getStoreId();
-        $ekp = $this->moduleConfig->getEkp($storeId);
-
-        $shipperCountry = $this->returnShipmentRequest->getShipperAddressCountryCode();
-        $recipientCountry = $this->returnShipmentRequest->getRecipientAddressCountryCode();
-
-        if ($shipperCountry === $recipientCountry) {
-            $procedure = Procedure::PROCEDURE_RETURNSHIPMENT_NATIONAL;
-        } else {
-            $procedure = Procedure::PROCEDURE_RETURNSHIPMENT_INTERNATIONAL;
-        }
-
-        $participationNumbers = $this->moduleConfig->getParticipations($storeId);
-        $participation = $participationNumbers[$procedure] ?? '';
-
-        return $ekp . $procedure . $participation;
     }
 
     /**
