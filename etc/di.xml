@@ -11,6 +11,11 @@
     <preference for="Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface" type="Dhl\Sdk\Paket\Retoure\Auth\AuthenticationStorage"/>
 
     <!-- # virtual types -->
+    <virtualType name="Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement\Virtual" type="Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement">
+        <arguments>
+            <argument name="responseProcessor" xsi:type="object">Netresearch\ShippingCore\Model\Pipeline\ReturnShipment\CreateLabelResponseProcessor\Virtual</argument>
+        </arguments>
+    </virtualType>
     <virtualType name="Dhl\PaketReturns\Model\Logger\Handler\Virtual" type="Netresearch\ShippingCore\Model\Util\ApiLogHandler">
         <arguments>
             <argument name="fileName" xsi:type="string">var/log/dhl_paket_returns.log</argument>
@@ -26,7 +31,6 @@
             </argument>
         </arguments>
     </virtualType>
-
     <virtualType name="Dhl\PaketReturns\Model\Pipeline\ArtifactsContainerFactory\Virtual" type="Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterfaceFactory">
         <arguments>
             <argument name="instanceName" xsi:type="string">Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer</argument>
@@ -50,14 +54,9 @@
     </virtualType>
 
     <!-- # argument di overrides -->
-    <type name="Dhl\PaketReturns\Controller\Returns\Create\Guest">
+    <type name="Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentConfiguration">
         <arguments>
-            <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
-        </arguments>
-    </type>
-    <type name="Dhl\PaketReturns\Controller\Returns\Label\Guest">
-        <arguments>
-            <argument name="orderAuthorization" xsi:type="object">Magento\Sales\Controller\Guest\OrderViewAuthorization</argument>
+            <argument name="shipmentManagement" xsi:type="object">Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement\Virtual</argument>
         </arguments>
     </type>
     <type name="Dhl\PaketReturns\Model\Pipeline\ApiGateway">
@@ -73,24 +72,6 @@
     <type name="Dhl\PaketReturns\Model\Carrier\Paket">
         <arguments>
             <argument name="returnShipmentManagement" xsi:type="object">Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement\Proxy</argument>
-        </arguments>
-    </type>
-    <type name="Dhl\PaketReturns\ViewModel\Sales\Order\Info\Button\Returns">
-        <arguments>
-            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
-        </arguments>
-    </type>
-    <type name="Dhl\PaketReturns\ViewModel\Sales\Rma\Form">
-        <arguments>
-            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
-        </arguments>
-    </type>
-    <type name="Netresearch\ShippingCore\Model\Util\ApiLogAnonymizer">
-        <arguments>
-            <argument name="patterns" xsi:type="array">
-                <item name="dhlpaketrmaBasicAuth" xsi:type="string">|Authorization: Basic (.+)|</item>
-                <item name="dhlpaketrmaUserAuth" xsi:type="string">|DPDHL-User-Authentication-Token: (.+)|</item>
-            </argument>
         </arguments>
     </type>
     <type name="Magento\Config\Model\Config\TypePool">
@@ -114,5 +95,20 @@
     </type>
     <type name="Magento\Config\App\Config\Source\DumpConfigSourceAggregated">
         <plugin name="unsetPaketReturnsSandboxPaths" type="Dhl\PaketReturns\Plugin\UnsetSandboxPaths"/>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\BulkShipment\ReturnShipmentConfiguration">
+        <arguments>
+            <argument name="configurations" xsi:type="array">
+                <item name="dhlpaketrma" xsi:type="object">Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentConfiguration</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Netresearch\ShippingCore\Model\Util\ApiLogAnonymizer">
+        <arguments>
+            <argument name="patterns" xsi:type="array">
+                <item name="dhlpaketrmaBasicAuth" xsi:type="string">|Authorization: Basic (.+)|</item>
+                <item name="dhlpaketrmaUserAuth" xsi:type="string">|DPDHL-User-Authentication-Token: (.+)|</item>
+            </argument>
+        </arguments>
     </type>
 </config>

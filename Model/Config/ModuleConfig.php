@@ -11,6 +11,7 @@ namespace Dhl\PaketReturns\Model\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Store\Model\ScopeInterface;
+use Netresearch\ShippingCore\Api\Config\RmaConfigInterface;
 use Netresearch\ShippingCore\Api\InfoBox\VersionInterface;
 
 class ModuleConfig implements VersionInterface
@@ -328,7 +329,7 @@ class ModuleConfig implements VersionInterface
     }
 
     /**
-     * Get the sandbox two letter country code to sandbox receiver IDs mapping.
+     * Get the sandbox two-letter country code to sandbox receiver IDs mapping.
      *
      * @param mixed $store
      * @return string[]
@@ -342,69 +343,6 @@ class ModuleConfig implements VersionInterface
         );
 
         return array_column($receiverIds, 'receiver_id', 'iso');
-    }
-
-    /**
-     * Obtain a carrier's title.
-     *
-     * @param string $carrierCode
-     * @param mixed $store
-     * @return string
-     */
-    public function getCarrierTitle(string $carrierCode, $store = null): string
-    {
-        return (string) $this->scopeConfig->getValue(
-            'carriers/' . $carrierCode . '/title',
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * Check if the native Magento RMA solution is enabled for customers.
-     *
-     * @param mixed $store
-     * @return bool
-     */
-    public function isRmaEnabledOnStoreFront($store = null): bool
-    {
-        return $this->scopeConfig->isSetFlag(
-            self::CONFIG_PATH_MAGENTO_RMA_ENABLED,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * @see \Magento\Rma\Helper\Data::getReturnAddressData
-     *
-     * @param mixed $store
-     * @return string[]
-     */
-    public function getReturnAddress($store = null): array
-    {
-        $scope = ScopeInterface::SCOPE_STORE;
-
-        $useStoreAddress = $this->scopeConfig->getValue('sales/magento_rma/use_store_address', $scope, $store);
-
-        if ($useStoreAddress === null || $useStoreAddress === '1') {
-            // flag not configured (CE) or explicitly set (EE).
-            $address['city'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_CITY, $scope, $store);
-            $address['country_id'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_COUNTRY_ID, $scope, $store);
-            $address['postcode'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ZIP, $scope, $store);
-            $address['region_id'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_REGION_ID, $scope, $store);
-            $address['street2'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ADDRESS2, $scope, $store);
-            $address['street1'] = $this->scopeConfig->getValue(Shipment::XML_PATH_STORE_ADDRESS1, $scope, $store);
-        } else {
-            $address['city'] = $this->scopeConfig->getValue('sales/magento_rma/city', $scope, $store);
-            $address['country_id'] = $this->scopeConfig->getValue('sales/magento_rma/country_id', $scope, $store);
-            $address['postcode'] = $this->scopeConfig->getValue('sales/magento_rma/zip', $scope, $store);
-            $address['region_id'] = $this->scopeConfig->getValue('sales/magento_rma/region_id', $scope, $store);
-            $address['street2'] = $this->scopeConfig->getValue('sales/magento_rma/address1', $scope, $store);
-            $address['street1'] = $this->scopeConfig->getValue('sales/magento_rma/address', $scope, $store);
-        }
-
-        return $address;
     }
 
     /**

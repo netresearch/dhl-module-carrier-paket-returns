@@ -8,20 +8,25 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponseFactory;
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponseFactory;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 use Magento\Framework\Exception\RuntimeException;
 use Magento\Framework\Phrase;
+use Magento\Sales\Api\Data\ShipmentInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterfaceFactory;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ReturnShipmentDocumentInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ReturnShipmentDocumentInterfaceFactory;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentDocumentInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterfaceFactory;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentResponseInterface;
 use Netresearch\ShippingCore\Api\Util\PdfCombinatorInterface;
 use Psr\Log\LoggerInterface;
 
 /**
  * Response mapper.
  *
- * Convert API response into the carrier response format that the shipping module understands.
+ * Convert API response into the carrier response format that the NR shipping core understands.
  *
  * @see \Magento\Shipping\Model\Carrier\AbstractCarrierOnline::requestToShipment
  */
@@ -38,21 +43,30 @@ class ResponseDataMapper
     private $logger;
 
     /**
-     * @var LabelResponseFactory
+     * @var ReturnShipmentDocumentInterfaceFactory
+     */
+    private $shipmentDocumentFactory;
+
+    /**
+     * @var LabelResponseInterfaceFactory
      */
     private $labelResponseFactory;
 
     /**
-     * @var ErrorResponseFactory
+     * @var ShipmentErrorResponseInterfaceFactory
      */
     private $errorResponseFactory;
 
     public function __construct(
         PdfCombinatorInterface $pdfCombinator,
-        LabelResponseFactory $labelResponseFactory,
-        ErrorResponseFactory $errorResponseFactory
+        LoggerInterface $logger,
+        ReturnShipmentDocumentInterfaceFactory $shipmentDocumentFactory,
+        LabelResponseInterfaceFactory $labelResponseFactory,
+        ShipmentErrorResponseInterfaceFactory $errorResponseFactory
     ) {
         $this->pdfCombinator = $pdfCombinator;
+        $this->logger = $logger;
+        $this->shipmentDocumentFactory = $shipmentDocumentFactory;
         $this->labelResponseFactory = $labelResponseFactory;
         $this->errorResponseFactory = $errorResponseFactory;
     }
@@ -62,11 +76,32 @@ class ResponseDataMapper
      *
      * @param string $requestIndex
      * @param ConfirmationInterface $confirmation
-     *
-     * @return LabelResponse
+     * @param ShipmentInterface|\Magento\Rma\Model\Shipping $salesShipment
+     * @return LabelResponseInterface
      */
-    public function createLabelResponse(string $requestIndex, ConfirmationInterface $confirmation): LabelResponse
-    {
+    public function createLabelResponse(
+        string $requestIndex,
+        ConfirmationInterface $confirmation,
+        $salesShipment
+    ): LabelResponseInterface {
+        $pdfDocument = $this->shipmentDocumentFactory->create([
+            'data' => [
+                ShipmentDocumentInterface::TITLE => __('PDF Label')->render(),
+                ShipmentDocumentInterface::MIME_TYPE => 'application/pdf',
+                ShipmentDocumentInterface::LABEL_DATA => base64_decode($confirmation->getLabelData()),
+                ReturnShipmentDocumentInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
+            ]
+        ]);
+
+        $qrDocument = $this->shipmentDocumentFactory->create([
+            'data' => [
+                ShipmentDocumentInterface::TITLE => __('QR Code')->render(),
+                ShipmentDocumentInterface::MIME_TYPE => 'image/png',
+                ShipmentDocumentInterface::LABEL_DATA => base64_decode($confirmation->getQrLabelData()),
+                ReturnShipmentDocumentInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
+            ]
+        ]);
+
         try {
             // Merge all labels together
             $shippingLabelContent = $this->pdfCombinator->combineB64PdfPages([
@@ -80,11 +115,11 @@ class ResponseDataMapper
 
         return $this->labelResponseFactory->create([
             'data' => [
-                LabelResponse::REQUEST_INDEX => $requestIndex,
-                LabelResponse::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
-                LabelResponse::SHIPPING_LABEL_CONTENT => $shippingLabelContent,
-                LabelResponse::SHIPPING_LABEL_DATA => $confirmation->getLabelData(),
-                LabelResponse::QR_LABEL_DATA => $confirmation->getQrLabelData(),
+                ShipmentResponseInterface::REQUEST_INDEX => $requestIndex,
+                ShipmentResponseInterface::SALES_SHIPMENT => $salesShipment,
+                LabelResponseInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
+                LabelResponseInterface::SHIPPING_LABEL_CONTENT => $shippingLabelContent,
+                LabelResponseInterface::DOCUMENTS => [$pdfDocument, $qrDocument],
             ]
         ]);
     }
@@ -94,15 +129,19 @@ class ResponseDataMapper
      *
      * @param string $requestIndex
      * @param Phrase $message
-     *
-     * @return ErrorResponse
+     * @param ShipmentInterface|\Magento\Rma\Model\Shipping $salesShipment
+     * @return ShipmentErrorResponseInterface
      */
-    public function createErrorResponse(string $requestIndex, Phrase $message): ErrorResponse
-    {
+    public function createErrorResponse(
+        string $requestIndex,
+        Phrase $message,
+        $salesShipment
+    ): ShipmentErrorResponseInterface {
         return $this->errorResponseFactory->create([
             'data' => [
-                ErrorResponse::REQUEST_INDEX => $requestIndex,
-                ErrorResponse::ERRORS => $message,
+                ShipmentResponseInterface::REQUEST_INDEX => $requestIndex,
+                ShipmentResponseInterface::SALES_SHIPMENT => $salesShipment,
+                ShipmentErrorResponseInterface::ERRORS => $message,
             ]
         ]);
     }

@@ -101,7 +101,7 @@ class RequestDataMapper
             return $this->requestBuilder->create();
         } catch (RequestValidatorException $exception) {
             $message = __('Return shipment request could not be created: %1', $exception->getMessage());
-            throw new ReturnShipmentException($message);
+            throw new ReturnShipmentException($message, $exception);
         }
     }
 }

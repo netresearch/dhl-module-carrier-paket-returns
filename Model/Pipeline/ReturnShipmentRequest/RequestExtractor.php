@@ -15,6 +15,7 @@ use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Item;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Config\CarrierConfigInterface;
 use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterfaceFactory;
@@ -42,6 +43,11 @@ class RequestExtractor
      * @var ShippingConfigInterface
      */
     private $coreConfig;
+
+    /**
+     * @var CarrierConfigInterface
+     */
+    private $carrierConfig;
 
     /**
      * @var ModuleConfig
@@ -86,6 +92,7 @@ class RequestExtractor
     public function __construct(
         ReturnShipment $returnShipmentRequest,
         ShippingConfigInterface $coreConfig,
+        CarrierConfigInterface $carrierConfig,
         ModuleConfig $moduleConfig,
         UnitConverterInterface $unitConverter,
         CountryCodeInterface $country,
@@ -95,6 +102,7 @@ class RequestExtractor
     ) {
         $this->returnShipmentRequest = $returnShipmentRequest;
         $this->coreConfig = $coreConfig;
+        $this->carrierConfig = $carrierConfig;
         $this->moduleConfig = $moduleConfig;
         $this->unitConverter = $unitConverter;
         $this->country = $country;
@@ -398,7 +406,7 @@ class RequestExtractor
     public function getOriginalCarrier(): string
     {
         $carrierCode = strtok((string)$this->getOrder()->getShippingMethod(), '_');
-        $carrierTitle = $this->moduleConfig->getCarrierTitle($carrierCode, $this->getOrder()->getStoreId());
+        $carrierTitle = $this->carrierConfig->getTitle($carrierCode, $this->getOrder()->getStoreId());
         return $carrierTitle ?: $carrierCode;
     }
 

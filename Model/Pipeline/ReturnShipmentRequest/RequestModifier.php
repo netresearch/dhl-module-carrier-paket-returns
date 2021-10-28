@@ -10,7 +10,6 @@ namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 
 use Dhl\PaketReturns\Model\Carrier\Paket;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
-use Dhl\PaketReturns\Model\Sales\OrderProvider;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Framework\DataObjectFactory;
@@ -19,16 +18,14 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\Data\ShipmentItemInterface;
 use Magento\Sales\Api\ShipmentRepositoryInterface;
+use Magento\Sales\Model\Order\Shipment\Item;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Config\RmaConfigInterface;
 use Netresearch\ShippingCore\Api\Config\ShippingConfigInterface;
+use Netresearch\ShippingCore\Api\Pipeline\ReturnShipmentRequest\RequestModifierInterface;
 
-class RequestModifier
+class RequestModifier implements RequestModifierInterface
 {
-    /**
-     * @var OrderProvider
-     */
-    private $orderProvider;
-
     /**
      * @var ShippingConfigInterface
      */
@@ -38,6 +35,11 @@ class RequestModifier
      * @var ModuleConfig
      */
     private $moduleConfig;
+
+    /**
+     * @var RmaConfigInterface
+     */
+    private $rmaConfig;
 
     /**
      * @var SearchCriteriaBuilderFactory
@@ -65,17 +67,17 @@ class RequestModifier
     private $shipments = [];
 
     public function __construct(
-        OrderProvider $orderProvider,
         ShippingConfigInterface $config,
         ModuleConfig $moduleConfig,
+        RmaConfigInterface $rmaConfig,
         SearchCriteriaBuilderFactory $searchCriteriaBuilderFactory,
         FilterBuilder $filterBuilder,
         ShipmentRepositoryInterface $shipmentRepository,
         DataObjectFactory $dataObjectFactory
     ) {
-        $this->orderProvider = $orderProvider;
         $this->config = $config;
         $this->moduleConfig = $moduleConfig;
+        $this->rmaConfig = $rmaConfig;
         $this->searchCriteriaBuilderFactory = $searchCriteriaBuilderFactory;
         $this->filterBuilder = $filterBuilder;
         $this->shipmentRepository = $shipmentRepository;
@@ -83,17 +85,18 @@ class RequestModifier
     }
 
     /**
+     * @param int $orderId
      * @param int[] $shipmentIds
      * @param int $shipmentItemId
      * @return ShipmentItemInterface
      * @throws NoSuchEntityException
      */
-    private function getShipmentItem(array $shipmentIds, int $shipmentItemId): ShipmentItemInterface
+    private function getShipmentItem(int $orderId, array $shipmentIds, int $shipmentItemId): ShipmentItemInterface
     {
         if (!$this->shipments) {
             $orderIdFilter = $this->filterBuilder
                 ->setField(ShipmentInterface::ORDER_ID)
-                ->setValue($this->orderProvider->getOrder()->getEntityId())
+                ->setValue($orderId)
                 ->setConditionType('eq')
                 ->create();
             $shipmentIdFilter = $this->filterBuilder
@@ -133,17 +136,12 @@ class RequestModifier
      */
     private function modifyGeneralParams(ReturnShipment $request)
     {
-        $order = $this->orderProvider->getOrder();
+        $order = $request->getOrderShipment()->getOrder();
 
         $request->setShippingMethod(Paket::METHOD_CODE);
         $request->setData('base_currency_code', $order->getBaseCurrencyCode());
         $request->setData('store_id', $order->getStoreId());
         $request->setData('is_return', true);
-
-        // add fake shipment to request
-        $orderShipment = $this->dataObjectFactory->create(['data' => ['order' => $order]]);
-        $orderShipment->setData('order', $order);
-        $request->setData('order_shipment', $orderShipment);
     }
 
     /**
@@ -201,7 +199,7 @@ class RequestModifier
      */
     private function modifyReceiver(ReturnShipment $request)
     {
-        $address = $this->moduleConfig->getReturnAddress($this->orderProvider->getOrder()->getStoreId());
+        $address = $this->rmaConfig->getReturnAddress($request->getOrderShipment()->getOrder()->getStoreId());
         $street = array_filter([$address['street1'], $address['street2']]);
 
         $request->setRecipientAddressStreet(implode(' ', $street));
@@ -224,21 +222,22 @@ class RequestModifier
      */
     private function modifyPackage(ReturnShipment $request)
     {
+        $order = $request->getOrderShipment()->getOrder();
         $shipmentsData = $request->getData('shipments');
 
         $items = [];
         $totalWeight = 0;
         $totalPrice = 0;
 
-        foreach ($shipmentsData as $shipmentId => $shipmentData) {
+        foreach ($shipmentsData as $shipmentData) {
             foreach ($shipmentData['items'] as $itemId => $qty) {
                 if (!$qty) {
                     continue;
                 }
 
                 try {
-                    /** @var \Magento\Sales\Model\Order\Shipment\Item $shipmentItem */
-                    $shipmentItem = $this->getShipmentItem(array_keys($shipmentsData), $itemId);
+                    /** @var Item $shipmentItem */
+                    $shipmentItem = $this->getShipmentItem((int) $order->getId(), array_keys($shipmentsData), $itemId);
                 } catch (NoSuchEntityException $exception) {
                     continue;
                 }
@@ -272,7 +271,7 @@ class RequestModifier
             throw new LocalizedException(__('Please select items to return.'));
         }
 
-        $unit = $this->config->getWeightUnit($this->orderProvider->getOrder()->getStoreId());
+        $unit = $this->config->getWeightUnit($order->getStoreId());
         $package = [
             'params' => [
                 'container' => '',
@@ -301,15 +300,15 @@ class RequestModifier
     /**
      * Add return data to return shipment request.
      *
-     * @param ReturnShipment $request
+     * @param ReturnShipment $shipmentRequest
      * @return void
      * @throws LocalizedException
      */
-    public function modify(ReturnShipment $request)
+    public function modify(ReturnShipment $shipmentRequest): void
     {
-        $this->modifyGeneralParams($request);
-        $this->modifyShipper($request);
-        $this->modifyReceiver($request);
-        $this->modifyPackage($request);
+        $this->modifyGeneralParams($shipmentRequest);
+        $this->modifyShipper($shipmentRequest);
+        $this->modifyReceiver($shipmentRequest);
+        $this->modifyPackage($shipmentRequest);
     }
 }

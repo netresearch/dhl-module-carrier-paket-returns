@@ -38,24 +38,32 @@ class SendRequestStage implements CreateShipmentsStageInterface
      */
     public function execute(array $requests, ArtifactsContainerInterface $artifactsContainer): array
     {
-        $apiRequests = $artifactsContainer->getApiRequests();
-        if (!empty($apiRequests)) {
-            $returnLabelService = $this->returnLabelServiceFactory->create([
-                'storeId' => $artifactsContainer->getStoreId(),
-            ]);
-
-            foreach ($apiRequests as $requestIndex => $apiRequest) {
-                try {
-                    $labelConfirmation = $returnLabelService->bookLabel($apiRequest);
-                    $artifactsContainer->addApiResponse((string) $requestIndex, $labelConfirmation);
-                } catch (DetailedServiceException $exception) {
-                    $artifactsContainer->addError((string) $requestIndex, $exception->getMessage());
-                } catch (ServiceException $exception) {
-                    $artifactsContainer->addError((string) $requestIndex, 'Web service request failed.');
-                }
-            }
+        if (empty($requests)) {
+            return $requests;
         }
 
-        return $requests;
+        $labelService = $this->returnLabelServiceFactory->create([
+            'storeId' => $artifactsContainer->getStoreId(),
+        ]);
+
+        $callback = function (ReturnShipment $request, int $requestIndex) use ($artifactsContainer, $labelService) {
+            try {
+                $apiRequest = $artifactsContainer->getApiRequests()[$requestIndex];
+                $labelConfirmation = $labelService->bookLabel($apiRequest);
+                $artifactsContainer->addApiResponse((string) $requestIndex, $labelConfirmation);
+
+                return true;
+            } catch (ServiceException $exception) {
+                $message = $exception instanceof DetailedServiceException
+                    ? $exception->getMessage()
+                    : 'Web service request failed.';
+                $artifactsContainer->addError((string) $requestIndex, $request->getOrderShipment(), $message);
+
+                return false;
+            }
+        };
+
+        // Pass on only the shipment requests that could be booked
+        return array_filter($requests, $callback, ARRAY_FILTER_USE_BOTH);
     }
 }

@@ -29,8 +29,6 @@ class MapResponseStage implements CreateShipmentsStageInterface
     /**
      * Transform collected results into response objects suitable for processing by the core.
      *
-     * The `sequence_number` property is set to the shipment request packages during request mapping.
-     *
      * @param ReturnShipment[] $requests
      * @param ArtifactsContainerInterface|ArtifactsContainer $artifactsContainer
      *
@@ -41,16 +39,24 @@ class MapResponseStage implements CreateShipmentsStageInterface
         $errors = $artifactsContainer->getErrors();
         $apiResponses = $artifactsContainer->getApiResponses();
 
-        foreach ($errors as $requestIndex => $message) {
-            // validation error or negative response received from webservice
-            $message = __('Label could not be created: %1', $message);
-            $response = $this->responseDataMapper->createErrorResponse((string) $requestIndex, $message);
+        foreach ($errors as $requestIndex => $details) {
+            // validation error, request mapping error, or negative response received from webservice
+            $message = __('Label could not be created: %1', $details['message']);
+            $response = $this->responseDataMapper->createErrorResponse(
+                (string) $requestIndex,
+                $message,
+                $details['shipment']
+            );
             $artifactsContainer->addErrorResponse((string) $requestIndex, $response);
         }
 
         foreach ($apiResponses as $requestIndex => $apiResponse) {
             // positive response received from webservice
-            $response = $this->responseDataMapper->createLabelResponse((string) $requestIndex, $apiResponse);
+            $response = $this->responseDataMapper->createLabelResponse(
+                (string) $requestIndex,
+                $apiResponse,
+                $requests[$requestIndex]->getOrderShipment()
+            );
             $artifactsContainer->addLabelResponse((string) $requestIndex, $response);
         }
 

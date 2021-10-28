@@ -8,10 +8,14 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
+use Magento\Rma\Model\Shipping;
+use Magento\Sales\Api\Data\ShipmentInterface;
+use Magento\Sales\Model\AbstractModel;
+use Magento\Sales\Model\Order\Shipment;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
 
 class ArtifactsContainer implements ArtifactsContainerInterface
 {
@@ -46,14 +50,14 @@ class ArtifactsContainer implements ArtifactsContainerInterface
     /**
      * Label response suitable for processing by the core.
      *
-     * @var LabelResponse[]
+     * @var LabelResponseInterface[]
      */
     private $labelResponses = [];
 
     /**
      * Error response suitable for processing by the core. Contains request id / sequence number.
      *
-     * @var ErrorResponse[]
+     * @var ShipmentErrorResponseInterface[]
      */
     private $errorResponses = [];
 
@@ -78,13 +82,15 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * @see addErrorResponse
      *
      * @param string $requestIndex
+     * @param Shipment|Shipping $shipment
      * @param string $errorMessage
-     *
-     * @return void
      */
-    public function addError(string $requestIndex, string $errorMessage)
+    public function addError(string $requestIndex, AbstractModel $shipment, string $errorMessage)
     {
-        $this->errors[$requestIndex] = $errorMessage;
+        $this->errors[$requestIndex] = [
+            'shipment' => $shipment,
+            'message' => $errorMessage,
+        ];
     }
 
     /**
@@ -115,10 +121,10 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * Add positive label response.
      *
      * @param string $requestIndex
-     * @param LabelResponse $labelResponse
+     * @param LabelResponseInterface $labelResponse
      * @return void
      */
-    public function addLabelResponse(string $requestIndex, LabelResponse $labelResponse)
+    public function addLabelResponse(string $requestIndex, LabelResponseInterface $labelResponse)
     {
         $this->labelResponses[$requestIndex] = $labelResponse;
     }
@@ -127,10 +133,10 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * Add label error.
      *
      * @param string $requestIndex
-     * @param ErrorResponse $errorResponse
+     * @param ShipmentErrorResponseInterface $errorResponse
      * @return void
      */
-    public function addErrorResponse(string $requestIndex, ErrorResponse $errorResponse)
+    public function addErrorResponse(string $requestIndex, ShipmentErrorResponseInterface $errorResponse)
     {
         $this->errorResponses[$requestIndex] = $errorResponse;
     }
@@ -178,7 +184,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
     /**
      * Obtain the labels retrieved from the web service.
      *
-     * @return LabelResponse[]
+     * @return LabelResponseInterface[]
      */
     public function getLabelResponses(): array
     {
@@ -188,7 +194,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
     /**
      * Obtain the label errors occurred during web service call.
      *
-     * @return ErrorResponse[]
+     * @return ShipmentErrorResponseInterface[]
      */
     public function getErrorResponses(): array
     {

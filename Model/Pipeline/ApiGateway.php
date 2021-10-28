@@ -8,10 +8,11 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
 use Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsPipelineInterface;
+use Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 
 /**
  * Magento carrier-aware wrapper around the DHL Paket Returns API SDK.
@@ -24,13 +25,22 @@ class ApiGateway
     private $pipeline;
 
     /**
+     * @var ShipmentResponseProcessorInterface
+     */
+    private $responseProcessor;
+
+    /**
      * @var int
      */
     private $storeId;
 
-    public function __construct(CreateShipmentsPipelineInterface $pipeline, int $storeId)
-    {
+    public function __construct(
+        CreateShipmentsPipelineInterface $pipeline,
+        ShipmentResponseProcessorInterface $responseProcessor,
+        int $storeId
+    ) {
         $this->pipeline = $pipeline;
+        $this->responseProcessor = $responseProcessor;
         $this->storeId = $storeId;
     }
 
@@ -43,12 +53,17 @@ class ApiGateway
      *
      * @param ReturnShipment[] $returnShipmentRequests
      *
-     * @return ErrorResponse[]|LabelResponse[]
+     * @return ShipmentErrorResponseInterface[]|LabelResponseInterface[]
      */
     public function createLabels(array $returnShipmentRequests): array
     {
         /** @var ArtifactsContainer $artifactsContainer */
         $artifactsContainer = $this->pipeline->run($this->storeId, $returnShipmentRequests);
+
+        $this->responseProcessor->processResponse(
+            $artifactsContainer->getLabelResponses(),
+            $artifactsContainer->getErrorResponses()
+        );
 
         return array_merge($artifactsContainer->getErrorResponses(), $artifactsContainer->getLabelResponses());
     }

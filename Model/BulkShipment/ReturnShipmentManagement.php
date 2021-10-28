@@ -10,14 +10,16 @@ namespace Dhl\PaketReturns\Model\BulkShipment;
 
 use Dhl\PaketReturns\Model\Pipeline\ApiGateway;
 use Dhl\PaketReturns\Model\Pipeline\ApiGatewayFactory;
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\ErrorResponse;
-use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentResponse\LabelResponse;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
+use Netresearch\ShippingCore\Api\BulkShipment\ReturnLabelCreationInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
+use Netresearch\ShippingCore\Api\Pipeline\ShipmentResponseProcessorInterface;
 
 /**
  * Central entry point for creating return order labels.
  */
-class ReturnShipmentManagement
+class ReturnShipmentManagement implements ReturnLabelCreationInterface
 {
     /**
      * @var ApiGatewayFactory
@@ -25,13 +27,21 @@ class ReturnShipmentManagement
     private $apiGatewayFactory;
 
     /**
+     * @var ShipmentResponseProcessorInterface
+     */
+    private $responseProcessor;
+
+    /**
      * @var ApiGateway[]
      */
     private $apiGateways;
 
-    public function __construct(ApiGatewayFactory $apiGatewayFactory)
-    {
+    public function __construct(
+        ApiGatewayFactory $apiGatewayFactory,
+        ShipmentResponseProcessorInterface $responseProcessor
+    ) {
         $this->apiGatewayFactory = $apiGatewayFactory;
+        $this->responseProcessor = $responseProcessor;
     }
 
     /**
@@ -45,7 +55,12 @@ class ReturnShipmentManagement
     private function getApiGateway(int $storeId): ApiGateway
     {
         if (!isset($this->apiGateways[$storeId])) {
-            $this->apiGateways[$storeId] = $this->apiGatewayFactory->create(['storeId' => $storeId]);
+            $this->apiGateways[$storeId] = $this->apiGatewayFactory->create(
+                [
+                    'responseProcessor' => $this->responseProcessor,
+                    'storeId' => $storeId,
+                ]
+            );
         }
 
         return $this->apiGateways[$storeId];
@@ -54,22 +69,22 @@ class ReturnShipmentManagement
     /**
      * Create return order labels at DHL Paket Returns API.
      *
-     * @param ReturnShipment[] $returnShipmentRequests
+     * @param ReturnShipment[] $shipmentRequests
      *
-     * @return ErrorResponse[]|LabelResponse[]
+     * @return ShipmentErrorResponseInterface[]|LabelResponseInterface[]
      */
-    public function createLabels(array $returnShipmentRequests): array
+    public function createLabels(array $shipmentRequests): array
     {
-        if (empty($returnShipmentRequests)) {
+        if (empty($shipmentRequests)) {
             return [];
         }
 
         $apiRequests = [];
         $apiResults  = [];
 
-        foreach ($returnShipmentRequests as $returnShipmentRequest) {
-            $storeId = (int) $returnShipmentRequest->getData('store_id');
-            $apiRequests[$storeId][] = $returnShipmentRequest;
+        foreach ($shipmentRequests as $shipmentRequest) {
+            $storeId = (int) $shipmentRequest->getData('store_id');
+            $apiRequests[$storeId][] = $shipmentRequest;
         }
 
         foreach ($apiRequests as $storeId => $storeApiRequests) {

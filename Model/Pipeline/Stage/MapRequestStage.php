@@ -44,7 +44,11 @@ class MapRequestStage implements CreateShipmentsStageInterface
 
                 return true;
             } catch (ReturnShipmentException $exception) {
-                $artifactsContainer->addError((string) $requestIndex, $exception->getMessage());
+                $artifactsContainer->addError(
+                    (string) $requestIndex,
+                    $request->getOrderShipment(),
+                    $exception->getMessage()
+                );
 
                 return false;
             }

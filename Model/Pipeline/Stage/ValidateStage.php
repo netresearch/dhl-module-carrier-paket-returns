@@ -33,8 +33,9 @@ class ValidateStage implements CreateShipmentsStageInterface
                 return true;
             }
 
+            /** @var ReturnShipment|Request $request */
             $message = __('Only return shipments are supported.')->render();
-            $artifactsContainer->addError((string) $requestIndex, $message);
+            $artifactsContainer->addError((string) $requestIndex, $request->getOrderShipment(), $message);
             return false;
         };
 
