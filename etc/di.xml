@@ -103,6 +103,16 @@
             </argument>
         </arguments>
     </type>
+    <type name="Netresearch\ShippingCore\Model\Config\Validator">
+        <arguments>
+            <argument name="itemValidators" xsi:type="array">
+                <item name="dhlpaketreturns_mode" xsi:type="object" sortOrder="2001">Dhl\PaketReturns\Model\Config\ItemValidator\ModeValidator</item>
+                <item name="dhlpaketreturns_receiver_ids" xsi:type="object" sortOrder="2002">Dhl\PaketReturns\Model\Config\ItemValidator\ReceiverIdsValidator</item>
+                <item name="dhlpaketreturns_api_credentials" xsi:type="object" sortOrder="2010">Dhl\PaketReturns\Model\Config\ItemValidator\ReturnsApiCredentialsValidator</item>
+                <item name="dhlpaketreturns_api" xsi:type="object" sortOrder="2011">Dhl\PaketReturns\Model\Config\ItemValidator\ReturnsApiValidator</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Netresearch\ShippingCore\Model\Util\ApiLogAnonymizer">
         <arguments>
             <argument name="patterns" xsi:type="array">
