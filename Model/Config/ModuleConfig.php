@@ -34,8 +34,6 @@ class ModuleConfig implements VersionInterface
     private const CONFIG_PATH_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_password';
     private const CONFIG_PATH_USER = 'dhlshippingsolutions/dhlpaketrma/account/production/api_username';
     private const CONFIG_PATH_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
-    private const CONFIG_PATH_EKP = 'dhlshippingsolutions/dhlpaketrma/account/production/account_number';
-    private const CONFIG_PATH_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/production/account_participations';
     private const CONFIG_PATH_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
 
     // Sandbox settings
@@ -43,8 +41,6 @@ class ModuleConfig implements VersionInterface
     private const CONFIG_PATH_SBX_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_password';
     private const CONFIG_PATH_SBX_USER = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_username';
     private const CONFIG_PATH_SBX_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password';
-    private const CONFIG_PATH_SBX_EKP = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_number';
-    private const CONFIG_PATH_SBX_PARTICIPATIONS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/account_participations';
     private const CONFIG_PATH_SBX_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/receiver_ids';
 
     private const CONFIG_PATH_MAGENTO_RMA_ENABLED = 'sales/magento_rma/enabled';
@@ -176,46 +172,6 @@ class ModuleConfig implements VersionInterface
     }
 
     /**
-     * Get the user's EKP (standardized customer and product number).
-     *
-     * @param mixed $store
-     * @return string
-     */
-    public function getEkp($store = null): string
-    {
-        if ($this->isSandboxMode($store)) {
-            return $this->getSandboxEkp($store);
-        }
-
-        return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_EKP,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * Get the procedure to user's participation numbers (partner IDs) mapping.
-     *
-     * @param mixed $store
-     * @return string[]
-     */
-    public function getParticipations($store = null): array
-    {
-        if ($this->isSandboxMode($store)) {
-            return $this->getSandboxParticipations($store);
-        }
-
-        $participations = $this->scopeConfig->getValue(
-            self::CONFIG_PATH_PARTICIPATIONS,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        return array_column($participations, 'participation', 'procedure');
-    }
-
-    /**
      * Get the two letter country code to receiver IDs mapping.
      *
      * @param mixed $store
@@ -294,38 +250,6 @@ class ModuleConfig implements VersionInterface
             ScopeInterface::SCOPE_STORE,
             $store
         );
-    }
-
-    /**
-     * Get the sandbox EKP (standardized customer and product number).
-     *
-     * @param mixed $store
-     * @return string
-     */
-    private function getSandboxEkp($store = null): string
-    {
-        return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_SBX_EKP,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * Get the sandbox procedure to sandbox participation numbers (partner IDs) mapping.
-     *
-     * @param mixed $store
-     * @return string[]
-     */
-    private function getSandboxParticipations($store = null): array
-    {
-        $participations = $this->scopeConfig->getValue(
-            self::CONFIG_PATH_SBX_PARTICIPATIONS,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-
-        return array_column($participations, 'participation', 'procedure');
     }
 
     /**

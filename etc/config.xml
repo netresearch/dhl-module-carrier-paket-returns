@@ -40,16 +40,6 @@
                         <auth_password>2de26b775e59279464d1c2f8546432e62413372421c672db36eaacfc2f</auth_password>
                         <api_username>2222222222_customer</api_username>
                         <api_password>uBQbZ62!ZiBiVVbhc</api_password>
-                        <account_number>2222222222</account_number>
-                        <account_participations backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized">
-                            <![CDATA[
-                                {
-                                    "_1485789382230_100":{"procedure":"07","participation":"01"},
-                                    "_1485789382230_101":{"procedure":"53","participation":"01"}
-                                }
-                            ]]>
-                        </account_participations>
-
                         <!-- Mapping of 2-letter-iso country code to DHL Paket return receiver id -->
                         <receiver_ids backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized">
                             <![CDATA[
@@ -92,16 +82,6 @@
                         <auth_username>M2_SHIPPING_1</auth_username>
                         <auth_password>pMnRHKfNMw9O3qKMLAUhFT4cBbwotp</auth_password>
                         <api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
-
-                        <account_participations backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized">
-                            <![CDATA[
-                                {
-                                    "_1485789382230_100":{"procedure":"07","participation":"01"},
-                                    "_1485789382230_101":{"procedure":"53","participation":"01"}
-                                }
-                            ]]>
-                        </account_participations>
-
                         <receiver_ids backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized"/>
                     </production>
                 </account>

@@ -155,65 +155,6 @@ class ModuleConfigTest extends TestCase
     }
 
     /**
-     * @test
-     *
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/production/account_number EKP1
-     *
-     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
-     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandbox/account_number EKP2
-     */
-    public function getEkp()
-    {
-        self::assertSame('EKP1', $this->config->getEkp());
-        self::assertSame('EKP2', $this->config->getEkp('fixturestore'));
-    }
-
-    /**
-     * Assert config defaults are valid.
-     *
-     * Exact values do not matter, just assert they are loaded properly.
-     *
-     * @test
-     *
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
-     */
-    public function getParticipations()
-    {
-        $participations = $this->config->getParticipations();
-
-        self::assertTrue(\is_array($participations));
-        self::assertNotEmpty($participations);
-
-        foreach ($participations as $procedure => $participation) {
-            self::assertTrue(\is_string($participation));
-            self::assertSame(2, strlen($participation));
-        }
-    }
-
-    /**
-     * Assert config defaults are valid in sandbox mode.
-     *
-     * Exact values do not matter, just assert they are loaded properly and match expected format.
-     *
-     * @test
-     *
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
-     */
-    public function getSandboxParticipations()
-    {
-        $participations = $this->config->getParticipations();
-
-        self::assertTrue(\is_array($participations));
-        self::assertNotEmpty($participations);
-
-        foreach ($participations as $procedure => $participation) {
-            self::assertTrue(\is_string($participation));
-            self::assertSame(2, strlen($participation));
-        }
-    }
-
-    /**
      * Assert that getter handles empty values properly.
      *
      * @test
