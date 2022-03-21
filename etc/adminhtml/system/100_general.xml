@@ -15,6 +15,11 @@
             <config_path>carriers/dhlpaketrma/active_rma</config_path>
             <backend_model>Dhl\PaketReturns\Model\Adminhtml\System\Config\Backend\ActiveRma</backend_model>
         </field>
+        <field id="title" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="11"
+               translate="label" type="text" canRestore="1">
+            <label>Displayed Text</label>
+            <config_path>carriers/dhlpaketrma/title</config_path>
+        </field>
 
         <!-- Default Settings -->
         <field id="default_item_weight" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">

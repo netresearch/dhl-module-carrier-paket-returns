@@ -5,6 +5,7 @@ Country,Land
 "DHL Parcel Germany Returns","DHL Paket Retouren"
 "DHL contract customers receive the access data to the DHL Business Customer Portal via <em>DHL Paket</em> sales.","DHL-Vertragskunden erhalten die Zugangsdaten zum DHL-Geschäftskundenportal durch einen <em>DHL Paket</em>-Vertriebsmitarbeiter."
 "Default Item Weight",Standardgewicht
+"Displayed Text","Angezeigter Text"
 "Enable Sandbox Mode","Sandbox-Modus aktivieren"
 Enabled,Aktiviert
 "Enter your API user name. Lower case letters only. Please talk to your account representative to add API access to your business account.","Geben Sie Ihren API-Benutzernamen ein (keine Großbuchstaben). Bitte kontaktieren Sie Ihren DHL Ansprechpartner um API-Zugriff für Ihren Geschäftskundenaccount freizuschalten."
