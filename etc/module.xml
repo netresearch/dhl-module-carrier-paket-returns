@@ -12,6 +12,7 @@
             <module name="Magento_Config"/>
             <module name="Magento_Directory"/>
             <module name="Magento_Framework"/>
+            <module name="Magento_MediaStorage"/>
             <module name="Magento_Quote"/>
             <module name="Magento_Rma"/>
             <module name="Magento_Sales"/>

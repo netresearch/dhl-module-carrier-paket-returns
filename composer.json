@@ -29,6 +29,7 @@
         "magento/module-catalog-inventory": "^100.3.0",
         "magento/module-config": "^101.1.0",
         "magento/module-directory": "^100.3.0",
+        "magento/module-media-storage": "^100.3.0",
         "magento/module-quote": "^101.1.0",
         "magento/module-sales": "^102.0.0 || ^103.0.0",
         "magento/module-shipping": "^100.3.0",

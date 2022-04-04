@@ -43,6 +43,13 @@
                 <frontend_model>Dhl\PaketReturns\Block\Adminhtml\System\Config\Form\Field\ReceiverId</frontend_model>
                 <backend_model>Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized</backend_model>
             </field>
+
+            <field id="receiver_ids_import" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="60"
+                   translate="label comment" type="file">
+                <label>Return Receiver CSV Upload</label>
+                <comment><![CDATA[The <em>Receiver Links</em> CSV file from the DHL Business Customer Portal <em>Returns</em> section can be uploaded here. Please note that, for a successful import, the locale setting in default scope must match the country name language in the CSV file (presumably German).]]></comment>
+                <backend_model>Dhl\PaketReturns\Model\Config\Backend\File\ReceiverIds</backend_model>
+            </field>
         </group>
     </group>
 </include>

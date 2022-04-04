@@ -33,10 +33,12 @@ Logging,Protokollierung
 "Receiver IDs are not configured. Please review your %1.","Retourenempfänger-IDs sind nicht hinterlegt. Bitte prüfen Sie Ihre %1."
 "Record communication with the DHL web services.","Kommunikation mit den DHL-Webservices aufzeichnen."
 "Retoure API connection established successfully.","Verbindung zur Retoure-API wurde erfolgreich hergestellt."
+"Return Receiver CSV Upload","Retourenempfänger-IDs CSV-Upload"
 "Return Receiver IDs",Retourenempfänger-IDs
 "Return shipment request could not be created: %1","Der Versandauftrag für die Retoure konnte nicht erzeugt werden: %1"
 "Returns API",Retoure-API
 "Shipment item %1 is not available.","Versandartikel %1 ist nicht verfügbar."
+"The <em>Receiver Links</em> CSV file from the DHL Business Customer Portal <em>Returns</em> section can be uploaded here. Please note that, for a successful import, the locale setting in default scope must match the country name language in the CSV file (presumably German).","Die <em>Retourenempfängerlinks</em> CSV-Datei aus dem <em>Retoure</em>-Bereich des Geschäftskundenportals kann hier importiert werden. Für einen erfolgreichen Import muss die Store-Lokalisierung in den Allgemeinen Einstellungen der Sprache der CSV-Datei entsprechen (wahrscheinlich deutsch)."
 "The DHL Parcel Germany Returns module allows to create return shipment labels for your orders directly within your Magento suite.","DHL Paket Retouren ermöglicht es Ihnen, Rücksendeetiketten für versandte Bestellungen direkt in Ihrer Magento-Instanz zu erzeugen."
 "The application runs in production mode. Labels can be used for shipping.","Produktions-Modus ist aktiviert. Erzeugte Labels können für den Versand verwendet werden."
 "The application runs in sandbox mode. Labels cannot be used for shipping.","Sandbox-Modus ist aktiviert. Erzeugte Labels können nicht für den Versand verwendet werden."

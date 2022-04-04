@@ -9,9 +9,7 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\Model\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Sales\Model\Order\Shipment;
 use Magento\Store\Model\ScopeInterface;
-use Netresearch\ShippingCore\Api\Config\RmaConfigInterface;
 use Netresearch\ShippingCore\Api\InfoBox\VersionInterface;
 
 class ModuleConfig implements VersionInterface
@@ -34,7 +32,7 @@ class ModuleConfig implements VersionInterface
     private const CONFIG_PATH_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_password';
     private const CONFIG_PATH_USER = 'dhlshippingsolutions/dhlpaketrma/account/production/api_username';
     private const CONFIG_PATH_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
-    private const CONFIG_PATH_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
+    public const CONFIG_PATH_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
 
     // Sandbox settings
     private const CONFIG_PATH_SBX_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_username';
