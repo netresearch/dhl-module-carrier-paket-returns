@@ -20,7 +20,7 @@ class OrderProvider
      */
     private $order;
 
-    public function setOrder(OrderInterface $order)
+    public function setOrder(OrderInterface $order): void
     {
         $this->order = $order;
     }

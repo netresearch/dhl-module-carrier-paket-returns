@@ -10,12 +10,11 @@ namespace Dhl\PaketReturns\Model\Pipeline;
 
 use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
 use Magento\Rma\Model\Shipping;
-use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\AbstractModel;
 use Magento\Sales\Model\Order\Shipment;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
-use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\LabelResponseInterface;
+use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentResponse\ShipmentErrorResponseInterface;
 
 class ArtifactsContainer implements ArtifactsContainerInterface
 {
@@ -85,7 +84,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * @param Shipment|Shipping $shipment
      * @param string $errorMessage
      */
-    public function addError(string $requestIndex, AbstractModel $shipment, string $errorMessage)
+    public function addError(string $requestIndex, AbstractModel $shipment, string $errorMessage): void
     {
         $this->errors[$requestIndex] = [
             'shipment' => $shipment,
@@ -100,7 +99,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * @param \JsonSerializable $returnOrder
      * @return void
      */
-    public function addApiRequest(string $requestIndex, \JsonSerializable $returnOrder)
+    public function addApiRequest(string $requestIndex, \JsonSerializable $returnOrder): void
     {
         $this->apiRequests[$requestIndex] = $returnOrder;
     }
@@ -112,7 +111,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * @param ConfirmationInterface $apiResponse
      * @return void
      */
-    public function addApiResponse(string $requestIndex, ConfirmationInterface $apiResponse)
+    public function addApiResponse(string $requestIndex, ConfirmationInterface $apiResponse): void
     {
         $this->apiResponses[$requestIndex] = $apiResponse;
     }
@@ -124,7 +123,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * @param LabelResponseInterface $labelResponse
      * @return void
      */
-    public function addLabelResponse(string $requestIndex, LabelResponseInterface $labelResponse)
+    public function addLabelResponse(string $requestIndex, LabelResponseInterface $labelResponse): void
     {
         $this->labelResponses[$requestIndex] = $labelResponse;
     }
@@ -136,7 +135,7 @@ class ArtifactsContainer implements ArtifactsContainerInterface
      * @param ShipmentErrorResponseInterface $errorResponse
      * @return void
      */
-    public function addErrorResponse(string $requestIndex, ShipmentErrorResponseInterface $errorResponse)
+    public function addErrorResponse(string $requestIndex, ShipmentErrorResponseInterface $errorResponse): void
     {
         $this->errorResponses[$requestIndex] = $errorResponse;
     }

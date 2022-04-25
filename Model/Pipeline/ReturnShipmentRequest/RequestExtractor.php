@@ -244,7 +244,7 @@ class RequestExtractor
             $packages = $this->returnShipmentRequest->getData('packages');
 
             $orderItems = $this->getOrder()->getAllItems();
-            $orderItemIds = array_map(function (Item $item) {
+            $orderItemIds = array_map(static function (Item $item) {
                 return $item->getId();
             }, $orderItems);
             $orderItems = array_combine($orderItemIds, $orderItems);

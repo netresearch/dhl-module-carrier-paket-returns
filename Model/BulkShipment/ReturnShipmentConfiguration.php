@@ -11,10 +11,10 @@ namespace Dhl\PaketReturns\Model\BulkShipment;
 use Dhl\PaketReturns\Model\Carrier\Paket;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestModifier;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\App\Area;
+use Magento\Framework\App\State;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Sales\Api\Data\OrderInterface;
-use Magento\Store\Model\Store;
-use Magento\Store\Model\StoreManagerInterface;
 use Netresearch\ShippingCore\Api\BulkShipment\ReturnLabelCreationInterface;
 use Netresearch\ShippingCore\Api\BulkShipment\ReturnShipmentConfigurationInterface;
 use Netresearch\ShippingCore\Api\Config\RmaConfigInterface;
@@ -33,9 +33,9 @@ class ReturnShipmentConfiguration implements ReturnShipmentConfigurationInterfac
     private $shipmentManagement;
 
     /**
-     * @var StoreManagerInterface
+     * @var State
      */
-    private $storeManager;
+    private $appState;
 
     /**
      * @var ModuleConfig
@@ -50,13 +50,13 @@ class ReturnShipmentConfiguration implements ReturnShipmentConfigurationInterfac
     public function __construct(
         RequestModifier $requestModifier,
         ReturnShipmentManagement $shipmentManagement,
-        StoreManagerInterface $storeManager,
+        State $appState,
         ModuleConfig $config,
         RmaConfigInterface $rmaConfig
     ) {
         $this->requestModifier = $requestModifier;
         $this->shipmentManagement = $shipmentManagement;
-        $this->storeManager = $storeManager;
+        $this->appState = $appState;
         $this->config = $config;
         $this->rmaConfig = $rmaConfig;
     }
@@ -79,12 +79,12 @@ class ReturnShipmentConfiguration implements ReturnShipmentConfigurationInterfac
     public function canProcessOrder(OrderInterface $order): bool
     {
         try {
-            $currentStore = $this->storeManager->getStore()->getId();
-        } catch (NoSuchEntityException $exception) {
+            $appState = $this->appState->getAreaCode();
+        } catch (LocalizedException $exception) {
             return false;
         }
 
-        if (($currentStore !== Store::DEFAULT_STORE_ID) && !$this->config->isEnabled($order->getStoreId())) {
+        if (($appState !== Area::AREA_ADMINHTML) && !$this->config->isEnabled($order->getStoreId())) {
             // creating returns in storefront (customer account) is not allowed by configuration
             return false;
         }

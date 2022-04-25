@@ -31,22 +31,20 @@ class RemoveConfigDataPatch implements DataPatchInterface, PatchRevertableInterf
         return [];
     }
 
-    public function getAliases()
+    public function getAliases(): array
     {
         return [];
     }
 
-    public function apply()
+    public function apply(): RemoveConfigDataPatch
     {
         return $this;
     }
 
     /**
      * Remove data that was created during module installation.
-     *
-     * @return void
      */
-    public function revert()
+    public function revert(): void
     {
         $defaultConnection = $this->schemaSetup->getConnection(ResourceConnection::DEFAULT_CONNECTION);
         $configTable = $this->schemaSetup->getTable('core_config_data', ResourceConnection::DEFAULT_CONNECTION);

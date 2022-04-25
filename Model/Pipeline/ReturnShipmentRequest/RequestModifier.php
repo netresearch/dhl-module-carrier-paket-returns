@@ -134,7 +134,7 @@ class RequestModifier implements RequestModifierInterface
      * @param ReturnShipment $request
      * @return void
      */
-    private function modifyGeneralParams(ReturnShipment $request)
+    private function modifyGeneralParams(ReturnShipment $request): void
     {
         $order = $request->getOrderShipment()->getOrder();
 
@@ -151,7 +151,7 @@ class RequestModifier implements RequestModifierInterface
      * @return void
      * @throws LocalizedException
      */
-    private function modifyShipper(ReturnShipment $request)
+    private function modifyShipper(ReturnShipment $request): void
     {
         $origShippingAddress = $request->getOrderShipment()->getOrder()->getShippingAddress();
 
@@ -197,7 +197,7 @@ class RequestModifier implements RequestModifierInterface
      * @param ReturnShipment $request
      * @return void
      */
-    private function modifyReceiver(ReturnShipment $request)
+    private function modifyReceiver(ReturnShipment $request): void
     {
         $address = $this->rmaConfig->getReturnAddress($request->getOrderShipment()->getOrder()->getStoreId());
         $street = array_filter([$address['street1'], $address['street2']]);
@@ -220,7 +220,7 @@ class RequestModifier implements RequestModifierInterface
      * @return void
      * @throws LocalizedException
      */
-    private function modifyPackage(ReturnShipment $request)
+    private function modifyPackage(ReturnShipment $request): void
     {
         $order = $request->getOrderShipment()->getOrder();
         $shipmentsData = $request->getData('shipments');

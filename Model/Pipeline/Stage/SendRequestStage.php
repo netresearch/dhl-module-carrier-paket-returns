@@ -46,7 +46,7 @@ class SendRequestStage implements CreateShipmentsStageInterface
             'storeId' => $artifactsContainer->getStoreId(),
         ]);
 
-        $callback = function (ReturnShipment $request, int $requestIndex) use ($artifactsContainer, $labelService) {
+        $callback = static function (ReturnShipment $request, int $requestIndex) use ($artifactsContainer, $labelService) {
             try {
                 $apiRequest = $artifactsContainer->getApiRequests()[$requestIndex];
                 $labelConfirmation = $labelService->bookLabel($apiRequest);
