@@ -11,7 +11,7 @@ via the [DHL Retoure API](https://entwickler.dhl.de/en/) (DHL Geschäftskundenve
 
 Requirements
 ------------
-* PHP >= 7.0.6
+* PHP >= 7.2
 * PHP JSON extension
 
 Compatibility

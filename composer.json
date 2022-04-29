@@ -1,6 +1,6 @@
 {
     "name": "dhl/module-carrier-paket-returns",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "type": "magento2-module",
     "description": "Carrier implementation for DHL Business Customer Shipping Returns",
     "license": "OSL-3.0",
@@ -42,10 +42,5 @@
     },
     "suggest": {
         "magento/module-rma": "*"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-develop": "2.2.0.x-dev"
-        }
     }
 }
