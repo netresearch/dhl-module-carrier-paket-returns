@@ -24,7 +24,7 @@
         "php": "^7.2.0 || ^8.1.0",
         "ext-json": "*",
         "dhl/module-shipping-core": "^2.2.0",
-        "dhl/sdk-api-bcs-returns": "^2.1.0",
+        "dhl/sdk-api-bcs-returns": "^2.1.1",
         "magento/framework": "^102.0.0 || ^103.0.0",
         "magento/module-catalog-inventory": "^100.3.0",
         "magento/module-config": "^101.1.0",
@@ -42,5 +42,10 @@
     },
     "suggest": {
         "magento/module-rma": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "2.2.1.x-dev"
+        }
     }
 }

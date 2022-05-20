@@ -21,12 +21,10 @@ Errors,Errors
 "Log Level","Log Level"
 Logging,Logging
 "Only return shipments are supported.","Only return shipments are supported."
-"PDF Label","PDF Label"
 "Password (Signature)","Password (Signature)"
 "Please select items to return.","Please select items to return."
 "Please specify a return shipment sender address.","Please specify a return shipment sender address."
 "Post & DHL and Magento","Post & DHL and Magento"
-"QR Code","QR Code"
 "Receiver ID","Receiver ID"
 "Receiver IDs","Receiver IDs"
 "Receiver IDs are configured.","Receiver IDs are configured."

@@ -72,6 +72,76 @@ class ResponseDataMapper
     }
 
     /**
+     * Collect documents from response.
+     *
+     * @param ConfirmationInterface $confirmation
+     * @return ReturnShipmentDocumentInterface[]
+     */
+    private function getDocuments(ConfirmationInterface $confirmation): array
+    {
+        $documents = [];
+
+        if ($confirmation->getLabelData()) {
+            $documents[] = $this->shipmentDocumentFactory->create(
+                [
+                    'data' => [
+                        ShipmentDocumentInterface::TITLE => 'PDF Label',
+                        ShipmentDocumentInterface::MIME_TYPE => 'application/pdf',
+                        ShipmentDocumentInterface::LABEL_DATA => base64_decode($confirmation->getLabelData()),
+                        ReturnShipmentDocumentInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
+                    ]
+                ]
+            );
+        }
+
+        if ($confirmation->getQrLabelData()) {
+            $documents[] = $this->shipmentDocumentFactory->create(
+                [
+                    'data' => [
+                        ShipmentDocumentInterface::TITLE => 'QR Code',
+                        ShipmentDocumentInterface::MIME_TYPE => 'image/png',
+                        ShipmentDocumentInterface::LABEL_DATA => base64_decode($confirmation->getQrLabelData()),
+                        ReturnShipmentDocumentInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
+                    ]
+                ]
+            );
+        }
+
+        return $documents;
+    }
+
+    /**
+     * Extract label binary from response.
+     *
+     * Returned file can include
+     * - either the shipping label PDF,
+     * - or the QR image,
+     * - or both combined into a multi-page PDF.
+     *
+     * @param ConfirmationInterface $confirmation
+     * @return string
+     */
+    private function getShippingLabelContent(ConfirmationInterface $confirmation): string
+    {
+        if ($confirmation->getLabelData() && $confirmation->getQrLabelData()) {
+            try {
+                return $this->pdfCombinator->combineB64PdfPages([
+                    $confirmation->getLabelData(),
+                    $confirmation->getQrLabelData(),
+                ]);
+            } catch (RuntimeException $exception) {
+                $this->logger->error($exception->getMessage(), ['exception' => $exception]);
+            }
+        } elseif ($confirmation->getLabelData()) {
+            return base64_decode($confirmation->getLabelData());
+        } elseif ($confirmation->getQrLabelData()) {
+            return base64_decode($confirmation->getQrLabelData());
+        }
+
+        return '';
+    }
+
+    /**
      * Map created return shipment into response object as required by the shipping module.
      *
      * @param string $requestIndex
@@ -84,34 +154,8 @@ class ResponseDataMapper
         ConfirmationInterface $confirmation,
         $salesShipment
     ): LabelResponseInterface {
-        $pdfDocument = $this->shipmentDocumentFactory->create([
-            'data' => [
-                ShipmentDocumentInterface::TITLE => __('PDF Label')->render(),
-                ShipmentDocumentInterface::MIME_TYPE => 'application/pdf',
-                ShipmentDocumentInterface::LABEL_DATA => base64_decode($confirmation->getLabelData()),
-                ReturnShipmentDocumentInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
-            ]
-        ]);
-
-        $qrDocument = $this->shipmentDocumentFactory->create([
-            'data' => [
-                ShipmentDocumentInterface::TITLE => __('QR Code')->render(),
-                ShipmentDocumentInterface::MIME_TYPE => 'image/png',
-                ShipmentDocumentInterface::LABEL_DATA => base64_decode($confirmation->getQrLabelData()),
-                ReturnShipmentDocumentInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
-            ]
-        ]);
-
-        try {
-            // Merge all labels together
-            $shippingLabelContent = $this->pdfCombinator->combineB64PdfPages([
-                $confirmation->getLabelData(),
-                $confirmation->getQrLabelData(),
-            ]);
-        } catch (RuntimeException $exception) {
-            $this->logger->error($exception->getMessage(), ['exception' => $exception]);
-            $shippingLabelContent = '';
-        }
+        $documents = $this->getDocuments($confirmation);
+        $shippingLabelContent = $this->getShippingLabelContent($confirmation);
 
         return $this->labelResponseFactory->create([
             'data' => [
@@ -119,7 +163,7 @@ class ResponseDataMapper
                 ShipmentResponseInterface::SALES_SHIPMENT => $salesShipment,
                 LabelResponseInterface::TRACKING_NUMBER => $confirmation->getShipmentNumber(),
                 LabelResponseInterface::SHIPPING_LABEL_CONTENT => $shippingLabelContent,
-                LabelResponseInterface::DOCUMENTS => [$pdfDocument, $qrDocument],
+                LabelResponseInterface::DOCUMENTS => $documents,
             ]
         ]);
     }

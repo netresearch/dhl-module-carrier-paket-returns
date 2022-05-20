@@ -21,12 +21,10 @@ Errors,Fehler
 "Log Level",Protokollierungsstufe
 Logging,Protokollierung
 "Only return shipments are supported.","Es werden nur Versandaufträge für Retouren unterstützt."
-"PDF Label",PDF-Label
 "Password (Signature)","Passwort (Signature)"
 "Please select items to return.","Bitte wählen Sie Retouren-Artikel aus."
 "Please specify a return shipment sender address.","Bitte geben Sie eine Absenderadresse für die Retoure an."
 "Post & DHL and Magento","Versenden mit Post & DHL"
-"QR Code",QR-Code
 "Receiver ID",Retourenempfänger-ID
 "Receiver IDs",Retourenempfänger-IDs
 "Receiver IDs are configured.","Retourenempfänger-IDs sind hinterlegt."
