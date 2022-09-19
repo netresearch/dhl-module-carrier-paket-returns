@@ -45,6 +45,7 @@ class ReceiverId extends AbstractFieldArray
                     ]
                 ]
             );
+            $this->templateRenderer->setClass('select admin__control-select');
         }
 
         return $this->templateRenderer;
@@ -86,7 +87,7 @@ class ReceiverId extends AbstractFieldArray
         $this->addColumn('receiver_id', [
             'label' => __('Receiver ID'),
             'style' => 'width: 80px',
-            'class' => 'validate-length maximum-length-30',
+            'class' => 'validate-length maximum-length-30 input-text admin__control-text',
         ]);
 
         // Hide "Add after" button
