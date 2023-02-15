@@ -14,7 +14,7 @@ Errors,Fehler
 "General Settings","Allgemeine Einstellungen"
 "Having issues configuring the extension? Contact our support desk: ","Haben Sie Probleme beim Konfigurieren der Extension? Wenden Sie sich an unser Support-Team: "
 "If you did not discuss this with your account representative when you set up your account, please consult them to enable your API access.","Wenn Sie dies bei der Einrichtung Ihres Kontos nicht mit Ihrem Kundenbetreuer besprochen haben, wenden Sie sich an diesen, um Ihren API-Zugriff zu aktivieren."
-"If you do not have an account or your account is with another DHL division, %1please contact DHL Parcel Germany%2 to establish or expand your relationship.","Wenn Sie kein Konto haben oder Ihr Konto bei einer anderen DHL-Abteilung ist, wenden Sie sich bitte an %1DHL Paket%2, um Ihren Vertrag zu erweitern."
+"If you do not have an account or your account is with another DHL division, %1please contact DHL Parcel Germany%2 to establish or expand your relationship.","Wenn Sie kein Konto haben oder Ihr Konto mit einer anderen DHL-Abteilung abgeschlossen wurde, dann wenden Sie sich bitte an %1DHL Paket%2, um Ihren Vertrag zu erweitern."
 "Info (All API Activities)","Info (alle API-Aktivitäten)"
 "Invalid request: %1","Ungültige Anfrage: %1"
 "Label could not be created: %1","Versandetikett konnte nicht erstellt werden: %1"
@@ -53,4 +53,4 @@ User,Benutzer
 "You must have a valid business customer contract with DHL Paket GmbH for the products DHL Retoure Online and/or DHL Retoure International.","Für die Produkte DHL Retoure Online und/oder DHL Retoure International benötigen Sie einen gültigen Geschäftskundenvertrag mit der DHL Paket GmbH."
 "You must have access to the DHL Business Customer Portal with the authorization for the function ""Returns"".","Sie benötigen Zugriff zum DHL Geschäftskundenportal mit der Berechtigung für die Funktion ""Retoure""."
 dhl.support@netresearch.de,dhl.support@netresearch.de
-https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html,https://www.dhl.de/de/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html
+https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html?source=magento&cid=c_dhloka_de_magento,https://www.dhl.de/dhl-kundewerden?source=magento&cid=c_dhloka_de_magento

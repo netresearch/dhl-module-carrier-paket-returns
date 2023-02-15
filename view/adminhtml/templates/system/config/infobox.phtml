@@ -2,7 +2,7 @@
 /**
  * See LICENSE.md for license details.
  */
-/** @var Magento\Framework\View\Element\Template $block */
+/** @var \Magento\Framework\View\Element\Template $block */
 ?>
 <div class="col content">
     <p>
@@ -15,15 +15,14 @@
             <br/>
             <em>
                 <small>
-                    <?php $contactUrl = __('https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html') ?>
-                    <?= $block->escapeHtml(
+                    <?php $contactUrl = __('https://www.dhl.de/en/geschaeftskunden/paket/kunde-werden/angebot-dhl-geschaeftskunden-online.html?source=magento&cid=c_dhloka_de_magento') ?>
+                    <?= /* @noEscape */
                         __(
                             'If you do not have an account or your account is with another DHL division, %1please contact DHL Parcel Germany%2 to establish or expand your relationship.',
                             '<a href="' . $block->escapeUrl($contactUrl) . '" target="_blank" rel="noreferrer">',
                             '</a>'
-                        ),
-                        ['a']
-                    ) ?>
+                        );
+                     ?>
                 </small>
             </em>
         </li>
