@@ -64,6 +64,11 @@
             <argument name="pipeline" xsi:type="object">Dhl\PaketReturns\Model\Pipeline\Virtual</argument>
         </arguments>
     </type>
+    <type name="Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestExtractor">
+        <arguments>
+            <argument name="country" xsi:type="object">Netresearch\ShippingCore\Model\Util\Alpha3Converter</argument>
+        </arguments>
+    </type>
     <type name="Dhl\PaketReturns\Model\Webservice\ReturnLabelService">
         <arguments>
             <argument name="logger" xsi:type="object">Dhl\PaketReturns\Model\Logger\Virtual</argument>

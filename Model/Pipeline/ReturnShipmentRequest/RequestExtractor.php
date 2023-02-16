@@ -21,7 +21,7 @@ use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterf
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\PackageItemInterfaceFactory;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterface;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ShipmentRequest\ShipperInterfaceFactory;
-use Netresearch\ShippingCore\Api\Util\CountryCodeInterface;
+use Netresearch\ShippingCore\Api\Util\CountryCodeConverterInterface;
 use Netresearch\ShippingCore\Api\Util\ItemAttributeReaderInterface;
 use Netresearch\ShippingCore\Api\Util\UnitConverterInterface;
 
@@ -60,7 +60,7 @@ class RequestExtractor
     private $unitConverter;
 
     /**
-     * @var CountryCodeInterface
+     * @var CountryCodeConverterInterface
      */
     private $country;
 
@@ -95,7 +95,7 @@ class RequestExtractor
         CarrierConfigInterface $carrierConfig,
         ModuleConfig $moduleConfig,
         UnitConverterInterface $unitConverter,
-        CountryCodeInterface $country,
+        CountryCodeConverterInterface $country,
         ItemAttributeReaderInterface $attributeReader,
         ShipperInterfaceFactory $shipperFactory,
         PackageItemInterfaceFactory $packageItemFactory
@@ -120,7 +120,7 @@ class RequestExtractor
     private function getIso3Code(string $iso2Code): string
     {
         try {
-            return $this->country->getIso3Code($iso2Code);
+            return $this->country->convert($iso2Code);
         } catch (NoSuchEntityException $exception) {
             return '';
         }
@@ -309,7 +309,7 @@ class RequestExtractor
 
     /**
      * Returns the total value of all package items. We use the amount of
-     * all items including tax and not the the package customs value.
+     * all items including tax and not the package customs value.
      *
      * @return float
      */
@@ -411,7 +411,7 @@ class RequestExtractor
     }
 
     /**
-     * Check if the return is shipped from a EU country.
+     * Check if the return is shipped from an EU country.
      *
      * @return bool
      */
