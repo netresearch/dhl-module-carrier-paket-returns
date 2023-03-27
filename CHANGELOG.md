@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.2
+
+### Changed
+
+- Establish compatibility to `netresearch/module-shipping-core:2.9.0`.
+
+### Fixed
+
+- Prevent broken styling in module configuration, reported via [#50](https://github.com/netresearch/dhl-shipping-m2/issues/50).
+
 ## 2.2.1
 
 ### Fixed
