@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\Model\Pipeline;
 
 use Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest\RequestExtractorFactory;
-use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface;
-use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
+use Dhl\Sdk\ParcelDe\Returns\Api\ReturnLabelRequestBuilderInterface;
+use Dhl\Sdk\ParcelDe\Returns\Exception\RequestValidatorException;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 
 class RequestDataMapper
@@ -49,13 +49,11 @@ class RequestDataMapper
     {
         $requestExtractor = $this->requestExtractorFactory->create(['returnShipmentRequest' => $request]);
 
-        $this->requestBuilder->setAccountDetails(
-            $requestExtractor->getReceiverId(),
-            $requestExtractor->getOrder()->getRealOrderId()
-        );
+        $this->requestBuilder->setReceiverId($requestExtractor->getReceiverId());
+        $this->requestBuilder->setCustomerReference($requestExtractor->getOrder()->getRealOrderId());
         $this->requestBuilder->setShipmentReference($requestExtractor->getReferenceNumber());
 
-        $this->requestBuilder->setShipperAddress(
+        $this->requestBuilder->setShipper(
             $requestExtractor->getShipper()->getContactPersonName(),
             $requestExtractor->getShipper()->getCountryCode(),
             $requestExtractor->getShipper()->getPostalCode(),
@@ -64,6 +62,7 @@ class RequestDataMapper
             $requestExtractor->getShipper()->getStreetNumber(),
             $requestExtractor->getShipper()->getContactCompanyName(),
             null,
+            [],
             $requestExtractor->getShipper()->getState()
         );
 
@@ -72,25 +71,24 @@ class RequestDataMapper
             $requestExtractor->getContactPhoneNumber()
         );
 
-        $this->requestBuilder->setPackageDetails(
+        $this->requestBuilder->setPackageValue(
+            $requestExtractor->getPackageAmount(),
+            $requestExtractor->getOrder()->getBaseCurrencyCode()
+        );
+        $this->requestBuilder->setPackageWeight(
             (int) $requestExtractor->getPackageWeight(),
-            $requestExtractor->getPackageAmount()
+            ReturnLabelRequestBuilderInterface::WEIGHT_G
         );
 
         if (!$requestExtractor->isEuShipping()) {
-            $this->requestBuilder->setCustomsDetails(
-                $requestExtractor->getOrder()->getBaseCurrencyCode(),
-                implode(', ', $requestExtractor->getOriginalShipmentNumbers()),
-                $requestExtractor->getOriginalCarrier()
-            );
-
             foreach ($requestExtractor->getPackageItems() as $item) {
                 $this->requestBuilder->addCustomsItem(
                     (int)$item->getQty(),
                     $item->getExportDescription() ?: $item->getName(),
                     $item->getPrice(),
+                    $requestExtractor->getOrder()->getBaseCurrencyCode(),
                     (int)$requestExtractor->getItemWeight($item),
-                    $item->getSku(),
+                    ReturnLabelRequestBuilderInterface::WEIGHT_G,
                     $item->getCountryOfOrigin(),
                     $item->getHsCode()
                 );

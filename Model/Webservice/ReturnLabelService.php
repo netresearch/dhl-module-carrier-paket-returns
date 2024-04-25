@@ -9,10 +9,12 @@ declare(strict_types=1);
 namespace Dhl\PaketReturns\Model\Webservice;
 
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
-use Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterfaceFactory;
-use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
-use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelServiceInterface;
-use Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface;
+use Dhl\Sdk\ParcelDe\Returns\Api\Data\AuthenticationStorageInterfaceFactory;
+use Dhl\Sdk\ParcelDe\Returns\Api\Data\ConfirmationInterface;
+use Dhl\Sdk\ParcelDe\Returns\Api\ReturnLabelServiceInterface;
+use Dhl\Sdk\ParcelDe\Returns\Api\ServiceFactoryInterface;
+use Dhl\Sdk\ParcelDe\Returns\Exception\AuthenticationException;
+use Dhl\Sdk\ParcelDe\Returns\Exception\ServiceException;
 use Psr\Log\LoggerInterface;
 
 class ReturnLabelService implements ReturnLabelServiceInterface
@@ -56,13 +58,12 @@ class ReturnLabelService implements ReturnLabelServiceInterface
         $this->storeId = $storeId;
     }
 
-    public function bookLabel(\JsonSerializable $returnOrder): ConfirmationInterface
+    public function createReturnOrder(\JsonSerializable $returnOrder, string $labelType = self::LABEL_TYPE_BOTH): ConfirmationInterface
     {
         $authStorage = $this->authStorageFactory->create([
-            'applicationId' => $this->moduleConfig->getAuthUsername($this->storeId),
-            'applicationToken' => $this->moduleConfig->getAuthPassword($this->storeId),
+            'apiKey' => 'pJDOxtJt03guK5eXKYcZt9Ez1bPi2Xvm',
             'user' => $this->moduleConfig->getUser($this->storeId),
-            'signature' => $this->moduleConfig->getSignature($this->storeId),
+            'password' => $this->moduleConfig->getPassword($this->storeId),
         ]);
 
         $service = $this->serviceFactory->createReturnLabelService(
@@ -71,6 +72,6 @@ class ReturnLabelService implements ReturnLabelServiceInterface
             $this->moduleConfig->isSandboxMode($this->storeId)
         );
 
-        return $service->bookLabel($returnOrder);
+        return $service->createReturnOrder($returnOrder, $labelType);
     }
 }

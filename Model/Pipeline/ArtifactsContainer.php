@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Model\Pipeline;
 
-use Dhl\Sdk\Paket\Retoure\Api\Data\ConfirmationInterface;
+use Dhl\Sdk\ParcelDe\Returns\Api\Data\ConfirmationInterface;
 use Magento\Rma\Model\Shipping;
 use Magento\Sales\Model\AbstractModel;
 use Magento\Sales\Model\Order\Shipment;

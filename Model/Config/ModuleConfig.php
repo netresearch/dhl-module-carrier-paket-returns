@@ -28,17 +28,13 @@ class ModuleConfig implements VersionInterface
     private const CONFIG_PATH_SANDBOX_MODE = 'dhlshippingsolutions/dhlpaketrma/account/sandboxmode';
 
     // Production settings
-    private const CONFIG_PATH_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_username';
-    private const CONFIG_PATH_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/production/auth_password';
     private const CONFIG_PATH_USER = 'dhlshippingsolutions/dhlpaketrma/account/production/api_username';
-    private const CONFIG_PATH_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
+    private const CONFIG_PATH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/production/api_password';
     public const CONFIG_PATH_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/production/receiver_ids';
 
     // Sandbox settings
-    private const CONFIG_PATH_SBX_AUTH_USERNAME = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_username';
-    private const CONFIG_PATH_SBX_AUTH_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_password';
     private const CONFIG_PATH_SBX_USER = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_username';
-    private const CONFIG_PATH_SBX_SIGNATURE = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password';
+    private const CONFIG_PATH_SBX_PASSWORD = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password';
     private const CONFIG_PATH_SBX_RECEIVER_IDS = 'dhlshippingsolutions/dhlpaketrma/account/sandbox/receiver_ids';
 
     private const CONFIG_PATH_MAGENTO_RMA_ENABLED = 'sales/magento_rma/enabled';
@@ -94,44 +90,6 @@ class ModuleConfig implements VersionInterface
     }
 
     /**
-     * Get the HTTP basic authentication username (CIG application authentication).
-     *
-     * @param mixed $store
-     * @return string
-     */
-    public function getAuthUsername($store = null): string
-    {
-        if ($this->isSandboxMode($store)) {
-            return $this->getSandboxAuthUsername($store);
-        }
-
-        return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_AUTH_USERNAME,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * Get the HTTP basic authentication password (CIG application authentication).
-     *
-     * @param mixed $store
-     * @return string
-     */
-    public function getAuthPassword($store = null): string
-    {
-        if ($this->isSandboxMode($store)) {
-            return $this->getSandboxAuthPassword($store);
-        }
-
-        return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_AUTH_PASSWORD,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
      * Get the user's name (API user credentials).
      *
      * @param mixed $store
@@ -156,21 +114,21 @@ class ModuleConfig implements VersionInterface
      * @param mixed $store
      * @return string
      */
-    public function getSignature($store = null): string
+    public function getPassword($store = null): string
     {
         if ($this->isSandboxMode($store)) {
-            return $this->getSandboxSignature($store);
+            return $this->getSandboxPassword($store);
         }
 
         return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_SIGNATURE,
+            self::CONFIG_PATH_PASSWORD,
             ScopeInterface::SCOPE_STORE,
             $store
         );
     }
 
     /**
-     * Get the two letter country code to receiver IDs mapping.
+     * Get the two-letter country code to receiver IDs mapping.
      *
      * @param mixed $store
      * @return string[]
@@ -188,36 +146,6 @@ class ModuleConfig implements VersionInterface
         );
 
         return array_column($receiverIds, 'receiver_id', 'iso');
-    }
-
-    /**
-     * Get the HTTP basic sandbox authentication username (CIG application authentication).
-     *
-     * @param mixed $store
-     * @return string
-     */
-    private function getSandboxAuthUsername($store = null): string
-    {
-        return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_SBX_AUTH_USERNAME,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
-    }
-
-    /**
-     * Get the HTTP basic sandbox authentication password (CIG application authentication).
-     *
-     * @param mixed $store
-     * @return string
-     */
-    private function getSandboxAuthPassword($store = null): string
-    {
-        return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_SBX_AUTH_PASSWORD,
-            ScopeInterface::SCOPE_STORE,
-            $store
-        );
     }
 
     /**
@@ -241,10 +169,10 @@ class ModuleConfig implements VersionInterface
      * @param mixed $store
      * @return string
      */
-    private function getSandboxSignature($store = null): string
+    private function getSandboxPassword($store = null): string
     {
         return (string) $this->scopeConfig->getValue(
-            self::CONFIG_PATH_SBX_SIGNATURE,
+            self::CONFIG_PATH_SBX_PASSWORD,
             ScopeInterface::SCOPE_STORE,
             $store
         );

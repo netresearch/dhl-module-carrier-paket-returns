@@ -29,8 +29,6 @@ class UnsetSandboxPaths
      */
     public function afterGet(DumpConfigSourceAggregated $subject, $result): array
     {
-        unset($result['default']['dhlshippingsolutions']['dhlpaketrma']['account']['sandbox']['auth_username']);
-        unset($result['default']['dhlshippingsolutions']['dhlpaketrma']['account']['sandbox']['auth_password']);
         unset($result['default']['dhlshippingsolutions']['dhlpaketrma']['account']['sandbox']['api_username']);
         unset($result['default']['dhlshippingsolutions']['dhlpaketrma']['account']['sandbox']['api_password']);
         unset($result['default']['dhlshippingsolutions']['dhlpaketrma']['account']['sandbox']['account_number']);

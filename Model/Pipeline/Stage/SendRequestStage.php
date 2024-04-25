@@ -10,8 +10,8 @@ namespace Dhl\PaketReturns\Model\Pipeline\Stage;
 
 use Dhl\PaketReturns\Model\Pipeline\ArtifactsContainer;
 use Dhl\PaketReturns\Model\Webservice\ReturnLabelServiceFactory;
-use Dhl\Sdk\Paket\Retoure\Exception\DetailedServiceException;
-use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
+use Dhl\Sdk\ParcelDe\Returns\Exception\DetailedServiceException;
+use Dhl\Sdk\ParcelDe\Returns\Exception\ServiceException;
 use Magento\Shipping\Model\Shipment\ReturnShipment;
 use Netresearch\ShippingCore\Api\Data\Pipeline\ArtifactsContainerInterface;
 use Netresearch\ShippingCore\Api\Pipeline\CreateShipmentsStageInterface;
@@ -49,7 +49,7 @@ class SendRequestStage implements CreateShipmentsStageInterface
         $callback = static function (ReturnShipment $request, int $requestIndex) use ($artifactsContainer, $labelService) {
             try {
                 $apiRequest = $artifactsContainer->getApiRequests()[$requestIndex];
-                $labelConfirmation = $labelService->bookLabel($apiRequest);
+                $labelConfirmation = $labelService->createReturnOrder($apiRequest);
                 $artifactsContainer->addApiResponse((string) $requestIndex, $labelConfirmation);
 
                 return true;

@@ -6,9 +6,9 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <!-- # sdk preferences -->
-    <preference for="Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface" type="Dhl\Sdk\Paket\Retoure\Model\ReturnLabelRequestBuilder"/>
-    <preference for="Dhl\Sdk\Paket\Retoure\Api\ServiceFactoryInterface" type="Dhl\Sdk\Paket\Retoure\Service\ServiceFactory"/>
-    <preference for="Dhl\Sdk\Paket\Retoure\Api\Data\AuthenticationStorageInterface" type="Dhl\Sdk\Paket\Retoure\Auth\AuthenticationStorage"/>
+    <preference for="Dhl\Sdk\ParcelDe\Returns\Api\ReturnLabelRequestBuilderInterface" type="Dhl\Sdk\ParcelDe\Returns\Model\ReturnLabelRequestBuilder"/>
+    <preference for="Dhl\Sdk\ParcelDe\Returns\Api\ServiceFactoryInterface" type="Dhl\Sdk\ParcelDe\Returns\Service\ServiceFactory"/>
+    <preference for="Dhl\Sdk\ParcelDe\Returns\Api\Data\AuthenticationStorageInterface" type="Dhl\Sdk\ParcelDe\Returns\Auth\AuthenticationStorage"/>
 
     <!-- # virtual types -->
     <virtualType name="Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement\Virtual" type="Dhl\PaketReturns\Model\BulkShipment\ReturnShipmentManagement">

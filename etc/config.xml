@@ -36,8 +36,6 @@
                     <!-- Sandbox -->
                     <sandboxmode>1</sandboxmode>
                     <sandbox>
-                        <auth_username>magento_1</auth_username>
-                        <auth_password>2de26b775e59279464d1c2f8546432e62413372421c672db36eaacfc2f</auth_password>
                         <api_username>2222222222_customer</api_username>
                         <api_password>uBQbZ62!ZiBiVVbhc</api_password>
                         <!-- Mapping of 2-letter-iso country code to DHL Paket return receiver id -->
@@ -79,8 +77,6 @@
                     </sandbox>
 
                     <production>
-                        <auth_username>M2_SHIPPING_1</auth_username>
-                        <auth_password>pMnRHKfNMw9O3qKMLAUhFT4cBbwotp</auth_password>
                         <api_password backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
                         <receiver_ids backend_model="Netresearch\ShippingCore\Model\Config\Backend\ArraySerialized"/>
                     </production>

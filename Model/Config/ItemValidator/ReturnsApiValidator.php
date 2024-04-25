@@ -10,9 +10,9 @@ namespace Dhl\PaketReturns\Model\Config\ItemValidator;
 
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Dhl\PaketReturns\Model\Webservice\ReturnLabelServiceFactory;
-use Dhl\Sdk\Paket\Retoure\Api\ReturnLabelRequestBuilderInterface;
-use Dhl\Sdk\Paket\Retoure\Exception\RequestValidatorException;
-use Dhl\Sdk\Paket\Retoure\Exception\ServiceException;
+use Dhl\Sdk\ParcelDe\Returns\Api\ReturnLabelRequestBuilderInterface;
+use Dhl\Sdk\ParcelDe\Returns\Exception\RequestValidatorException;
+use Dhl\Sdk\ParcelDe\Returns\Exception\ServiceException;
 use Dhl\ShippingCore\Model\Config\ItemValidator\DhlSection;
 use Magento\Framework\Phrase;
 use Netresearch\ShippingCore\Api\Config\ItemValidatorInterface;
@@ -74,9 +74,9 @@ class ReturnsApiValidator implements ItemValidatorInterface
     public function execute(int $storeId): ResultInterface
     {
         $receiverIds = $this->config->getReceiverIds($storeId);
-        $this->requestBuilder->setAccountDetails($receiverIds['DE'] ?? '');
+        $this->requestBuilder->setReceiverId($receiverIds['DE'] ?? '');
         $this->requestBuilder->setShipperContact('john.doe@example.org');
-        $this->requestBuilder->setShipperAddress('John Doe', 'DEU', '53113', 'Bonn', 'Charles-de-Gaulle-Straße', '20');
+        $this->requestBuilder->setShipper('John Doe', 'DEU', '53113', 'Bonn', 'Charles-de-Gaulle-Straße', '20');
 
         try {
             $apiRequest = $this->requestBuilder->create();
@@ -90,7 +90,7 @@ class ReturnsApiValidator implements ItemValidatorInterface
         ]);
 
         try {
-            $labelService->bookLabel($apiRequest);
+            $labelService->createReturnOrder($apiRequest);
 
             $status = ResultInterface::OK;
             $message = __('Retoure API connection established successfully.');

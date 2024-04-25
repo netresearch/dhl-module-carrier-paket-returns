@@ -96,36 +96,6 @@ class ModuleConfigTest extends TestCase
      * @test
      *
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/production/auth_username USERNAME1
-     *
-     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
-     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_username USERNAME2
-     */
-    public function getAuthUsername()
-    {
-        self::assertSame('USERNAME1', $this->config->getAuthUsername());
-        self::assertSame('USERNAME2', $this->config->getAuthUsername('fixturestore'));
-    }
-
-    /**
-     * @test
-     *
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/production/auth_password SECRET1
-     *
-     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
-     * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandbox/auth_password SECRET2
-     */
-    public function getAuthPassword()
-    {
-        self::assertSame('SECRET1', $this->config->getAuthPassword());
-        self::assertSame('SECRET2', $this->config->getAuthPassword('fixturestore'));
-    }
-
-    /**
-     * @test
-     *
-     * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/production/api_username USER1
      *
      * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
@@ -150,8 +120,8 @@ class ModuleConfigTest extends TestCase
     {
         self::markTestIncomplete('encryption/decryption does not work with config fixtures');
 
-        self::assertSame($this->encryptor->decrypt('PASS1'), $this->config->getSignature());
-        self::assertSame('PASS2', $this->config->getSignature('fixturestore'));
+        self::assertSame($this->encryptor->decrypt('PASS1'), $this->config->getPassword());
+        self::assertSame('PASS2', $this->config->getPassword('fixturestore'));
     }
 
     /**

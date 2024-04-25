@@ -39,7 +39,7 @@ class ReturnsApiCredentialsValidator implements ItemValidatorInterface
 
     public function execute(int $storeId): ResultInterface
     {
-        if (!$this->config->getUser($storeId) || !$this->config->getSignature($storeId)) {
+        if (!$this->config->getUser($storeId) || !$this->config->getPassword($storeId)) {
             $status = ResultInterface::ERROR;
             $message = __(
                 'Web service credentials are incomplete. Please review your %1.',
