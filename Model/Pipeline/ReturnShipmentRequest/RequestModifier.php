@@ -15,6 +15,8 @@ use Magento\Framework\Api\Search\SearchCriteriaBuilderFactory;
 use Magento\Framework\DataObjectFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Measure\Length;
+use Magento\Framework\Measure\Weight;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Api\Data\ShipmentItemInterface;
 use Magento\Sales\Api\ShipmentRepositoryInterface;
@@ -280,8 +282,8 @@ class RequestModifier implements RequestModifierInterface
                 'length' => '',
                 'width' => '',
                 'height' => '',
-                'weight_units' => $unit === 'kg' ? \Zend_Measure_Weight::KILOGRAM : \Zend_Measure_Weight::POUND,
-                'dimension_units' => $unit === 'kg' ? \Zend_Measure_Length::CENTIMETER : \Zend_Measure_Length::INCH,
+                'weight_units' => $unit === 'kg' ? Weight::KILOGRAM : Weight::POUND,
+                'dimension_units' => $unit === 'kg' ? Length::CENTIMETER : Length::INCH,
                 'content_type' => '',
                 'content_type_other' => '',
             ],

@@ -11,6 +11,7 @@ namespace Dhl\PaketReturns\Model\Pipeline\ReturnShipmentRequest;
 use Dhl\PaketReturns\Model\Config\ModuleConfig;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Measure\Weight;
 use Magento\Sales\Api\Data\ShipmentInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Item;
@@ -341,7 +342,7 @@ class RequestExtractor
         return $this->unitConverter->convertWeight(
             (float)$this->returnShipmentRequest->getPackageWeight(),
             $weightUnit,
-            \Zend_Measure_Weight::GRAM
+            Weight::GRAM
         );
     }
 
@@ -357,7 +358,7 @@ class RequestExtractor
         $packages = $this->returnShipmentRequest->getData('packages');
         $weightUnit = $packages[$packageId]['params']['weight_units'];
 
-        return $this->unitConverter->convertWeight($packageItem->getWeight(), $weightUnit, \Zend_Measure_Weight::GRAM);
+        return $this->unitConverter->convertWeight($packageItem->getWeight(), $weightUnit, Weight::GRAM);
     }
 
     /**

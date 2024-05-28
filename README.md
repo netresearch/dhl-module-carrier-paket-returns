@@ -11,12 +11,12 @@ via the [DHL Retoure API](https://entwickler.dhl.de/en/) (DHL Geschäftskundenve
 
 Requirements
 ------------
-* PHP >= 7.2
+* PHP >= 8.2
 * PHP JSON extension
 
 Compatibility
 -------------
-* Magento >= 2.3.0+
+* Magento >= 2.4.6
 
 Installation Instructions
 -------------------------
