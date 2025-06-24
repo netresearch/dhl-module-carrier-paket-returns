@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.4.0
+
+Magento 2.4.8 compatibility release
+
+### Added
+
+- Support for Magento 2.4.8
+- Support for PHP 8.4
+
+### Changed
+
+- Modernized codebase with PHP 8+ features (nullable types, union types, `#[\Override]` attributes)
+- Updated strict type declarations for PHP 8.3+ compatibility
+
+### Removed
+
+- Support for PHP 8.2
+
 ## 2.3.0
 
 Magento 2.4.7 compatibility release
