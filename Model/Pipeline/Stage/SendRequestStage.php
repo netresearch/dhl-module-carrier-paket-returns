@@ -36,6 +36,7 @@ class SendRequestStage implements CreateShipmentsStageInterface
      *
      * @return ReturnShipment[]
      */
+    #[\Override]
     public function execute(array $requests, ArtifactsContainerInterface $artifactsContainer): array
     {
         if (empty($requests)) {

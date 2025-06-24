@@ -26,16 +26,19 @@ class RemoveConfigDataPatch implements DataPatchInterface, PatchRevertableInterf
         $this->schemaSetup = $schemaSetup;
     }
 
+    #[\Override]
     public static function getDependencies(): array
     {
         return [];
     }
 
+    #[\Override]
     public function getAliases(): array
     {
         return [];
     }
 
+    #[\Override]
     public function apply(): RemoveConfigDataPatch
     {
         return $this;
@@ -44,6 +47,7 @@ class RemoveConfigDataPatch implements DataPatchInterface, PatchRevertableInterf
     /**
      * Remove data that was created during module installation.
      */
+    #[\Override]
     public function revert(): void
     {
         $defaultConnection = $this->schemaSetup->getConnection(ResourceConnection::DEFAULT_CONNECTION);

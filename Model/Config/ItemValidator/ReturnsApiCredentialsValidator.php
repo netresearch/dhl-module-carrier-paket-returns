@@ -37,6 +37,7 @@ class ReturnsApiCredentialsValidator implements ItemValidatorInterface
         $this->config = $config;
     }
 
+    #[\Override]
     public function execute(int $storeId): ResultInterface
     {
         if (!$this->config->getUser($storeId) || !$this->config->getPassword($storeId)) {

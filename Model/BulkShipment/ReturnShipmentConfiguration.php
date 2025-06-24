@@ -61,26 +61,30 @@ class ReturnShipmentConfiguration implements ReturnShipmentConfigurationInterfac
         $this->rmaConfig = $rmaConfig;
     }
 
+    #[\Override]
     public function getCarrierCode(): string
     {
         return Paket::CARRIER_CODE;
     }
 
+    #[\Override]
     public function getRequestModifier(): RequestModifierInterface
     {
         return $this->requestModifier;
     }
 
+    #[\Override]
     public function getLabelService(): ReturnLabelCreationInterface
     {
         return $this->shipmentManagement;
     }
 
+    #[\Override]
     public function canProcessOrder(OrderInterface $order): bool
     {
         try {
             $appState = $this->appState->getAreaCode();
-        } catch (LocalizedException $exception) {
+        } catch (LocalizedException) {
             return false;
         }
 

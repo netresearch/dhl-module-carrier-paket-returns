@@ -8,37 +8,50 @@ declare(strict_types=1);
 
 namespace Dhl\PaketReturns\Test\Integration\TestCase\Model\Util;
 
-use Netresearch\ShippingCore\Model\Util\ApiLogAnonymizer;
 use Magento\TestFramework\Helper\Bootstrap;
+use Monolog\Level;
+use Monolog\LogRecord;
+use Netresearch\ShippingCore\Model\Util\ApiLogAnonymizer;
 use PHPUnit\Framework\TestCase;
 
 class ApiLogAnonymizerTest extends TestCase
 {
     /**
-     * @return string[][][]
+     * @return LogRecord[][]
      */
-    public function getLogs(): array
+    public static function getLogs(): array
     {
+        $datetime = new \DateTimeImmutable();
+        
         return [
             'return' => [
-                ['message' => file_get_contents(__DIR__ . '/../../../Provider/_files/return_log_orig.txt')],
-                ['message' => file_get_contents(__DIR__ . '/../../../Provider/_files/return_log_anon.txt')],
+                new LogRecord(
+                    $datetime,
+                    'test',
+                    Level::Info,
+                    file_get_contents(__DIR__ . '/../../../Provider/_files/return_log_orig.txt')
+                ),
+                new LogRecord(
+                    $datetime,
+                    'test',
+                    Level::Info,
+                    file_get_contents(__DIR__ . '/../../../Provider/_files/return_log_anon.txt')
+                ),
             ],
         ];
     }
 
     /**
-     * @test
-     * @dataProvider getLogs
-     *
-     * @param string[] $originalRecord
-     * @param string[] $expectedRecord
+     * @param LogRecord $originalRecord
+     * @param LogRecord $expectedRecord
      */
-    public function stripSensitiveData(array $originalRecord, array $expectedRecord)
+    #[\PHPUnit\Framework\Attributes\DataProvider('getLogs')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function stripSensitiveData(LogRecord $originalRecord, LogRecord $expectedRecord)
     {
         /** @var ApiLogAnonymizer $anonymizer */
         $anonymizer = Bootstrap::getObjectManager()->create(ApiLogAnonymizer::class, ['replacement' => '[test]']);
         $actualRecord = $anonymizer($originalRecord);
-        self::assertSame($expectedRecord, $actualRecord);
+        self::assertSame($expectedRecord->message, $actualRecord->message);
     }
 }

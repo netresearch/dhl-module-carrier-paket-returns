@@ -122,7 +122,7 @@ class RequestExtractor
     {
         try {
             return $this->country->convert($iso2Code);
-        } catch (NoSuchEntityException $exception) {
+        } catch (NoSuchEntityException) {
             return '';
         }
     }

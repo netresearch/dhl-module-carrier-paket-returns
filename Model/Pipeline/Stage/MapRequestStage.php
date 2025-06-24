@@ -35,6 +35,7 @@ class MapRequestStage implements CreateShipmentsStageInterface
      *
      * @return ReturnShipment[]
      */
+    #[\Override]
     public function execute(array $requests, ArtifactsContainerInterface $artifactsContainer): array
     {
         $callback = function (ReturnShipment $request, int $requestIndex) use ($artifactsContainer) {

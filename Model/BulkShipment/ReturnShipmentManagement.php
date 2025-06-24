@@ -73,6 +73,7 @@ class ReturnShipmentManagement implements ReturnLabelCreationInterface
      *
      * @return ShipmentErrorResponseInterface[]|LabelResponseInterface[]
      */
+    #[\Override]
     public function createLabels(array $shipmentRequests): array
     {
         if (empty($shipmentRequests)) {
@@ -92,10 +93,8 @@ class ReturnShipmentManagement implements ReturnLabelCreationInterface
             $apiResults[$storeId] = $api->createLabels($storeApiRequests);
         }
 
-        if (!empty($apiResults)) {
-            // Convert results per store to flat response
-            $apiResults = array_reduce($apiResults, 'array_merge', []);
-        }
+        // Convert results per store to flat response
+        $apiResults = array_reduce($apiResults, 'array_merge', []);
 
         return $apiResults;
     }

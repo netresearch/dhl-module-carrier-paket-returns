@@ -56,8 +56,8 @@ class ReceiverIds extends ArraySerialized
         UploaderFactory $uploaderFactory,
         Csv $csvReader,
         CountryInformationAcquirerInterface $countryInfo,
-        AbstractResource $resource = null,
-        AbstractDb $resourceCollection = null,
+        ?AbstractResource $resource = null,
+        ?AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->requestData = $requestData;
@@ -90,6 +90,7 @@ class ReceiverIds extends ArraySerialized
         return $file;
     }
 
+    #[\Override]
     public function save()
     {
         $fileData = $this->getFileData();
@@ -97,7 +98,7 @@ class ReceiverIds extends ArraySerialized
             return $this;
         }
 
-        $fileExt = pathinfo($fileData['name'], PATHINFO_EXTENSION);
+        $fileExt = pathinfo((string) $fileData['name'], PATHINFO_EXTENSION);
 
         $uploader = $this->uploaderFactory->create(['fileId' => $fileData]);
         $uploader->setAllowedExtensions(self::ALLOWED_EXTENSIONS);

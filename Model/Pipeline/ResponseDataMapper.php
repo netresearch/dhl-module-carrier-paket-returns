@@ -185,7 +185,7 @@ class ResponseDataMapper
             'data' => [
                 ShipmentResponseInterface::REQUEST_INDEX => $requestIndex,
                 ShipmentResponseInterface::SALES_SHIPMENT => $salesShipment,
-                ShipmentErrorResponseInterface::ERRORS => $message,
+                ShipmentErrorResponseInterface::ERRORS => [$message],
             ]
         ]);
     }

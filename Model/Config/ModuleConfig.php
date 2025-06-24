@@ -54,6 +54,7 @@ class ModuleConfig implements VersionInterface
      *
      * @return string
      */
+    #[\Override]
     public function getModuleVersion(): string
     {
         return $this->scopeConfig->getValue(self::CONFIG_PATH_VERSION);
@@ -62,10 +63,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Returns TRUE if module is enabled, FALSE otherwise.
      *
-     * @param mixed $store
      * @return bool
      */
-    public function isEnabled($store = null): bool
+    public function isEnabled(mixed $store = null): bool
     {
         return $this->scopeConfig->isSetFlag(
             self::CONFIG_PATH_ACTIVE_RMA,
@@ -77,10 +77,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Returns TRUE if sandbox mode is enabled, FALSE otherwise.
      *
-     * @param mixed $store
      * @return bool
      */
-    public function isSandboxMode($store = null): bool
+    public function isSandboxMode(mixed $store = null): bool
     {
         return $this->scopeConfig->isSetFlag(
             self::CONFIG_PATH_SANDBOX_MODE,
@@ -92,10 +91,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Get the user's name (API user credentials).
      *
-     * @param mixed $store
      * @return string
      */
-    public function getUser($store = null): string
+    public function getUser(mixed $store = null): string
     {
         if ($this->isSandboxMode($store)) {
             return $this->getSandboxUser($store);
@@ -111,10 +109,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Get the user's password (API user credentials).
      *
-     * @param mixed $store
      * @return string
      */
-    public function getPassword($store = null): string
+    public function getPassword(mixed $store = null): string
     {
         if ($this->isSandboxMode($store)) {
             return $this->getSandboxPassword($store);
@@ -130,10 +127,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Get the two-letter country code to receiver IDs mapping.
      *
-     * @param mixed $store
      * @return string[]
      */
-    public function getReceiverIds($store = null): array
+    public function getReceiverIds(mixed $store = null): array
     {
         if ($this->isSandboxMode($store)) {
             return $this->getSandboxReceiverIds($store);
@@ -151,10 +147,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Get the name (API user sandbox credentials).
      *
-     * @param mixed $store
      * @return string
      */
-    private function getSandboxUser($store = null): string
+    private function getSandboxUser(mixed $store = null): string
     {
         return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_USER,
@@ -166,10 +161,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Get the password (API user sandbox credentials).
      *
-     * @param mixed $store
      * @return string
      */
-    private function getSandboxPassword($store = null): string
+    private function getSandboxPassword(mixed $store = null): string
     {
         return (string) $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_PASSWORD,
@@ -181,10 +175,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Get the sandbox two-letter country code to sandbox receiver IDs mapping.
      *
-     * @param mixed $store
      * @return string[]
      */
-    private function getSandboxReceiverIds($store = null): array
+    private function getSandboxReceiverIds(mixed $store = null): array
     {
         $receiverIds = $this->scopeConfig->getValue(
             self::CONFIG_PATH_SBX_RECEIVER_IDS,
@@ -198,10 +191,9 @@ class ModuleConfig implements VersionInterface
     /**
      * Obtain default item weight for a return item.
      *
-     * @param mixed $store
      * @return float
      */
-    public function getDefaultItemWeight($store = null): float
+    public function getDefaultItemWeight(mixed $store = null): float
     {
         return (float)$this->scopeConfig->getValue(
             self::CONFIG_PATH_DEFAULT_ITEM_WEIGHT,

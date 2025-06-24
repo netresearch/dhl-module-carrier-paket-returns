@@ -240,7 +240,7 @@ class RequestModifier implements RequestModifierInterface
                 try {
                     /** @var Item $shipmentItem */
                     $shipmentItem = $this->getShipmentItem((int) $order->getId(), array_keys($shipmentsData), $itemId);
-                } catch (NoSuchEntityException $exception) {
+                } catch (NoSuchEntityException) {
                     continue;
                 }
 
@@ -306,6 +306,7 @@ class RequestModifier implements RequestModifierInterface
      * @return void
      * @throws LocalizedException
      */
+    #[\Override]
     public function modify(ReturnShipment $shipmentRequest): void
     {
         $this->modifyGeneralParams($shipmentRequest);

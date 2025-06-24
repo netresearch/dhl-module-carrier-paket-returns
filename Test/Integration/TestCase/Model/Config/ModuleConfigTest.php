@@ -33,10 +33,9 @@ class ModuleConfigTest extends TestCase
     /**
      * Init object manager and test subject
      */
+    #[\Override]
     protected function setUp(): void
     {
-        parent::setUp();
-
         $this->objectManager = ObjectManager::getInstance();
         $this->config = $this->objectManager->create(ModuleConfig::class);
         $this->encryptor = $this->objectManager->create(EncryptorInterface::class);
@@ -48,14 +47,13 @@ class ModuleConfigTest extends TestCase
      *
      * @link http://magento.stackexchange.com/a/93961
      */
+    #[\Override]
     public static function setUpBeforeClass(): void
     {
         $realPath = realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files');
 
         include $realPath . '/core_fixturestore_rollback.php';
         include $realPath . '/core_fixturestore.php';
-
-        parent::setUpBeforeClass();
     }
 
     /**
@@ -63,37 +61,33 @@ class ModuleConfigTest extends TestCase
      *
      * @see setUpBeforeClass()
      */
+    #[\Override]
     public static function tearDownAfterClass(): void
     {
         $realPath = realpath(TESTS_TEMP_DIR . '/../testsuite/Magento/Store/_files');
 
         include $realPath . '/core_fixturestore_rollback.php';
-
-        parent::tearDownAfterClass();
     }
 
     /**
-     * @test
-     *
      * @magentoConfigFixture default/carriers/dhlpaketrma/version XXX
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getModuleVersion()
     {
         self::assertSame('XXX', $this->config->getModuleVersion());
     }
 
     /**
-     * @test
-     *
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function isSandboxMode()
     {
         self::assertTrue($this->config->isSandboxMode());
     }
 
     /**
-     * @test
      *
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/production/api_username USER1
@@ -101,6 +95,7 @@ class ModuleConfigTest extends TestCase
      * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
      * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandbox/api_username USER2
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getUser()
     {
         self::assertSame('USER1', $this->config->getUser());
@@ -108,7 +103,6 @@ class ModuleConfigTest extends TestCase
     }
 
     /**
-     * @test
      *
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/production/api_password PASS1
@@ -116,21 +110,22 @@ class ModuleConfigTest extends TestCase
      * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
      * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandbox/api_password PASS2
      */
-    public function getSignature()
+    #[\PHPUnit\Framework\Attributes\Test]
+    public function getSignature(): void
     {
-        self::markTestIncomplete('encryption/decryption does not work with config fixtures');
+//        self::markTestIncomplete('encryption/decryption does not work with config fixtures');
 
-        self::assertSame($this->encryptor->decrypt('PASS1'), $this->config->getPassword());
+        self::assertSame('PASS1', $this->config->getPassword());
         self::assertSame('PASS2', $this->config->getPassword('fixturestore'));
     }
 
     /**
      * Assert that getter handles empty values properly.
      *
-     * @test
      *
      * @magentoConfigFixture current_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 0
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getReceiverIds()
     {
         $receiverIds = $this->config->getReceiverIds();
@@ -143,10 +138,10 @@ class ModuleConfigTest extends TestCase
      *
      * Exact values do not matter, just assert they are loaded properly and match expected format.
      *
-     * @test
      *
      * @magentoConfigFixture fixturestore_store dhlshippingsolutions/dhlpaketrma/account/sandboxmode 1
      */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function getSandboxReceiverIds()
     {
         $receiverIds = $this->config->getReceiverIds('fixturestore');

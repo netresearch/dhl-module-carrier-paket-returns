@@ -108,6 +108,7 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      * @param RateRequest $request
      * @return DataObject|Result
      */
+    #[\Override]
     public function collectRates(RateRequest $request)
     {
         $result = $this->_rateFactory->create();
@@ -136,6 +137,7 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      * @param DataObject|ReturnShipment|Request $request
      * @return DataObject
      */
+    #[\Override]
     protected function _doShipmentRequest(DataObject $request): DataObject
     {
         $address = $request->getOrderShipment()->getOrder()->getShippingAddress();
@@ -160,6 +162,7 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      * @param DataObject $request
      * @return $this|bool|DataObject
      */
+    #[\Override]
     public function processAdditionalValidation(DataObject $request)
     {
         $isReturn = (bool)$request->getData('is_return');
@@ -177,6 +180,7 @@ class Paket extends AbstractCarrierOnline implements CarrierInterface
      *
      * @return string[] Associative array of method names with method code as key.
      */
+    #[\Override]
     public function getAllowedMethods(): array
     {
         return [self::METHOD_CODE => 'Return Shipment'];

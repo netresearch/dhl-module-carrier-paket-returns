@@ -24,8 +24,8 @@ class UnsetSandboxPaths
      * Prevent `account/sandbox_*` settings from being dumped on `app:config:dump` command.
      *
      * @param DumpConfigSourceAggregated $subject
-     * @param string[][][][] $result
-     * @return string[][][][]
+     * @param array $result
+     * @return array
      */
     public function afterGet(DumpConfigSourceAggregated $subject, $result): array
     {

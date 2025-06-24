@@ -34,6 +34,7 @@ class MapResponseStage implements CreateShipmentsStageInterface
      *
      * @return ReturnShipment[]
      */
+    #[\Override]
     public function execute(array $requests, ArtifactsContainerInterface $artifactsContainer): array
     {
         $errors = $artifactsContainer->getErrors();

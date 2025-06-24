@@ -37,6 +37,7 @@ class ReceiverIdsValidator implements ItemValidatorInterface
         $this->config = $config;
     }
 
+    #[\Override]
     public function execute(int $storeId): ResultInterface
     {
         $receiverIds = $this->config->getReceiverIds($storeId);

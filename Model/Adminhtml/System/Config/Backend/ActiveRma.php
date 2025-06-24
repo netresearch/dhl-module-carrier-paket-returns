@@ -34,8 +34,8 @@ class ActiveRma extends Value
         ScopeConfigInterface $config,
         TypeListInterface $cacheTypeList,
         WriterInterface $configWriter,
-        AbstractResource $resource = null,
-        AbstractDb $resourceCollection = null,
+        ?AbstractResource $resource = null,
+        ?AbstractDb $resourceCollection = null,
         array $data = []
     ) {
         $this->configWriter = $configWriter;
@@ -48,6 +48,7 @@ class ActiveRma extends Value
      *
      * @return Value
      */
+    #[\Override]
     public function afterSave(): Value
     {
         $scope   = $this->getScope();

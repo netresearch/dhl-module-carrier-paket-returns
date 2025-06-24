@@ -58,6 +58,7 @@ class ReceiverId extends AbstractFieldArray
      *
      * @throws LocalizedException
      */
+    #[\Override]
     protected function _prepareArrayRow(DataObject $row)
     {
         $hash = $this->getTemplateRenderer()->calcOptionHash(
@@ -77,6 +78,7 @@ class ReceiverId extends AbstractFieldArray
      *
      * @throws LocalizedException
      */
+    #[\Override]
     protected function _prepareToRender()
     {
         $this->addColumn('iso', [
@@ -109,6 +111,7 @@ class ReceiverId extends AbstractFieldArray
      * @return string
      * @throws \Exception
      */
+    #[\Override]
     public function renderCellTemplate($columnName): string
     {
         $cellTemplate = parent::renderCellTemplate($columnName);

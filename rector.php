@@ -1,43 +1,41 @@
 <?php
 
-/**
- * See LICENSE file for license details.
- */
-
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUselessParamTagRector;
-use Rector\DeadCode\Rector\ClassMethod\RemoveUselessReturnTagRector;
-use Rector\DeadCode\Rector\Property\RemoveUselessVarTagRector;
-use Rector\Set\ValueObject\LevelSetList;
-use Rector\Set\ValueObject\SetList;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
+use Rector\Php81\Rector\ClassMethod\NewInInitializerRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
-use Rector\TypeDeclaration\Rector\ClassMethod\AddMethodCallBasedStrictParamTypeRector;
-use Rector\TypeDeclaration\Rector\Property\AddPropertyTypeDeclarationRector;
-use Rector\Php81\Rector\ClassConst\FinalizePublicClassConstantRector;
+use Rector\Php82\Rector\Class_\ReadOnlyClassRector;
+use Rector\Php83\Rector\ClassConst\AddTypeToConstRector;
+use Rector\PHPUnit\Set\PHPUnitSetList;
+use Rector\Set\ValueObject\SetList;
+use Rector\ValueObject\PhpVersion;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->paths([
-        __DIR__ . '/.',
-    ]);
-
-    $rectorConfig->sets([
-        LevelSetList::UP_TO_PHP_82,
-        SetList::CODE_QUALITY,
-        SetList::EARLY_RETURN,
-        SetList::TYPE_DECLARATION,
-    ]);
-    $rectorConfig->rules([
-        RemoveUselessParamTagRector::class,
-        RemoveUselessReturnTagRector::class,
-        RemoveUselessVarTagRector::class,
-        AddPropertyTypeDeclarationRector::class
-    ]);
-    $rectorConfig->skip([
-        FinalizePublicClassConstantRector::class,
+return RectorConfig::configure()
+    ->withPaths([
+        __DIR__ . '/Block',
+        __DIR__ . '/Model',
+        __DIR__ . '/Plugin',
+        __DIR__ . '/Setup',
+        __DIR__ . '/Test',
+        __DIR__ . '/view',
+    ])
+    ->withPhpVersion(PhpVersion::PHP_84)
+    ->withSets([
+        SetList::PHP_80,
+        SetList::PHP_81,
+        SetList::PHP_82,
+        SetList::PHP_83,
+        SetList::PHP_84,
+        PHPUnitSetList::PHPUNIT_100
+    ])
+    ->withPHPStanConfigs(phpstanConfigs: [__DIR__ . '/phpstan.neon'])
+    ->withSkip([
+        // Skip specific rules if needed
         ReadOnlyPropertyRector::class,
-        AddMethodCallBasedStrictParamTypeRector::class,
-        __DIR__ . '/Test/*'
+        ReadOnlyClassRector::class,
+        AddTypeToConstRector::class,
+        ClassPropertyAssignToConstructorPromotionRector::class,
+        NewInInitializerRector::class
     ]);
-};
