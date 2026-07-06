@@ -1,0 +1,9 @@
+# Allowlist for pre-existing, intentionally embedded vendor/app credentials.
+# Triaged in CI-398 (ticket attachment + comment 2026-07-03). Rotation not
+# required: these ship with the module by design, paired with per-merchant
+# credentials from configuration.
+[allowlist]
+description = "CI-398 triaged intentional embedded credentials"
+regexes = [
+  '''pJDOxtJt03guK5eXKYcZt9Ez1bPi2Xvm''',
+]
