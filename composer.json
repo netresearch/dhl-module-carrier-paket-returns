@@ -35,7 +35,7 @@
         "magento/module-shipping": "^100.4.8",
         "magento/module-store": "^101.1.8",
         "netresearch/config-fields-m2": "^1.3.0",
-        "netresearch/module-shipping-core": "^4.0.0"
+        "netresearch/module-shipping-core": "^5.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^10.5.0"
